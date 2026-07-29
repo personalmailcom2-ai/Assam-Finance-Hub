@@ -1,10 +1,17 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAnQPG-tdceOqxxfEzHIYdpr6pBJDcOgbM",
+  apiKey: "AIzaSyAnQFG-tdce0gxxfEhIYdpr6BJDcQgbW",
   authDomain: "assam-finance-hub.firebaseapp.com",
   projectId: "assam-finance-hub",
   storageBucket: "assam-finance-hub.firebasestorage.app",
   messagingSenderId: "989678663450",
   appId: "1:989678663450:web:d0499bf58d8dd382325ea3",
-  measurementId: "G-H1SX3EDQJM"
+  measurementId: "G-H15X3EDQJW"
 };
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.db = db;
