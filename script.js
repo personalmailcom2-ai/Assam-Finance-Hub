@@ -10,16 +10,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const bike = document.getElementById("bike").value.trim();
     const city = document.getElementById("city").value.trim();
 
-    const message = "🏍️ New Loan Application\n\n" +
+    // WhatsApp Message
+    const message =
+      "🛵 New Loan Application\n\n" +
       "👤 Name: " + name + "\n" +
       "📱 Mobile: " + mobile + "\n" +
-      "🏍️ Bike Model: " + bike + "\n" +
+      "🏍 Bike: " + bike + "\n" +
       "📍 City: " + city;
 
     const whatsappUrl =
       "https://wa.me/919707040752?text=" + encodeURIComponent(message);
 
+    // Open WhatsApp
     window.open(whatsappUrl, "_blank");
+
+    alert("Application Submitted Successfully!");
 
     form.reset();
   });
