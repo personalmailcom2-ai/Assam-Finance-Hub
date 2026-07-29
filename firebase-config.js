@@ -5,6 +5,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-aut
 const firebaseConfig = {
   apiKey: "AIzaSyAnQFG-tdce0gxxfEhIYdpr6BJDcQgbW",
   authDomain: "assam-finance-hub.firebaseapp.com",
+  databaseURL: "https://assam-finance-hub-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "assam-finance-hub",
   storageBucket: "assam-finance-hub.firebasestorage.app",
   messagingSenderId: "989678663450",
@@ -13,6 +14,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+window.app = app;
+
 const db = getFirestore(app);
 
 window.db = db;
