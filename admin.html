@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
 
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+padding:20px;
+}
+h2{text-align:center;}
+.card{
+background:#fff;
+padding:15px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+button{
+padding:8px 15px;
+margin:5px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+color:#fff;
+}
+.approve{background:green;}
+.reject{background:red;}
+</style>
+</head>
+
+<body>
+
+<h2>Loan Applications</h2>
+
+<div id="list">Loading...</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+doc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAnQFG-tdce0gxxfEhIYdpr6BJDcQgbW",
+  authDomain: "assam-finance-hub.firebaseapp.com",
+  projectId: "assam-finance-hub",
+  storageBucket: "assam-finance-hub.firebasestorage.app",
+  messagingSenderId: "989678663450",
+  appId: "1:989678663450:web:d0499bf58d8dd382325ea3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const list = document.getElementById("list");
+
+async function loadData(){
+
+list.innerHTML="";
+
+const snapshot = await getDocs(collection(db,"applications"));
+
+snapshot.forEach((d)=>{
+
+const x = d.data();
+
+list.innerHTML += `
+<div class="card">
+<h3>${x.name}</h3>
+
+<p><b>Mobile:</b> ${x.mobile}</p>
+<p><b>Bike:</b> ${x.bike}</p>
+<p><b>City:</b> ${x.city}</p>
+<p><b>Status:</b> ${x.status}</p>
+
+<button class="approve" onclick="changeStatus('${d.id}','Approved')">Approve</button>
+
+<button class="reject" onclick="changeStatus('${d.id}','Rejected')">Reject</button>
+
+</div>
+`;
+
+});
+
+}
+
+window.changeStatus = async(id,status)=>{
+
+await updateDoc(doc(db,"applications",id),{
+status:status
+});
+
+alert("Status Updated");
+
+location.reload();
+
+}
+
+loadData();
+
+</script>
+
+</body>
+</html>
