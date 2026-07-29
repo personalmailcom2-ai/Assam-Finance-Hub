@@ -64,16 +64,6 @@ btn.innerHTML = "Submitting...";
     const bike = document.getElementById("bike").value.trim();
     const city = document.getElementById("city").value.trim();
 
-    const confirmationResult = await signInWithPhoneNumber(
-  auth,
-  "+91" + mobile,
-  window.recaptchaVerifier
-);
-
-const otp = prompt("Enter the OTP sent to your mobile");
-
-await confirmationResult.confirm(otp);
-
     const q = query(
   collection(window.db, "applications"),
   where("mobile", "==", mobile)
