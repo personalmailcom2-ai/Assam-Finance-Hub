@@ -188,16 +188,16 @@ Reject
 
 window.changeStatus = async(id,status)=>{
 
-await updateDoc(doc(db,"applications",id),{
-status:status
-});
+  await updateDoc(doc(db,"applications",id),{
+    status:status
+  });
 
-alert("Status Updated Successfully");
-
-loadData();
+  alert("Status Updated Successfully");
+  loadData();
 
 }
 
+loadData();
 
 </script>
 
