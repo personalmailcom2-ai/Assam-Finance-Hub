@@ -32,6 +32,21 @@ btn.innerHTML = "Submitting...";
     const bike = document.getElementById("bike").value.trim();
     const city = document.getElementById("city").value.trim();
 
+    const q = query(
+  collection(window.db, "applications"),
+  where("mobile", "==", mobile)
+);
+
+const snapshot = await getDocs(q);
+
+if (!snapshot.empty) {
+  alert("You have already submitted an application with this mobile number.");
+
+  btn.disabled = false;
+  btn.innerHTML = "Apply Now";
+
+  return;
+}
     try {
 
       await addDoc(collection(window.db, "applications"), {
