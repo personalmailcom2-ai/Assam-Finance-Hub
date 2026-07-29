@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check Loan Status</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:400px;
+margin:auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
+}
+
+h2{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+font-size:16px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#007bff;
+color:#fff;
+border:none;
+border-radius:5px;
+font-size:16px;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+font-size:18px;
+font-weight:bold;
+text-align:center;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Loan Status</h2>
+
+<input
+type="text"
+id="mobile"
+placeholder="Enter Mobile Number">
+
+<button onclick="checkStatus()">
+Check Status
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+getFirestore,
+collection,
+query,
+where,
+getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey:"AIzaSyAnQFG-tdce0gxxfEhIYdpr6BJDcQgbW",
+authDomain:"assam-finance-hub.firebaseapp.com",
+projectId:"assam-finance-hub",
+storageBucket:"assam-finance-hub.firebasestorage.app",
+messagingSenderId:"989678663450",
+appId:"1:989678663450:web:d0499bf58d8dd382325ea3"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+
+window.checkStatus=async()=>{
+
+const mobile=document.getElementById("mobile").value.trim();
+
+const q=query(
+collection(db,"applications"),
+where("mobile","==",mobile)
+);
+
+const snap=await getDocs(q);
+
+if(snap.empty){
+
+document.getElementById("result").innerHTML=
+"❌ No Application Found";
+
+return;
+
+}
+
+snap.forEach(doc=>{
+
+const data=doc.data();
+
+document.getElementById("result").innerHTML=
+"Status : <b>"+data.status+"</b>";
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
