@@ -1,7 +1,10 @@
 import {
   collection,
   addDoc,
-  serverTimestamp
+  serverTimestamp,
+  query,
+  where,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 window.addEventListener("load", () => {
@@ -14,6 +17,9 @@ window.addEventListener("load", () => {
   }
 
   form.addEventListener("submit", async (e) => {
+    const btn = form.querySelector("button");
+btn.disabled = true;
+btn.innerHTML = "Submitting...";
     e.preventDefault();
 
     if (!window.db) {
@@ -49,12 +55,23 @@ window.addEventListener("load", () => {
         "_blank"
       );
 
-      alert("Application Submitted Successfully!");
+      document.getElementById("msg").innerHTML = "✅ Application Submitted Successfully!";
       form.reset();
 
+      btn.innerHTML = "Submitted ✓";
+
+      setTimeout(() => {
+  btn.disabled = false;
+  btn.innerHTML = "Apply Now";
+  document.getElementById("msg").innerHTML = "";
+}, 3000);
+      
     } catch (err) {
       console.error(err);
       alert(err.message);
+
+      btn.disabled = false;
+btn.innerHTML = "Apply Now";
     }
   });
 
