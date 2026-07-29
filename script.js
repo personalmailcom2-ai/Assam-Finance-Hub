@@ -38,7 +38,6 @@ btn.innerHTML = "Submitting...";
 );
 
 const snapshot = await getDocs(q);
-    alert("Found: " + snapshot.size);
 
 if (snapshot.size > 0) {
   alert("You have already submitted an application with this mobile number.");
