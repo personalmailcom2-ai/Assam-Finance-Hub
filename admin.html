@@ -47,13 +47,40 @@ background:red;
 
 <body>
 
-<script>
-const password = prompt("Enter Admin Password");
+<script type="module">
 
-if(password !== "Assam@123"){
-alert("Wrong Password!");
-window.location.href="index.html";
+import {
+initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig={
+apiKey:"AIzaSyAnQFG-tdce0gxxfEhIYdpr6BJDcQgbW",
+authDomain:"assam-finance-hub.firebaseapp.com",
+projectId:"assam-finance-hub",
+storageBucket:"assam-finance-hub.firebasestorage.app",
+messagingSenderId:"989678663450",
+appId:"1:989678663450:web:d0499bf58d8dd382325ea3"
+};
+
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="admin-login.html";
+
 }
+
+});
+
 </script>
 
 <h2>Loan Applications</h2>
