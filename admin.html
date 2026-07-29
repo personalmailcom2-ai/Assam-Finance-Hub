@@ -94,7 +94,9 @@ const snapshot = await getDocs(collection(db,"applications"));
 
 snapshot.forEach((d)=>{
 
-const x=d.data();
+const x = d.data();
+
+if(!x.name || !x.mobile) return;
 
 list.innerHTML += `
 <div class="card">
