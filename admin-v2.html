@@ -240,7 +240,7 @@ document.getElementById("rejected").innerHTML=rejected;
 
 }
 
-  window.changeStatus = async(id,status)=>{
+  window.changeStatus = async function(id,status){
 
 await updateDoc(doc(db,"applications",id),{
 
@@ -254,7 +254,7 @@ loadData();
 
 }
 
-window.deleteApplication = async(id)=>{
+window.deleteApplication = async function(id){
 
 const ok=confirm("Delete this application?");
 
