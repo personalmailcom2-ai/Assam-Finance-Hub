@@ -15,6 +15,23 @@ import {
 
 window.addEventListener("load", () => {
   const auth = window.auth;
+  const sendOtpBtn = document.getElementById("sendOtpBtn");
+
+sendOtpBtn.addEventListener("click", async () => {
+
+const mobile = document.getElementById("mobile").value.trim();
+
+const confirmationResult = await signInWithPhoneNumber(
+auth,
+"+91" + mobile,
+window.recaptchaVerifier
+);
+
+window.confirmationResult = confirmationResult;
+
+alert("OTP Sent Successfully");
+
+});
 
 window.recaptchaVerifier = new RecaptchaVerifier(
   auth,
