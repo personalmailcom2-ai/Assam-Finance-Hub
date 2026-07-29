@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assam Finance Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">Assam Finance Hub</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#features">Features</a>
+        <a href="#loanForm">Apply</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Assam Finance Hub</h1>
+    <p>Fast & Easy Two Wheeler Finance</p>
+
+    <button onclick="document.getElementById('loanForm').scrollIntoView({behavior:'smooth'})">
+        Apply Now
+    </button>
+</section>
+
+<section id="features" class="features">
+
+    <div class="card">
+        <h3>⚡ Instant Approval</h3>
+        <p>Quick loan approval process.</p>
+    </div>
+
+    <div class="card">
+        <h3>💰 Low EMI</h3>
+        <p>Affordable monthly installments.</p>
+    </div>
+
+    <div class="card">
+        <h3>📄 Minimal Documents</h3>
+        <p>Simple documentation.</p>
+    </div>
+
+    <div class="card">
+        <h3>🏍️ All Bike Brands</h3>
+        <p>Finance available for all brands.</p>
+    </div>
+
+</section>
+
+<div class="form-box">
+
+<h2>Loan Application</h2>
+
+<form id="loanForm">
+
+<input type="text" id="name" placeholder="Full Name" required>
+
+<input type="tel" id="mobile" placeholder="Mobile Number" required>
+
+<input type="text" id="bike" placeholder="Bike Model" required>
+
+<input type="text" id="city" placeholder="City" required>
+
+<button type="submit">Submit Application</button>
+
+</form>
+
+</div>
+
+<footer id="contact">
+
+<h2>Contact Us</h2>
+
+<p>📞 +91 9707040752</p>
+
+<p>📧 assamfinancehub@gmail.com</p>
+
+<p>📍 Assam, India</p>
+
+<p>© 2026 Assam Finance Hub. All Rights Reserved.</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
