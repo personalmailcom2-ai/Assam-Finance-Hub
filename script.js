@@ -14,6 +14,15 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 window.addEventListener("load", () => {
+  const auth = getAuth();
+
+window.recaptchaVerifier = new RecaptchaVerifier(
+  auth,
+  "recaptcha-container",
+  {
+    size: "invisible"
+  }
+);
 
   const form = document.getElementById("loanForm");
 
@@ -37,6 +46,16 @@ btn.innerHTML = "Submitting...";
     const mobile = document.getElementById("mobile").value.trim();
     const bike = document.getElementById("bike").value.trim();
     const city = document.getElementById("city").value.trim();
+
+    const confirmationResult = await signInWithPhoneNumber(
+  auth,
+  "+91" + mobile,
+  window.recaptchaVerifier
+);
+
+const otp = prompt("Enter the OTP sent to your mobile");
+
+await confirmationResult.confirm(otp);
 
     const q = query(
   collection(window.db, "applications"),
