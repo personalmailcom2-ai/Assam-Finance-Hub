@@ -1,3 +1,5 @@
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const form = document.getElementById("loanForm");
@@ -10,31 +12,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const bike = document.getElementById("bike").value.trim();
     const city = document.getElementById("city").value.trim();
 
-    // Save to Firestore
-    await db.collection("applications").add({
-      name: name,
-      mobile: mobile,
-      bike: bike,
-      city: city,
-      status: "Pending",
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+    try {
+      await addDoc(collection(window.db, "applications"), {
+        name,
+        mobile,
+        bike,
+        city,
+        status: "Pending",
+        createdAt: serverTimestamp()
+      });
 
-    // WhatsApp Message
-    const message =
-      "🚲 New Loan Application\n\n" +
-      "👤 Name: " + name + "\n" +
-      "📱 Mobile: " + mobile + "\n" +
-      "🏍 Bike: " + bike + "\n" +
-      "📍 City: " + city;
+      const message =
+        "🚲 New Loan Application\n\n" +
+        "👤 Name: " + name + "\n" +
+        "📱 Mobile: " + mobile + "\n" +
+        "🏍 Bike: " + bike + "\n" +
+        "📍 City: " + city;
 
-    window.open(
-      "https://wa.me/919707040752?text=" + encodeURIComponent(message),
-      "_blank"
-    );
+      window.open(
+        "https://wa.me/919707040752?text=" + encodeURIComponent(message),
+        "_blank"
+      );
 
-    alert("Application Submitted Successfully!");
-    form.reset();
+      alert("Application Submitted Successfully!");
+      form.reset();
+
+    } catch (err) {
+      alert(err.message);
+      console.error(err);
+    }
+
   });
 
 });
