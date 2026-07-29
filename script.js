@@ -1,38 +1,29 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbzWiAhEjpma7ISaSt_rgum8euKqTaE3qRCymm-7WD_TKbIY4f4N_SpyKTCA6oGcWvbsMA/exec";
+document.addEventListener("DOMContentLoaded", function () {
 
-document.getElementById("loanForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+    const form = document.getElementById("loanForm");
 
-    const submitBtn = this.querySelector("button");
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = "Submitting...";
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    const data = {
-        name: document.getElementById("name").value,
-        mobile: document.getElementById("mobile").value,
-        bike: document.getElementById("bike").value,
-        city: document.getElementById("city").value
-    };
+        const name = document.getElementById("name").value.trim();
+        const mobile = document.getElementById("mobile").value.trim();
+        const bike = document.getElementById("bike").value.trim();
+        const city = document.getElementById("city").value.trim();
 
-    fetch(scriptURL, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(result => {
-        alert("✅ Thank You!\nYour loan application has been submitted successfully.");
-        document.getElementById("loanForm").reset();
-    })
-    .catch(err => {
-        alert("❌ Error: " + err);
-        console.error(err);
-    })
-    .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = "Submit";
+        const message = `🏍️ New Loan Application
+
+👤 Name: ${name}
+📱 Mobile: ${mobile}
+🏍️ Bike Model: ${bike}
+📍 City: ${city}`;
+
+        const phone = "919707040752";
+
+        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappUrl, "_blank");
+
+        form.reset();
     });
+
 });
