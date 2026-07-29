@@ -104,7 +104,7 @@ Logout
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getFirestore,
@@ -128,7 +128,6 @@ const firebaseConfig = {
   appId: "1:989678663450:web:d0499bf58d8dd382325ea3"
 };
 
-import { getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 const app = getApp();
 const db = getFirestore(app);
