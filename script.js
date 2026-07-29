@@ -40,7 +40,7 @@ btn.innerHTML = "Submitting...";
 const snapshot = await getDocs(q);
     alert("Found: " + snapshot.size);
 
-if (!snapshot.empty) {
+if (snapshot.size > 0) {
   alert("You have already submitted an application with this mobile number.");
 
   btn.disabled = false;
