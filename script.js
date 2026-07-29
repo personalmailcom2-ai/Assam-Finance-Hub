@@ -14,7 +14,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 window.addEventListener("load", () => {
-  const auth = getAuth();
+  const auth = window.auth;
 
 window.recaptchaVerifier = new RecaptchaVerifier(
   auth,
