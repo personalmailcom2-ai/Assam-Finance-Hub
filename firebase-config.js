@@ -3,7 +3,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebas
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAnQFG-tdce0gxxfEhIYdpr6BJDcQgbW",
+  apiKey: "AIzaSyAnQPG-tdceOqxxfEzHIYdpr6pBJDcOgbM",
   authDomain: "assam-finance-hub.firebaseapp.com",
   databaseURL: "https://assam-finance-hub-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "assam-finance-hub",
