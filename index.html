@@ -42,22 +42,31 @@ input{
     border-radius:5px;
     box-sizing:border-box;
     font-size:16px;
+   transition:0.3s;
 }
 
+   input:focus{
+outline:none;
+border:1px solid #0B5ED7;
+box-shadow:0 0 8px rgba(11,94,215,.3);
+   }
 button{
     width:100%;
     padding:14px;
     margin-top:10px;
-    background:#007bff;
+    background:linear-gradient(135deg,#0B5ED7,#1E88E5);
     color:#fff;
     border:none;
     border-radius:5px;
     font-size:18px;
     cursor:pointer;
+   transition:0.3s;
+box-shadow:0 8px 20px rgba(11,94,215,.35);
 }
 
 button:hover{
-    background:#0056b3;
+    transform:translateY(-2px);
+box-shadow:0 12px 24px rgba(11,94,215,.45);
 }
 </style>
 
