@@ -1,82 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Admin Panel</title>
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
+
 font-family:Arial,sans-serif;
 background:#f5f5f5;
 padding:20px;
-margin:0;
+
 }
 
 .header{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:20px;
+
 }
 
 h2{
-margin:0;
+
+color:#0B5ED7;
+
+}
+
+.logout{
+
+background:#d32f2f;
+color:white;
+padding:10px 18px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+
 }
 
 .dashboard{
+
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:10px;
+gap:12px;
 margin-bottom:20px;
+
 }
 
 .box{
-background:#fff;
+
+background:white;
 padding:15px;
 border-radius:10px;
 text-align:center;
-box-shadow:0 2px 8px rgba(0,0,0,.2);
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+
 }
 
 .box h3{
-margin:0;
+
 font-size:28px;
 color:#0B5ED7;
+
 }
 
 .search{
+
 width:100%;
 padding:12px;
-margin-bottom:20px;
 border:1px solid #ccc;
 border-radius:8px;
 font-size:16px;
-box-sizing:border-box;
+margin-bottom:15px;
+
+}
+
+.topButtons{
+
+display:flex;
+gap:10px;
+margin-bottom:20px;
+
+}
+
+.export{
+
+background:#0B5ED7;
+color:white;
+padding:10px 18px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+
 }
 
 .card{
-background:#fff;
+
+background:white;
 padding:15px;
-margin-bottom:15px;
 border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.2);
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+margin-bottom:15px;
+
 }
 
 button{
-padding:10px 18px;
-margin:5px;
+
+padding:10px 16px;
 border:none;
-border-radius:5px;
+border-radius:6px;
 cursor:pointer;
 color:white;
+margin:5px;
+
 }
 
-.approve{background:green;}
-.reject{background:red;}
-.delete{background:black;}
-.logout{background:#d32f2f;}
+.approve{
+
+background:green;
+
+}
+
+.reject{
+
+background:red;
+
+}
+
+.delete{
+
+background:black;
+
+}
+
+@media(max-width:700px){
+
+.dashboard{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
 
 </style>
 
@@ -88,7 +166,9 @@ color:white;
 
 <h2>Loan Applications</h2>
 
-<button id="logoutBtn" class="logout">
+<button
+id="logoutBtn"
+class="logout">
 Logout
 </button>
 
@@ -119,18 +199,30 @@ Logout
 </div>
 
 <input
-type="text"
 id="searchBox"
 class="search"
-placeholder="🔍 Search by Name or Mobile">
+type="text"
+placeholder="🔍 Search Name or Mobile">
+
+<div class="topButtons">
+
+<button
+id="exportBtn"
+class="export">
+📥 Export Excel
+</button>
+
+</div>
 
 <div id="list">
+
 Loading...
+
 </div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getFirestore,
@@ -158,17 +250,25 @@ measurementId:"G-H15X3EDQJW"
 };
 
 const app=initializeApp(firebaseConfig);
+
 const db=getFirestore(app);
+
 const auth=getAuth(app);
 
 const list=document.getElementById("list");
+
 const searchBox=document.getElementById("searchBox");
 
-  onAuthStateChanged(auth,(user)=>{
+const exportBtn=document.getElementById("exportBtn");
+
+onAuthStateChanged(auth,(user)=>{
 
 if(!user){
+
 window.location.href="admin-login.html";
+
 return;
+
 }
 
 loadData();
@@ -189,7 +289,7 @@ loadData();
 
 });
 
-async function loadData(){
+  async function loadData(){
 
 list.innerHTML="Loading...";
 
@@ -234,6 +334,7 @@ pending++;
 }
 
 list.innerHTML+=`
+
 <div class="card">
 
 <h3>${x.name||""}</h3>
@@ -281,12 +382,14 @@ list.innerHTML="<h3>No Applications Found</h3>";
 
 }
 
-window.changeStatus=async(id,status)=>{
+window.changeStatus = async(id,status)=>{
 
 try{
 
 await updateDoc(doc(db,"applications",id),{
+
 status:status
+
 });
 
 alert("Status Updated Successfully");
@@ -305,7 +408,7 @@ alert(err.message);
 
 window.deleteApplication = async(id)=>{
 
-const ok = confirm("Delete this application?");
+const ok=confirm("Delete this application?");
 
 if(!ok) return;
 
@@ -327,9 +430,67 @@ alert(err.message);
 
 };
 
+exportBtn.onclick = async()=>{
+
+const snapshot=await getDocs(collection(db,"applications"));
+
+let csv="Name,Mobile,Bike,City,Status\n";
+
+snapshot.forEach((d)=>{
+
+const x=d.data();
+
+csv+=`"${x.name||""}","${x.mobile||""}","${x.bike||""}","${x.city||""}","${x.status||"Pending"}"\n`;
+
+});
+
+const blob=new Blob([csv],{type:"text/csv"});
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+
+a.href=url;
+
+a.download="Loan_Applications.csv";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+};
+
+  loadData();
+
+setInterval(()=>{
+
 loadData();
 
-</script>
+},30000);
+
+// Auto Refresh every 30 seconds
+
+function formatStatus(status){
+
+if(status==="Approved"){
+
+return "🟢 Approved";
+
+}
+
+if(status==="Rejected"){
+
+return "🔴 Rejected";
+
+}
+
+return "🟡 Pending";
+
+}
+
+console.log("Admin Panel Loaded Successfully");
+
+  </script>
 
 </body>
-</html>  
+</html>
