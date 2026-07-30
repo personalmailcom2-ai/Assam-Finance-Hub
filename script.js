@@ -1,7 +1,5 @@
 import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
+  getAuth
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
@@ -15,50 +13,25 @@ import {
 
 window.addEventListener("load", () => {
 
-  const auth = getAuth();
-
-  // Create reCAPTCHA only ONCE
-  window.recaptchaVerifier = new RecaptchaVerifier(
-    auth,
-    "recaptcha-container",
-    {
-      size: "invisible"
-    }
-  );
+  getAuth(); // Future Firebase OTP ke liye
 
   const sendOtpBtn = document.getElementById("sendOtpBtn");
   const form = document.getElementById("loanForm");
 
-  // SEND OTP
-  sendOtpBtn.addEventListener("click", async () => {
+  // DEMO OTP
+  sendOtpBtn.addEventListener("click", () => {
 
     const mobile = document.getElementById("mobile").value.trim();
 
-    if (mobile.length != 10) {
+    if (mobile.length !== 10) {
       alert("Enter valid mobile number");
       return;
     }
 
-    try {
-
-      const confirmationResult = await signInWithPhoneNumber(
-        auth,
-        "+91" + mobile,
-        window.recaptchaVerifier
-      );
-
-      window.confirmationResult = confirmationResult;
-
-      alert("OTP Sent Successfully");
-
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
+    alert("Demo OTP: 1234");
 
   });
 
-  // SUBMIT FORM
   form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
@@ -74,25 +47,15 @@ window.addEventListener("load", () => {
     const city = document.getElementById("city").value.trim();
     const otp = document.getElementById("otp").value.trim();
 
-    if (!window.confirmationResult) {
-      alert("Pehle OTP Send karo");
-      btn.disabled = false;
-      btn.innerHTML = "Apply Now";
-      return;
-    }
-
-    try {
-
-      await window.confirmationResult.confirm(otp);
-
-    } catch (err) {
+    // Demo OTP Check
+    if (otp !== "1234") {
 
       alert("Invalid OTP");
 
       btn.disabled = false;
       btn.innerHTML = "Apply Now";
-      return;
 
+      return;
     }
 
     const q = query(
