@@ -2260,3 +2260,46 @@ font-size:26px;
 }
 
 }
+
+/* CONTACT PAGE */
+
+.contact-page{
+padding:80px 0;
+background:#f5f7fb;
+}
+
+.contact-page h1{
+text-align:center;
+font-size:42px;
+margin-bottom:15px;
+color:#0d47a1;
+}
+
+.contact-page> .container>p{
+text-align:center;
+margin-bottom:40px;
+color:#666;
+font-size:18px;
+}
+
+.contact-page form{
+max-width:700px;
+margin:auto;
+}
+
+.contact-page textarea{
+resize:vertical;
+}
+
+.contact-page .card i{
+color:#1565c0;
+margin-bottom:20px;
+}
+
+@media(max-width:768px){
+
+.contact-page h1{
+font-size:32px;
+}
+
+}
