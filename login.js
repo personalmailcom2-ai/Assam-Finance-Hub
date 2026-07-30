@@ -34,10 +34,11 @@ form.addEventListener("submit", async (e) => {
 
     window.location.href = "admin.html";
 
-  } catch (error) {
+} catch (error) {
 
-    alert(error.message);
+  console.log(error);
+  alert(error.code + "\n" + error.message);
 
-  }
+}
 
 });
