@@ -1,176 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Panel</title>
+<title>Admin Dashboard</title>
 
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-
-font-family:Arial,sans-serif;
-background:#f5f5f5;
-padding:20px;
-
-}
-
-.header{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
-
-}
-
-h2{
-
-color:#0B5ED7;
-
-}
-
-.logout{
-
-background:#d32f2f;
-color:white;
-padding:10px 18px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-
-}
-
-.dashboard{
-
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-bottom:20px;
-
-}
-
-.box{
-
-background:white;
-padding:15px;
-border-radius:10px;
-text-align:center;
-box-shadow:0 2px 8px rgba(0,0,0,.15);
-
-}
-
-.box h3{
-
-font-size:28px;
-color:#0B5ED7;
-
-}
-
-.search{
-
-width:100%;
-padding:12px;
-border:1px solid #ccc;
-border-radius:8px;
-font-size:16px;
-margin-bottom:15px;
-
-}
-
-.topButtons{
-
-display:flex;
-gap:10px;
-margin-bottom:20px;
-
-}
-
-.export{
-
-background:#0B5ED7;
-color:white;
-padding:10px 18px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-
-}
-
-.card{
-
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.15);
-margin-bottom:15px;
-
-}
-
-button{
-
-padding:10px 16px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-color:white;
-margin:5px;
-
-}
-
-.approve{
-
-background:green;
-
-}
-
-.reject{
-
-background:red;
-
-}
-
-.delete{
-
-background:black;
-
-}
-
-@media(max-width:700px){
-
-.dashboard{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-</style>
+<link rel="stylesheet" href="admin.css">
 
 </head>
 
 <body>
 
+<div class="container">
+
 <div class="header">
 
-<h2>Loan Applications</h2>
+<h2>Assam Finance Hub Admin</h2>
 
-<button
-id="logoutBtn"
-class="logout">
-Logout
-</button>
+<button id="logoutBtn">Logout</button>
 
 </div>
 
@@ -178,7 +29,7 @@ Logout
 
 <div class="box">
 <h3 id="totalCount">0</h3>
-<p>Total</p>
+<p>Total Applications</p>
 </div>
 
 <div class="box">
@@ -199,20 +50,9 @@ Logout
 </div>
 
 <input
-id="searchBox"
-class="search"
 type="text"
-placeholder="🔍 Search Name or Mobile">
-
-<div class="topButtons">
-
-<button
-id="exportBtn"
-class="export">
-📥 Export Excel
-</button>
-
-</div>
+id="searchBox"
+placeholder="Search by Name or Mobile">
 
 <div id="list">
 
@@ -222,7 +62,7 @@ Loading...
 
 <script type="module">
 
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { app } from "./firebase.js";
 
 import {
 getFirestore,
@@ -239,27 +79,162 @@ onAuthStateChanged,
 signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-const firebaseConfig={
-apiKey:"AIzaSyAnQPG-tdceOqxxfEzHIYdpr6pBJDcOgbM",
-authDomain:"assam-finance-hub.firebaseapp.com",
-projectId:"assam-finance-hub",
-storageBucket:"assam-finance-hub.firebasestorage.app",
-messagingSenderId:"989678663450",
-appId:"1:989678663450:web:d0499bf58d8dd382325ea3",
-measurementId:"G-H15X3EDQJW"
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+const list = document.getElementById("list");
+const searchBox = document.getElementById("searchBox");
+
+let applications = [];
+
+  async function loadApplications(){
+
+const snapshot = await getDocs(collection(db,"applications"));
+
+applications = snapshot.docs.map(doc=>({
+
+id:doc.id,
+
+...doc.data()
+
+}));
+
+renderApplications();
+
+}
+
+function renderApplications(){
+
+const search = searchBox.value.toLowerCase();
+
+let total = 0;
+let pending = 0;
+let approved = 0;
+let rejected = 0;
+
+list.innerHTML = "";
+
+applications.forEach(item=>{
+
+const name = (item.name||"").toLowerCase();
+const mobile = (item.mobile||"").toLowerCase();
+
+if(
+!name.includes(search) &&
+!mobile.includes(search)
+){
+return;
+}
+
+total++;
+
+if(item.status==="Approved"){
+approved++;
+}else if(item.status==="Rejected"){
+rejected++;
+}else{
+pending++;
+}
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>${item.name||""}</h3>
+
+<p><b>Mobile:</b> ${item.mobile||""}</p>
+
+<p><b>Bike:</b> ${item.bike||""}</p>
+
+<p><b>City:</b> ${item.city||""}</p>
+
+<p><b>Status:</b> ${item.status||"Pending"}</p>
+
+<button onclick="changeStatus('${item.id}','Approved')">
+
+Approve
+
+</button>
+
+<button onclick="changeStatus('${item.id}','Rejected')">
+
+Reject
+
+</button>
+
+<button onclick="deleteApplication('${item.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("totalCount").innerText = total;
+document.getElementById("pendingCount").innerText = pending;
+document.getElementById("approvedCount").innerText = approved;
+document.getElementById("rejectedCount").innerText = rejected;
+
+if(total===0){
+
+list.innerHTML="<h3>No Applications Found</h3>";
+
+}
+
+}
+
+searchBox.addEventListener("input",renderApplications);
+
+  window.changeStatus = async(id,status)=>{
+
+try{
+
+await updateDoc(doc(db,"applications",id),{
+
+status:status
+
+});
+
+await loadApplications();
+
+}catch(err){
+
+alert(err.message);
+
+}
+
 };
 
-const app=initializeApp(firebaseConfig);
+window.deleteApplication = async(id)=>{
 
-const db=getFirestore(app);
+if(!confirm("Delete this application?")) return;
 
-const auth=getAuth(app);
+try{
 
-const list=document.getElementById("list");
+await deleteDoc(doc(db,"applications",id));
 
-const searchBox=document.getElementById("searchBox");
+await loadApplications();
 
-const exportBtn=document.getElementById("exportBtn");
+}catch(err){
+
+alert(err.message);
+
+}
+
+};
+
+document.getElementById("logoutBtn").onclick = async()=>{
+
+await signOut(auth);
+
+window.location.href = "admin-login.html";
+
+};
 
 onAuthStateChanged(auth,(user)=>{
 
@@ -271,226 +246,14 @@ return;
 
 }
 
-loadData();
+loadApplications();
 
 });
 
-document.getElementById("logoutBtn").onclick=async()=>{
-
-await signOut(auth);
-
-window.location.href="admin-login.html";
-
-};
-
-searchBox.addEventListener("input",()=>{
-
-loadData();
-
-});
-
-  async function loadData(){
-
-list.innerHTML="Loading...";
-
-const snapshot=await getDocs(collection(db,"applications"));
-
-const docs=snapshot.docs.reverse();
-
-let total=0;
-let pending=0;
-let approved=0;
-let rejected=0;
-
-const search=searchBox.value.toLowerCase().trim();
-
-list.innerHTML="";
-
-docs.forEach((d)=>{
-
-const x=d.data();
-
-const name=(x.name||"").toLowerCase();
-const mobile=(x.mobile||"").toLowerCase();
-
-if(
-search &&
-!name.includes(search) &&
-!mobile.includes(search)
-){
-return;
-}
-
-total++;
-
-if(x.status==="Approved"){
-approved++;
-}
-else if(x.status==="Rejected"){
-rejected++;
-}
-else{
-pending++;
-}
-
-list.innerHTML+=`
-
-<div class="card">
-
-<h3>${x.name||""}</h3>
-
-<p><b>Mobile:</b> ${x.mobile||""}</p>
-
-<p><b>Bike:</b> ${x.bike||""}</p>
-
-<p><b>City:</b> ${x.city||""}</p>
-
-<p><b>Status:</b> ${x.status||"Pending"}</p>
-
-<button
-class="approve"
-onclick="changeStatus('${d.id}','Approved')">
-Approve
-</button>
-
-<button
-class="reject"
-onclick="changeStatus('${d.id}','Rejected')">
-Reject
-</button>
-
-<button
-class="delete"
-onclick="deleteApplication('${d.id}')">
-Delete
-</button>
+</script>
 
 </div>
 
-`;
-
-});
-
-document.getElementById("totalCount").innerHTML=total;
-document.getElementById("pendingCount").innerHTML=pending;
-document.getElementById("approvedCount").innerHTML=approved;
-document.getElementById("rejectedCount").innerHTML=rejected;
-
-if(list.innerHTML===""){
-list.innerHTML="<h3>No Applications Found</h3>";
-}
-
-}
-
-window.changeStatus = async(id,status)=>{
-
-try{
-
-await updateDoc(doc(db,"applications",id),{
-
-status:status
-
-});
-
-alert("Status Updated Successfully");
-
-loadData();
-
-}catch(err){
-
-console.error(err);
-
-alert(err.message);
-
-}
-
-};
-
-window.deleteApplication = async(id)=>{
-
-const ok=confirm("Delete this application?");
-
-if(!ok) return;
-
-try{
-
-await deleteDoc(doc(db,"applications",id));
-
-alert("Application Deleted Successfully");
-
-loadData();
-
-}catch(err){
-
-console.error(err);
-
-alert(err.message);
-
-}
-
-};
-
-exportBtn.onclick = async()=>{
-
-const snapshot=await getDocs(collection(db,"applications"));
-
-let csv="Name,Mobile,Bike,City,Status\n";
-
-snapshot.forEach((d)=>{
-
-const x=d.data();
-
-csv+=`"${x.name||""}","${x.mobile||""}","${x.bike||""}","${x.city||""}","${x.status||"Pending"}"\n`;
-
-});
-
-const blob=new Blob([csv],{type:"text/csv"});
-
-const url=URL.createObjectURL(blob);
-
-const a=document.createElement("a");
-
-a.href=url;
-
-a.download="Loan_Applications.csv";
-
-a.click();
-
-URL.revokeObjectURL(url);
-
-};
-
-  loadData();
-
-setInterval(()=>{
-
-loadData();
-
-},30000);
-
-// Auto Refresh every 30 seconds
-
-function formatStatus(status){
-
-if(status==="Approved"){
-
-return "🟢 Approved";
-
-}
-
-if(status==="Rejected"){
-
-return "🔴 Rejected";
-
-}
-
-return "🟡 Pending";
-
-}
-
-console.log("Admin Panel Loaded Successfully");
-
-  </script>
-
 </body>
+
 </html>
