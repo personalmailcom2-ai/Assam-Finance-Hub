@@ -63,6 +63,19 @@ btn.innerHTML = "Submitting...";
     const mobile = document.getElementById("mobile").value.trim();
     const bike = document.getElementById("bike").value.trim();
     const city = document.getElementById("city").value.trim();
+    const otp = document.getElementById("otp").value.trim();
+
+    if (!window.confirmationResult) {
+  alert("Pehle OTP Send karo");
+  return;
+    }
+
+    try {
+  await window.confirmationResult.confirm(otp);
+} catch (e) {
+  alert("Invalid OTP");
+  return;
+    }
 
     const q = query(
   collection(window.db, "applications"),
