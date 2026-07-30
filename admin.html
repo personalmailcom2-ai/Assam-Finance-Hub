@@ -4,10 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Dashboard</title>
+<title>Assam Finance Hub - Admin Dashboard</title>
 
 <link rel="stylesheet" href="admin.css">
 
@@ -17,78 +16,89 @@
 
 <div class="container">
 
-<div class="header">
+<header class="header">
 
-<h2>Assam Finance Hub Admin Dashboard</h2>
+<div>
 
-<button id="logoutBtn">
+<h1>Assam Finance Hub</h1>
 
-Logout
-
-</button>
+<p class="subtitle">
+Bike Loan Admin Dashboard
+</p>
 
 </div>
 
-<div class="dashboard">
+<button id="logoutBtn" class="logout-btn">
+Logout
+</button>
 
-<div class="box">
+</header>
 
-<h3 id="totalCount">0</h3>
+<section class="dashboard">
+
+<div class="box total">
+
+<h2 id="totalCount">0</h2>
 
 <p>Total Applications</p>
 
 </div>
 
-<div class="box">
+<div class="box pending">
 
-<h3 id="pendingCount">0</h3>
+<h2 id="pendingCount">0</h2>
 
-<p>Pending Applications</p>
+<p>Pending</p>
 
 </div>
 
-<div class="box">
+<div class="box approved">
 
-<h3 id="approvedCount">0</h3>
+<h2 id="approvedCount">0</h2>
 
 <p>Approved</p>
 
 </div>
 
-<div class="box">
+<div class="box rejected">
 
-<h3 id="rejectedCount">0</h3>
+<h2 id="rejectedCount">0</h2>
 
 <p>Rejected</p>
 
 </div>
 
-</div>
+</section>
+
+<section class="search-section">
 
 <input
 type="text"
 id="searchBox"
 placeholder="Search by Name or Mobile Number">
 
-<div id="list">
+</section>
 
-  <div class="card">
+<section class="info-card">
 
-<h3>Loan Applications</h3>
+<h2>Loan Applications</h2>
 
 <p>
 
-All submitted applications will appear below.
-
-Use the buttons to approve, reject or delete an application.
+All submitted bike loan applications will appear below.
+Use the action buttons to approve, reject or delete applications.
 
 </p>
 
-</div>
+</section>
+
+<div id="list">
+
+  <!-- Applications loaded from Firebase -->
 
 <div id="applicationsContainer">
 
-<!-- Applications loaded by admin.js -->
+<!-- admin.js will render application cards here -->
 
 </div>
 
@@ -106,63 +116,121 @@ Action completed successfully.
 
 <div class="error-box" id="errorMsg">
 
-Something went wrong.
+Something went wrong. Please try again.
 
 </div>
 
-  <section class="card">
+<section class="card">
 
-<h3>Dashboard Guide</h3>
+<h2>Dashboard Guide</h2>
 
 <ul>
 
-<li>🔍 Use the search box to find applications by name or mobile number.</li>
+<li>🔍 Search applications using applicant name or mobile number.</li>
 
-<li>✅ Click <strong>Approve</strong> to approve a loan application.</li>
+<li>✅ Click <strong>Approve</strong> to approve a bike loan.</li>
 
-<li>❌ Click <strong>Reject</strong> to reject a loan application.</li>
+<li>❌ Click <strong>Reject</strong> to reject a bike loan.</li>
 
 <li>🗑 Click <strong>Delete</strong> to permanently remove an application.</li>
 
-<li>📊 Dashboard counters update automatically.</li>
+<li>📊 Dashboard statistics update automatically.</li>
+
+<li>🔄 Applications refresh automatically every 30 seconds.</li>
 
 </ul>
 
 </section>
 
-<hr style="margin:20px 0;">
+<section class="card">
 
-<div id="applicationList">
+<h2>Quick Actions</h2>
 
-<!-- admin.js will render all application cards here -->
+<div class="quick-actions">
+
+<button onclick="loadApplications()">
+Refresh Applications
+</button>
+
+<button onclick="window.scrollTo({top:0,behavior:'smooth'})">
+Back To Top
+</button>
 
 </div>
 
+</section>
+
   <section class="card">
 
-<h3>Quick Actions</h3>
+<h2>Admin Instructions</h2>
 
 <p>
 
-You can manage all bike loan applications from this dashboard.
-
-Use the search bar above to quickly find any applicant.
+Only authorized administrators should access this dashboard.
+Every action performed here updates the Firebase Firestore database instantly.
 
 </p>
 
 </section>
 
-<footer>
+<section class="card">
+
+<h2>Application Status</h2>
+
+<div class="status-grid">
+
+<div class="status-item pending">
+
+<span class="status-dot"></span>
+
+Pending Applications
+
+</div>
+
+<div class="status-item approved">
+
+<span class="status-dot"></span>
+
+Approved Applications
+
+</div>
+
+<div class="status-item rejected">
+
+<span class="status-dot"></span>
+
+Rejected Applications
+
+</div>
+
+</div>
+
+</section>
+
+<section class="card">
+
+<h2>Security Notice</h2>
 
 <p>
 
-Assam Finance Hub – Admin Dashboard
+This dashboard is protected using Firebase Authentication.
+If your session expires, you will automatically be redirected to the login page.
+
+</p>
+
+</section>
+
+<footer class="footer">
+
+<p>
+
+© 2026 Assam Finance Hub. All Rights Reserved.
 
 </p>
 
 <p>
 
-Only authorized administrators are allowed to access this panel.
+Secure Bike Loan Management System powered by Firebase.
 
 </p>
 
@@ -173,5 +241,4 @@ Only authorized administrators are allowed to access this panel.
 <script type="module" src="admin.js"></script>
 
 </body>
-
 </html>
