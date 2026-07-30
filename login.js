@@ -1,8 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-getAuth,
-signInWithEmailAndPassword
+  getAuth,
+  signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -14,7 +14,6 @@ const firebaseConfig = {
   appId: "1:989678663450:web:d0499bf58d8dd382325ea3",
   measurementId: "G-H1SX3EDQJM"
 };
-  
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -23,24 +22,23 @@ const loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", async () => {
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   try {
+
     await signInWithEmailAndPassword(auth, email, password);
 
     alert("Login Successful");
 
     window.location.href = "admin.html";
 
-} catch (error) {
+  } catch (error) {
 
-  console.log(error);
-  alert(error.code + "\n" + error.message);
+    console.log(error);
 
-}
+    alert(error.code + "\n" + error.message);
+
+  }
 
 });
