@@ -1,44 +1,175 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+/* ==========================================
+   FORGOT PASSWORD
+========================================== */
 
-import {
-  getAuth,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+forgotPassword.addEventListener("click", async (e) => {
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAnQPG-tdceOqxxfEzHIYdpr6pBJDcOgbM",
-  authDomain: "assam-finance-hub.firebaseapp.com",
-  projectId: "assam-finance-hub",
-  storageBucket: "assam-finance-hub.firebasestorage.app",
-  messagingSenderId: "989678663450",
-  appId: "1:989678663450:web:d0499bf58d8dd382325ea3",
-  measurementId: "G-H1SX3EDQJM"
-};
+e.preventDefault();
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const userEmail = email.value.trim();
 
-const loginBtn = document.getElementById("loginBtn");
+if(userEmail===""){
 
-loginBtn.addEventListener("click", async () => {
+alert("Please enter your email first.");
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+email.focus();
 
-  try {
+return;
 
-    await signInWithEmailAndPassword(auth, email, password);
+}
 
-    alert("Login Successful");
+try{
 
-    window.location.href = "admin.html";
+await sendPasswordResetEmail(auth,userEmail);
 
-  } catch (error) {
+alert("Password reset email has been sent.");
 
-    console.log(error);
+}catch(error){
 
-    alert(error.code + "\n" + error.message);
+alert(error.message);
 
-  }
+}
 
 });
+
+/* ==========================================
+   ENTER KEY SUPPORT
+========================================== */
+
+password.addEventListener("keypress",(e)=>{
+
+if(e.key==="Enter"){
+
+loginForm.requestSubmit();
+
+}
+
+});
+
+/* ==========================================
+   AUTO LOGIN CHECK
+========================================== */
+
+import {
+
+onAuthStateChanged
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+window.location.href="admin.html";
+
+}
+
+});
+
+/* ==========================================
+   FRIENDLY ERROR MESSAGE
+========================================== */
+
+function getFirebaseError(code){
+
+switch(code){
+
+case "auth/invalid-credential":
+
+return "Invalid email or password.";
+
+case "auth/user-not-found":
+
+return "Account not found.";
+
+case "auth/wrong-password":
+
+return "Incorrect password.";
+
+case "auth/invalid-email":
+
+return "Invalid email address.";
+
+case "auth/too-many-requests":
+
+return "Too many attempts. Try again later.";
+
+case "auth/network-request-failed":
+
+return "Check your internet connection.";
+
+default:
+
+return "Login failed. Please try again.";
+
+}
+
+}
+
+/* ==========================================
+   SESSION STORAGE
+========================================== */
+
+sessionStorage.setItem("appName","Assam Finance Hub");
+
+/* ==========================================
+   WINDOW FOCUS
+========================================== */
+
+window.addEventListener("focus",()=>{
+
+email.blur();
+
+password.blur();
+
+});
+
+/* ==========================================
+   PREVENT MULTIPLE CLICKS
+========================================== */
+
+let isLoggingIn=false;
+
+loginForm.addEventListener("submit",async(e)=>{
+
+if(isLoggingIn){
+
+e.preventDefault();
+
+return;
+
+}
+
+isLoggingIn=true;
+
+setTimeout(()=>{
+
+isLoggingIn=false;
+
+},3000);
+
+});
+
+/* ==========================================
+   PAGE LOADED
+========================================== */
+
+window.addEventListener("load",()=>{
+
+console.log("Login Page Loaded");
+
+});
+
+/* ==========================================
+   VERSION
+========================================== */
+
+const LOGIN_VERSION="1.0.0";
+
+console.log("Login Version:",LOGIN_VERSION);
+
+/* ==========================================
+   END OF LOGIN.JS
+========================================== */
