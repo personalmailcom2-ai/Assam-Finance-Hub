@@ -111,7 +111,8 @@ getFirestore,
 collection,
 getDocs,
 doc,
-updateDoc
+updateDoc,
+deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
@@ -150,7 +151,9 @@ list.innerHTML="";
 
 const snapshot = await getDocs(collection(db,"applications"));
 
-snapshot.forEach((d)=>{
+  const docs = snapshot.docs.reverse();
+
+docs.forEach((d)=>{
 
 const x = d.data();
 
@@ -179,6 +182,12 @@ onclick="changeStatus('${d.id}','Rejected')">
 Reject
 </button>
 
+<button
+style="background:#000;"
+onclick="deleteApplication('${d.id}')">
+Delete
+</button>
+
 </div>
 `;
 
@@ -197,6 +206,21 @@ window.changeStatus = async(id,status)=>{
 
 }
 
+  import {
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+window.deleteApplication = async(id) => {
+
+  if (!confirm("Delete this application?")) return;
+
+  await deleteDoc(doc(db, "applications", id));
+
+  alert("Application Deleted");
+
+  loadData();
+};
+  
 loadData();
 
 </script>
