@@ -3,35 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel</title>
+<title>Admin Panel - Assam Finance Hub</title>
 
 <style>
+
 body{
 font-family:Arial,sans-serif;
 background:#f5f5f5;
-padding:20px;
 margin:0;
+padding:20px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
 }
 
 h2{
-text-align:center;
+margin:0;
 }
 
 .card{
 background:#fff;
 padding:15px;
-margin:15px 0;
+margin-bottom:15px;
 border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,.2);
 }
 
 button{
 padding:10px 18px;
-margin:5px;
 border:none;
 border-radius:5px;
 cursor:pointer;
 color:white;
+margin:5px;
 font-size:15px;
 }
 
@@ -42,69 +50,40 @@ background:green;
 .reject{
 background:red;
 }
+
+.delete{
+background:black;
+}
+
+.logout{
+background:#d32f2f;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAnQPG-tdceOqxxfEzHIYdpr6pBJDcOgbM",
-  authDomain: "assam-finance-hub.firebaseapp.com",
-  projectId: "assam-finance-hub",
-  storageBucket: "assam-finance-hub.firebasestorage.app",
-  messagingSenderId: "989678663450",
-  appId: "1:989678663450:web:d0499bf58d8dd382325ea3",
-  measurementId: "G-H15X3EDQJW"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// Check login
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "admin-login.html";
-  }
-});
-
-// Wait until page is loaded
-window.onload = () => {
-  const btn = document.getElementById("logoutBtn");
-
-  if (btn) {
-    btn.onclick = async () => {
-      await signOut(auth);
-      window.location.href = "admin-login.html";
-    };
-  }
-};
-</script>
-
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+<div class="header">
 
 <h2>Loan Applications</h2>
 
-<button id="logoutBtn"
-style="background:#d32f2f;padding:10px 18px;border:none;border-radius:5px;color:white;cursor:pointer;">
+<button
+id="logoutBtn"
+class="logout">
 Logout
 </button>
 
 </div>
 
-<div id="list">Loading...</div>
+<div id="list">
+Loading...
+</div>
 
 <script type="module">
 
-import { getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp,getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getFirestore,
@@ -113,117 +92,172 @@ getDocs,
 doc,
 updateDoc,
 deleteDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
 getAuth,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  
-const firebaseConfig = {
-  apiKey: "AIzaSyAnQPG-tdceOqxxfEzHIYdpr6pBJDcOgbM",
-  authDomain: "assam-finance-hub.firebaseapp.com",
-  projectId: "assam-finance-hub",
-  storageBucket: "assam-finance-hub.firebasestorage.app",
-  messagingSenderId: "989678663450",
-  appId: "1:989678663450:web:d0499bf58d8dd382325ea3"
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig={
+apiKey:"AIzaSyAnQPG-tdceOqxxfEzHIYdpr6pBJDcOgbM",
+authDomain:"assam-finance-hub.firebaseapp.com",
+projectId:"assam-finance-hub",
+storageBucket:"assam-finance-hub.firebasestorage.app",
+messagingSenderId:"989678663450",
+appId:"1:989678663450:web:d0499bf58d8dd382325ea3",
+measurementId:"G-H15X3EDQJW"
 };
 
+const app=initializeApp(firebaseConfig);
 
-const app = getApp();
-const db = getFirestore(app);
-const auth = getAuth(app);
+const db=getFirestore(app);
 
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.replace("admin-login.html");
-    return;
-  }
+const auth=getAuth(app);
+
+const list=document.getElementById("list");
+
+  onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+window.location.href="admin-login.html";
+return;
+}
+
 loadData();
-  
+
 });
 
-const list = document.getElementById("list");
+document.getElementById("logoutBtn").onclick=async()=>{
+
+await signOut(auth);
+
+window.location.href="admin-login.html";
+
+};
 
 async function loadData(){
 
+list.innerHTML="Loading...";
+
+try{
+
+const snapshot=await getDocs(collection(db,"applications"));
+
+const docs=snapshot.docs.reverse();
+
 list.innerHTML="";
-
-const snapshot = await getDocs(collection(db,"applications"));
-
-  const docs = snapshot.docs.reverse();
 
 docs.forEach((d)=>{
 
-const x = d.data();
+const x=d.data();
 
-if(!x.name || !x.mobile) return;
+list.innerHTML+=`
 
-list.innerHTML += `
 <div class="card">
 
-<h3>${x.name || ""}</h3>
+<h3>${x.name||""}</h3>
 
-<p><b>Mobile:</b> ${x.mobile || ""}</p>
+<p><b>Mobile:</b> ${x.mobile||""}</p>
 
-<p><b>Bike:</b> ${x.bike || ""}</p>
+<p><b>Bike:</b> ${x.bike||""}</p>
 
-<p><b>City:</b> ${x.city || ""}</p>
+<p><b>City:</b> ${x.city||""}</p>
 
-<p><b>Status:</b> ${x.status || "Pending"}</p>
+<p><b>Status:</b> ${x.status||"Pending"}</p>
 
-<button class="approve"
+<button
+class="approve"
 onclick="changeStatus('${d.id}','Approved')">
 Approve
 </button>
 
-<button class="reject"
+<button
+class="reject"
 onclick="changeStatus('${d.id}','Rejected')">
 Reject
 </button>
 
 <button
-style="background:#000;"
+class="delete"
 onclick="deleteApplication('${d.id}')">
 Delete
 </button>
 
 </div>
+
 `;
 
 });
 
-}
+if(docs.length===0){
 
-window.changeStatus = async(id,status)=>{
-
-  await updateDoc(doc(db,"applications",id),{
-    status:status
-  });
-
-  alert("Status Updated Successfully");
-  loadData();
+list.innerHTML="<h3>No Applications Found</h3>";
 
 }
 
-  import {
-  deleteDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+}catch(err){
 
-window.deleteApplication = async(id) => {
+console.error(err);
 
-  if (!confirm("Delete this application?")) return;
+list.innerHTML="<h3 style='color:red'>Error Loading Data</h3>";
 
-  await deleteDoc(doc(db, "applications", id));
+}
 
-  alert("Application Deleted");
+}
 
-  loadData();
-};
-  
+  window.changeStatus = async(id,status)=>{
+
+try{
+
+await updateDoc(doc(db,"applications",id),{
+
+status:status
+
+});
+
+alert("Status Updated Successfully");
+
 loadData();
 
-</script>
+}catch(err){
+
+console.error(err);
+
+alert(err.message);
+
+}
+
+};
+
+window.deleteApplication = async(id)=>{
+
+const ok=confirm("Delete this application?");
+
+if(!ok) return;
+
+try{
+
+await deleteDoc(doc(db,"applications",id));
+
+alert("Application Deleted Successfully");
+
+loadData();
+
+}catch(err){
+
+console.error(err);
+
+alert(err.message);
+
+}
+
+};
+
+  </script>
 
 </body>
 </html>
