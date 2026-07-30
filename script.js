@@ -14,7 +14,15 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 window.addEventListener("load", () => {
-  const auth = window.auth;
+  const auth = getAuth();
+
+  window.recaptchaVerifier = new RecaptchaVerifier(
+  auth,
+  "recaptcha-container",
+  {
+    size: "invisible"
+  }
+);
   const sendOtpBtn = document.getElementById("sendOtpBtn");
 
 sendOtpBtn.addEventListener("click", async () => {
