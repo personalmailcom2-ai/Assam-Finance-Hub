@@ -1,92 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Assam Finance Hub</title>
 
-<style>
-    *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-    }
-body{
-    margin:0;
-    padding:20px;
-    background:#f2f2f2;
-    font-family:Arial,sans-serif;
-}
+<link rel="stylesheet" href="style.css">
 
-.container{
-    max-width:420px;
-    margin:30px auto;
-    background:#ffffff;
-    padding:30px;
-    border-radius:18px;
-    box-shadow:0 15px 40px rgba(0,0,0,.12);
-    border-top:6px solid #0B5ED7;
-}
-
-h2{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:5px;
-    box-sizing:border-box;
-    font-size:16px;
-   transition:0.3s;
-}
-
-   input:focus{
-outline:none;
-border:1px solid #0B5ED7;
-box-shadow:0 0 8px rgba(11,94,215,.3);
-   }
-button{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    background:linear-gradient(135deg,#0B5ED7,#1E88E5);
-    color:#fff;
-    border:none;
-    border-radius:5px;
-    font-size:18px;
-    cursor:pointer;
-   transition:0.3s;
-box-shadow:0 8px 20px rgba(11,94,215,.35);
-}
-
-button:hover{
-    transform:translateY(-2px);
-box-shadow:0 12px 24px rgba(11,94,215,.45);
-}
-</style>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
-<div style="background:linear-gradient(135deg,#0B5ED7,#1E88E5);color:white;padding:25px;text-align:center;border-radius:0 0 20px 20px;margin-bottom:20px;">
-<h1 style="margin:0;">🏦 Assam Finance Hub</h1>
-<p>Fast • Secure • Trusted Two Wheeler Finance</p>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+<div class="logo">
+
+🚲 Assam Finance Hub
+
 </div>
-    
-<div class="container">
 
-<h2 style="margin-bottom:5px;color:#0B5ED7;">
-🏦 Assam Finance Hub
-</h2>
+<nav>
 
-<p style="text-align:center;color:#666;font-size:15px;margin-bottom:20px;">
-Fast • Secure • Trusted Two Wheeler Finance
+<a href="#">Home</a>
+
+<a href="#features">Features</a>
+
+<a href="#calculator">EMI</a>
+
+<a href="#apply">Apply</a>
+
+<a href="status.html">Status</a>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>
+
+Bike Loan Made Easy
+
+</h1>
+
+<p>
+
+Fast Approval • Low EMI • Instant Process
+
 </p>
+
+<button onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">
+
+Apply Now
+
+</button>
+
+</section>
+
+<!-- FEATURES -->
+
+<section
+id="features"
+class="features">
+
+<div class="card">
+
+<h3>⚡ Instant Approval</h3>
+
+<p>
+
+Quick loan approval within minutes.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>💰 Low EMI</h3>
+
+<p>
+
+Affordable monthly installments.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📄 Minimal Documents</h3>
+
+<p>
+
+Very few documents required.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🔒 Secure Process</h3>
+
+<p>
+
+100% Safe & Secure Application.
+
+</p>
+
+</div>
+
+</section>
+
+   <!-- EMI CALCULATOR -->
+
+<section
+id="calculator"
+class="calculator">
+
+<h2>EMI Calculator</h2>
+
+<input
+type="number"
+id="loanAmount"
+placeholder="Loan Amount">
+
+<input
+type="number"
+id="interestRate"
+placeholder="Interest Rate (%)">
+
+<input
+type="number"
+id="loanMonths"
+placeholder="Loan Duration (Months)">
+
+<button id="calculateBtn">
+
+Calculate EMI
+
+</button>
+
+<div
+id="emiResult"
+class="result">
+
+Your EMI will appear here
+
+</div>
+
+</section>
+
+<!-- LOAN APPLY FORM -->
+
+<section
+id="apply"
+class="form-box">
+
+<h2>
+
+Apply For Bike Loan
+
+</h2>
 
 <form id="loanForm">
 
@@ -100,17 +188,9 @@ required>
 type="tel"
 id="mobile"
 placeholder="Mobile Number"
+maxlength="10"
 required>
-   
-   <button type="button" id="sendOtpBtn">
-Send OTP
-   </button>
 
-   <input
-type="text"
-id="otp"
-placeholder="Enter OTP">
-   
 <input
 type="text"
 id="bike"
@@ -123,20 +203,406 @@ id="city"
 placeholder="City"
 required>
 
-<button type="submit">
-Apply Now
+<div id="recaptcha-container"></div>
+
+<button
+type="button"
+id="sendOtpBtn">
+
+Send OTP
+
 </button>
 
-   <p id="msg" style="text-align:center;color:green;margin-top:15px;font-weight:bold;"></p>
-   
-</form>
-   
-<div id="recaptcha-container"></div>
-   
+<input
+type="text"
+id="otp"
+placeholder="Enter OTP">
+
+<button
+type="submit">
+
+Apply Now
+
+</button>
+
+<div
+id="loader"
+class="loader">
+
+Processing...
+
 </div>
 
-<script type="module" src="firebase-config.js"></script>
+<div
+id="successMsg"
+class="success-box">
+
+Application Submitted Successfully ✅
+
+</div>
+
+<div
+id="errorMsg"
+class="error-box">
+
+Something went wrong ❌
+
+</div>
+
+</form>
+
+</section>
+
+   <!-- STATUS SECTION -->
+
+<section class="status-box">
+
+<h2>
+
+Check Application Status
+
+</h2>
+
+<p>
+
+Already applied?
+
+Click below to check your application status.
+
+</p>
+
+<button
+onclick="window.location.href='status.html'">
+
+Check Status
+
+</button>
+
+</section>
+
+<!-- CONTACT -->
+
+<footer>
+
+<h2>
+
+Assam Finance Hub
+
+</h2>
+
+<p>
+
+📍 Assam, India
+
+</p>
+
+<p>
+
+📞 +91 9707040752
+
+</p>
+
+<p>
+
+📧 support@assamfinancehub.in
+
+</p>
+
+<p>
+
+© 2026 Assam Finance Hub
+
+All Rights Reserved.
+
+</p>
+
+</footer>
+
+<!-- WHATSAPP -->
+
+<a
+href="https://wa.me/919707040752"
+class="whatsapp-btn"
+target="_blank">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+<script type="module" src="firebase.js"></script>
+
 <script type="module" src="script.js"></script>
+
+   <!-- ABOUT SECTION -->
+
+<section class="features">
+
+<div class="card">
+<h3>Why Choose Assam Finance Hub?</h3>
+
+<p>
+
+We provide instant bike loan approval,
+simple documentation,
+low interest rates and trusted service across Assam.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Documents Required</h3>
+
+<p>
+
+✔ Aadhaar Card<br>
+✔ PAN Card<br>
+✔ Driving Licence (Optional)<br>
+✔ Passport Size Photo
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Loan Benefits</h3>
+
+<p>
+
+✔ Up to 100% Finance<br>
+✔ Fast Processing<br>
+✔ Flexible EMI<br>
+✔ Easy Approval
+
+</p>
+
+</div>
+
+</section>
+
+<!-- HOW IT WORKS -->
+
+<section class="form-box">
+
+<h2>
+
+How It Works
+
+</h2>
+
+<div class="card">
+
+<h3>
+
+1️⃣ Apply Online
+
+</h3>
+
+<p>
+
+Fill the online application form with your details.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+2️⃣ Verification
+
+</h3>
+
+<p>
+
+Our team verifies your application and documents.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+3️⃣ Approval
+
+</h3>
+
+<p>
+
+After approval our representative will contact you.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+4️⃣ Loan Disbursement
+
+</h3>
+
+<p>
+
+Your bike loan process will be completed quickly.
+
+</p>
+
+</div>
+
+</section>
+
+   <!-- FAQ SECTION -->
+
+<section class="form-box">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="card">
+
+<h3>How much loan can I get?</h3>
+
+<p>
+You can get finance according to your eligibility and bike price.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>How many days does approval take?</h3>
+
+<p>
+Normally approval is completed within 24–48 hours after verification.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Is there any processing fee?</h3>
+
+<p>
+Processing fee depends on the finance company and loan amount.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Can I apply online?</h3>
+
+<p>
+Yes, you can complete the entire application online through Assam Finance Hub.
+</p>
+
+</div>
+
+</section>
+
+<!-- CONTACT SECTION -->
+
+<section class="form-box">
+
+<h2>Contact Us</h2>
+
+<input
+type="text"
+value="Assam Finance Hub"
+readonly>
+
+<input
+type="text"
+value="+91 9707040752"
+readonly>
+
+<input
+type="text"
+value="support@assamfinancehub.in"
+readonly>
+
+<input
+type="text"
+value="Assam, India"
+readonly>
+
+<button
+onclick="window.open('https://wa.me/919707040752','_blank')">
+
+Chat on WhatsApp
+
+</button>
+
+<button
+onclick="window.location.href='tel:+919707040752'">
+
+Call Now
+
+</button>
+
+</section>
+
+   <!-- BACK TO TOP BUTTON -->
+
+<button
+id="topBtn"
+style="
+position:fixed;
+bottom:90px;
+right:20px;
+display:none;
+padding:12px 16px;
+border:none;
+border-radius:50%;
+background:#0057D9;
+color:white;
+font-size:20px;
+cursor:pointer;
+box-shadow:0 4px 10px rgba(0,0,0,.3);
+z-index:999;
+">
+
+↑
+
+</button>
+
+<script>
+
+const topBtn = document.getElementById("topBtn");
+
+window.onscroll = function(){
+
+if(document.body.scrollTop>300 || document.documentElement.scrollTop>300){
+
+topBtn.style.display="block";
+
+}else{
+
+topBtn.style.display="none";
+
+}
+
+};
+
+topBtn.onclick=function(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+</script>
 
 </body>
 </html>
