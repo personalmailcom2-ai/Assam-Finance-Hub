@@ -1,25 +1,27 @@
+// Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAnQPG-tdceOqxxfEzHIYdpr6pBJDcOgbM",
   authDomain: "assam-finance-hub.firebaseapp.com",
-  databaseURL: "https://assam-finance-hub-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "assam-finance-hub",
   storageBucket: "assam-finance-hub.firebasestorage.app",
   messagingSenderId: "989678663450",
   appId: "1:989678663450:web:d0499bf58d8dd382325ea3",
-  measurementId: "G-H15X3EDQJW"
+  measurementId: "G-H1SX3EDQJM"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+// Firebase Services
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-window.app = app;
-window.db = db;
-window.auth = auth;
-
-console.log("Firebase Loaded Successfully");
+// Export
+export { auth, db };
