@@ -1866,3 +1866,138 @@ font-size:60px;
 }
 
 }
+
+/* ==========================================
+   ADMIN DASHBOARD
+========================================== */
+
+.admin-header{
+background:#0d47a1;
+padding:18px 0;
+color:#fff;
+position:sticky;
+top:0;
+z-index:999;
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.admin-header .container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.admin-logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.admin-logo i{
+font-size:30px;
+color:#ffcc00;
+}
+
+.admin-logo h2{
+font-size:28px;
+margin:0;
+}
+
+.admin-actions{
+display:flex;
+gap:12px;
+}
+
+.dashboard{
+padding:60px 0 30px;
+text-align:center;
+background:#f8fbff;
+}
+
+.dashboard h1{
+font-size:40px;
+color:#0d47a1;
+margin-bottom:10px;
+}
+
+.dashboard p{
+font-size:17px;
+color:#666;
+}
+
+.stats{
+padding:30px 0;
+}
+
+.stats .cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.stats .card{
+background:#fff;
+padding:30px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.stats .card:hover{
+transform:translateY(-6px);
+}
+
+.stats .card h3{
+margin-bottom:15px;
+color:#555;
+}
+
+.stats .card h2{
+font-size:36px;
+color:#0d6efd;
+}
+
+.admin-tools{
+padding:30px 0;
+}
+
+.tool-bar{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+align-items:center;
+}
+
+.tool-bar input,
+.tool-bar select{
+flex:1;
+min-width:220px;
+padding:14px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:15px;
+}
+
+.tool-bar button{
+padding:14px 22px;
+}
+
+.applications{
+padding:40px 0;
+}
+
+.applications h2{
+margin-bottom:25px;
+color:#0d47a1;
+}
+
+#applicationsContainer{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:20px;
+}
+
+
