@@ -19,7 +19,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const form = document.getElementById("loginForm");
+const loginBtn = document.getElementById("loginBtn");
+
+loginBtn.addEventListener("click", async () => {
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
