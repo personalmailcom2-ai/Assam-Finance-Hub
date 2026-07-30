@@ -14,50 +14,59 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 window.addEventListener("load", () => {
+
   const auth = getAuth();
 
+  // Create reCAPTCHA only ONCE
   window.recaptchaVerifier = new RecaptchaVerifier(
-  auth,
-  "recaptcha-container",
-  {
-    size: "invisible"
-  }
-);
+    auth,
+    "recaptcha-container",
+    {
+      size: "invisible"
+    }
+  );
+
   const sendOtpBtn = document.getElementById("sendOtpBtn");
-
-sendOtpBtn.addEventListener("click", async () => {
-
-const mobile = document.getElementById("mobile").value.trim();
-
-const confirmationResult = await signInWithPhoneNumber(
-auth,
-"+91" + mobile,
-window.recaptchaVerifier
-);
-
-window.confirmationResult = confirmationResult;
-
-alert("OTP Sent Successfully");
-
-});
-
   const form = document.getElementById("loanForm");
 
-  if (!form) {
-    alert("Form not found");
-    return;
-  }
+  // SEND OTP
+  sendOtpBtn.addEventListener("click", async () => {
 
-  form.addEventListener("submit", async (e) => {
-    const btn = form.querySelector("button");
-btn.disabled = true;
-btn.innerHTML = "Submitting...";
-    e.preventDefault();
+    const mobile = document.getElementById("mobile").value.trim();
 
-    if (!window.db) {
-      alert("Firebase not loaded");
+    if (mobile.length != 10) {
+      alert("Enter valid mobile number");
       return;
     }
+
+    try {
+
+      const confirmationResult = await signInWithPhoneNumber(
+        auth,
+        "+91" + mobile,
+        window.recaptchaVerifier
+      );
+
+      window.confirmationResult = confirmationResult;
+
+      alert("OTP Sent Successfully");
+
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+
+  });
+
+  // SUBMIT FORM
+  form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const btn = form.querySelector('button[type="submit"]');
+
+    btn.disabled = true;
+    btn.innerHTML = "Submitting...";
 
     const name = document.getElementById("name").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
@@ -66,41 +75,54 @@ btn.innerHTML = "Submitting...";
     const otp = document.getElementById("otp").value.trim();
 
     if (!window.confirmationResult) {
-  alert("Pehle OTP Send karo");
-  return;
+      alert("Pehle OTP Send karo");
+      btn.disabled = false;
+      btn.innerHTML = "Apply Now";
+      return;
     }
 
     try {
-  await window.confirmationResult.confirm(otp);
-} catch (e) {
-  alert("Invalid OTP");
-  return;
+
+      await window.confirmationResult.confirm(otp);
+
+    } catch (err) {
+
+      alert("Invalid OTP");
+
+      btn.disabled = false;
+      btn.innerHTML = "Apply Now";
+      return;
+
     }
 
     const q = query(
-  collection(window.db, "applications"),
-  where("mobile", "==", mobile)
-);
+      collection(window.db, "applications"),
+      where("mobile", "==", mobile)
+    );
 
-const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
-if (snapshot.size > 0) {
-  alert("You have already submitted an application with this mobile number.");
+    if (!snapshot.empty) {
 
-  btn.disabled = false;
-  btn.innerHTML = "Apply Now";
+      alert("Application already submitted.");
 
-  return;
-}
+      btn.disabled = false;
+      btn.innerHTML = "Apply Now";
+
+      return;
+    }
+
     try {
 
       await addDoc(collection(window.db, "applications"), {
+
         name,
         mobile,
         bike,
         city,
         status: "Pending",
         createdAt: serverTimestamp()
+
       });
 
       const message =
@@ -115,24 +137,32 @@ if (snapshot.size > 0) {
         "_blank"
       );
 
-      document.getElementById("msg").innerHTML = "✅ Application Submitted Successfully!";
+      document.getElementById("msg").innerHTML =
+        "✅ Application Submitted Successfully!";
+
       form.reset();
 
       btn.innerHTML = "Submitted ✓";
 
       setTimeout(() => {
-  btn.disabled = false;
-  btn.innerHTML = "Apply Now";
-  document.getElementById("msg").innerHTML = "";
-}, 3000);
-      
+
+        btn.disabled = false;
+        btn.innerHTML = "Apply Now";
+        document.getElementById("msg").innerHTML = "";
+
+      }, 3000);
+
     } catch (err) {
+
       console.error(err);
+
       alert(err.message);
 
       btn.disabled = false;
-btn.innerHTML = "Apply Now";
+      btn.innerHTML = "Apply Now";
+
     }
+
   });
 
 });
