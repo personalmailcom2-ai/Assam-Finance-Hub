@@ -46,6 +46,16 @@ font-size:28px;
 color:#0B5ED7;
 }
 
+.search{
+width:100%;
+padding:12px;
+margin-bottom:20px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+box-sizing:border-box;
+}
+
 .card{
 background:#fff;
 padding:15px;
@@ -63,21 +73,10 @@ cursor:pointer;
 color:white;
 }
 
-.approve{
-background:green;
-}
-
-.reject{
-background:red;
-}
-
-.delete{
-background:black;
-}
-
-.logout{
-background:#d32f2f;
-}
+.approve{background:green;}
+.reject{background:red;}
+.delete{background:black;}
+.logout{background:#d32f2f;}
 
 </style>
 
@@ -89,9 +88,7 @@ background:#d32f2f;
 
 <h2>Loan Applications</h2>
 
-<button
-id="logoutBtn"
-class="logout">
+<button id="logoutBtn" class="logout">
 Logout
 </button>
 
@@ -120,6 +117,12 @@ Logout
 </div>
 
 </div>
+
+<input
+type="text"
+id="searchBox"
+class="search"
+placeholder="🔍 Search by Name or Mobile">
 
 <div id="list">
 Loading...
@@ -159,6 +162,7 @@ const db=getFirestore(app);
 const auth=getAuth(app);
 
 const list=document.getElementById("list");
+const searchBox=document.getElementById("searchBox");
 
   onAuthStateChanged(auth,(user)=>{
 
@@ -179,6 +183,12 @@ window.location.href="admin-login.html";
 
 };
 
+searchBox.addEventListener("input",()=>{
+
+loadData();
+
+});
+
 async function loadData(){
 
 list.innerHTML="Loading...";
@@ -192,24 +202,38 @@ let pending=0;
 let approved=0;
 let rejected=0;
 
+const search=searchBox.value.toLowerCase().trim();
+
 list.innerHTML="";
 
 docs.forEach((d)=>{
 
 const x=d.data();
 
+const name=(x.name||"").toLowerCase();
+const mobile=(x.mobile||"").toLowerCase();
+
+if(
+search &&
+!name.includes(search) &&
+!mobile.includes(search)
+){
+return;
+}
+
 total++;
 
 if(x.status==="Approved"){
 approved++;
-}else if(x.status==="Rejected"){
+}
+else if(x.status==="Rejected"){
 rejected++;
-}else{
+}
+else{
 pending++;
 }
 
 list.innerHTML+=`
-
 <div class="card">
 
 <h3>${x.name||""}</h3>
@@ -251,20 +275,18 @@ document.getElementById("pendingCount").innerHTML=pending;
 document.getElementById("approvedCount").innerHTML=approved;
 document.getElementById("rejectedCount").innerHTML=rejected;
 
-if(total===0){
+if(list.innerHTML===""){
 list.innerHTML="<h3>No Applications Found</h3>";
 }
 
 }
 
-  window.changeStatus = async(id,status)=>{
+window.changeStatus=async(id,status)=>{
 
 try{
 
 await updateDoc(doc(db,"applications",id),{
-
 status:status
-
 });
 
 alert("Status Updated Successfully");
@@ -283,7 +305,7 @@ alert(err.message);
 
 window.deleteApplication = async(id)=>{
 
-const ok=confirm("Delete this application?");
+const ok = confirm("Delete this application?");
 
 if(!ok) return;
 
@@ -305,9 +327,9 @@ alert(err.message);
 
 };
 
-  loadData();
+loadData();
 
 </script>
 
 </body>
-</html>
+</html>  
