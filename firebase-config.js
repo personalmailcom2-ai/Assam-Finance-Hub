@@ -14,9 +14,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-window.app = app;
 
 const db = getFirestore(app);
+const auth = getAuth(app);
 
+window.app = app;
 window.db = db;
-window.auth = getAuth(app);
+window.auth = auth;
+
+console.log("Firebase Loaded Successfully");
