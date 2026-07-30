@@ -4,110 +4,147 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Contact Us | Assam Finance Hub</title>
 
 <link rel="stylesheet" href="style.css">
 
-<style>
-
-.contact{
-max-width:900px;
-margin:40px auto;
-padding:20px;
-}
-
-.card{
-background:#fff;
-padding:30px;
-border-radius:12px;
-box-shadow:0 8px 20px rgba(0,0,0,.1);
-}
-
-.card h1{
-color:#0d6efd;
-margin-bottom:20px;
-}
-
-.card p{
-margin:15px 0;
-line-height:1.8;
-color:#555;
-}
-
-.info{
-margin-top:25px;
-}
-
-.info div{
-margin:15px 0;
-font-size:18px;
-}
-
-.back-btn{
-display:inline-block;
-margin-top:30px;
-padding:12px 25px;
-background:#0d6efd;
-color:white;
-text-decoration:none;
-border-radius:8px;
-}
-
-.back-btn:hover{
-background:#0b5ed7;
-}
-
-</style>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<section class="contact">
+<header class="header">
 
-<div class="card">
+<div class="container">
+
+<div class="logo">
+<h2>Assam Finance Hub</h2>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="status.html">Status</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+</div>
+
+</header>
+
+<section class="contact-page">
+
+<div class="container">
 
 <h1>Contact Us</h1>
 
 <p>
-Need help with your bike loan application?
-Our support team is always ready to assist you.
+Need help? Contact our support team anytime.
 </p>
 
-<div class="info">
+<div class="cards">
 
-<div>
-📧 Email :
-<strong>support@assamfinancehub.in</strong>
-</div>
+<div class="card">
 
-<div>
-📱 Phone :
-<strong>+91 XXXXXXXXXX</strong>
-</div>
+<i class="fas fa-phone fa-3x"></i>
 
-<div>
-📍 Address :
-<strong>Assam, India</strong>
-</div>
+<h3>Phone</h3>
 
-<div>
-🕒 Working Hours :
-<strong>Monday - Saturday (10 AM - 6 PM)</strong>
-</div>
+<p>+91 9876543210</p>
 
 </div>
 
-<a href="index.html" class="back-btn">
-← Back to Home
-</a>
+<div class="card">
+
+<i class="fas fa-envelope fa-3x"></i>
+
+<h3>Email</h3>
+
+<p>support@assamfinancehub.in</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-location-dot fa-3x"></i>
+
+<h3>Office</h3>
+
+<p>Guwahati, Assam, India</p>
+
+</div>
+
+</div>
+
+<br><br>
+
+<form id="contactForm">
+
+<input
+type="text"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+placeholder="Email Address"
+required>
+
+<input
+type="tel"
+placeholder="Mobile Number"
+required>
+
+<textarea
+rows="6"
+placeholder="Write your message..."
+required></textarea>
+
+<button
+class="btn"
+type="submit">
+
+Send Message
+
+</button>
+
+</form>
 
 </div>
 
 </section>
+
+<footer>
+
+<div class="container">
+
+<p>
+
+© 2026 Assam Finance Hub. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<script>
+
+document.getElementById("contactForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+alert("Thank you! Your message has been submitted.");
+
+this.reset();
+
+});
+
+</script>
 
 </body>
 
