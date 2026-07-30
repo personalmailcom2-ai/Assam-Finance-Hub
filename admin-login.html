@@ -5,15 +5,11 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Admin Login</title>
 
 <link rel="stylesheet" href="admin.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -23,31 +19,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <div class="login-box">
 
-<h2>
+<h2>Admin Login</h2>
 
-<i class="fas fa-user-shield"></i>
-
-Admin Login
-
-</h2>
+<p>Login to access Assam Finance Hub Dashboard</p>
 
 <form id="loginForm">
 
 <input
 type="email"
 id="email"
-placeholder="Admin Email"
+placeholder="Enter Admin Email"
 required>
 
 <input
 type="password"
 id="password"
-placeholder="Password"
+placeholder="Enter Password"
 required>
 
 <button type="submit">
-
-<i class="fas fa-sign-in-alt"></i>
 
 Login
 
@@ -67,80 +57,6 @@ Invalid Email or Password
 
 </div>
 
-<script type="module" src="firebase.js"></script>
-
-<script type="module" src="admin-login.js"></script>
-
-</body>
-
-</html>
-
-<div class="login-footer">
-
-<p>
-
-🔒 Secure Admin Panel
-
-</p>
-
-<p>
-
-Assam Finance Hub
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="login-info">
-
-<div class="info-card">
-
-<i class="fas fa-shield-alt"></i>
-
-<h3>Secure Login</h3>
-
-<p>
-
-Only authorized administrators can access this panel.
-
-</p>
-
-</div>
-
-<div class="info-card">
-
-<i class="fas fa-database"></i>
-
-<h3>Firebase Protected</h3>
-
-<p>
-
-All applications are securely stored in Firebase.
-
-</p>
-
-</div>
-
-<div class="info-card">
-
-<i class="fas fa-chart-line"></i>
-
-<h3>Dashboard Access</h3>
-
-<p>
-
-Manage, approve, reject and monitor all loan applications.
-
-</p>
-
-</div>
-
-</div>
-
 <script type="module">
 
 import { app } from "./firebase.js";
@@ -153,10 +69,6 @@ onAuthStateChanged
 
 const auth = getAuth(app);
 
-const form = document.getElementById("loginForm");
-
-const errorBox = document.getElementById("loginError");
-
 onAuthStateChanged(auth,(user)=>{
 
 if(user){
@@ -167,35 +79,29 @@ window.location.href="admin.html";
 
 });
 
-form.addEventListener("submit",async(e)=>{
+const loginForm=document.getElementById("loginForm");
+
+  loginForm.addEventListener("submit", async (e) => {
 
 e.preventDefault();
 
-errorBox.style.display="none";
+document.getElementById("loginError").style.display = "none";
 
-const email =
-document.getElementById("email").value.trim();
+const email = document.getElementById("email").value.trim();
 
-const password =
-document.getElementById("password").value;
+const password = document.getElementById("password").value;
 
-try{
+try {
 
-await signInWithEmailAndPassword(
+await signInWithEmailAndPassword(auth, email, password);
 
-auth,
-email,
-password
+window.location.href = "admin.html";
 
-);
+} catch (error) {
 
-window.location.href="admin.html";
+document.getElementById("loginError").style.display = "block";
 
-}catch(err){
-
-console.error(err);
-
-errorBox.style.display="block";
+console.error(error);
 
 }
 
@@ -203,3 +109,6 @@ errorBox.style.display="block";
 
 </script>
 
+</body>
+
+</html>
