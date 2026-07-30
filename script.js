@@ -33,8 +33,6 @@ setupLoanForm();
 
 setupNewsletter();
 
-setupSmoothScroll();
-
 }
 
 /* ==========================
