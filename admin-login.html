@@ -1,67 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Admin Login</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f5f5f5;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
+<link rel="stylesheet" href="admin.css">
 
-.box{
-background:white;
-padding:30px;
-width:350px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,.2);
-}
-
-h2{
-text-align:center;
-margin-bottom:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin:10px 0;
-box-sizing:border-box;
-border:1px solid #ccc;
-border-radius:5px;
-font-size:16px;
-}
-
-button{
-width:100%;
-padding:12px;
-background:#1565C0;
-color:white;
-border:none;
-border-radius:5px;
-font-size:16px;
-cursor:pointer;
-}
-
-button:hover{
-background:#0D47A1;
-}
-</style>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<div class="box">
+<div class="login-container">
 
-<h2>Admin Login</h2>
+<div class="login-box">
+
+<h2>
+
+<i class="fas fa-user-shield"></i>
+
+Admin Login
+
+</h2>
 
 <form id="loginForm">
 
@@ -78,14 +46,160 @@ placeholder="Password"
 required>
 
 <button type="submit">
+
+<i class="fas fa-sign-in-alt"></i>
+
 Login
+
 </button>
+
+<div
+id="loginError"
+class="error-box">
+
+Invalid Email or Password
+
+</div>
 
 </form>
 
 </div>
 
-<script type="module" src="login.js"></script>
+</div>
+
+<script type="module" src="firebase.js"></script>
+
+<script type="module" src="admin-login.js"></script>
 
 </body>
+
 </html>
+
+<div class="login-footer">
+
+<p>
+
+🔒 Secure Admin Panel
+
+</p>
+
+<p>
+
+Assam Finance Hub
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="login-info">
+
+<div class="info-card">
+
+<i class="fas fa-shield-alt"></i>
+
+<h3>Secure Login</h3>
+
+<p>
+
+Only authorized administrators can access this panel.
+
+</p>
+
+</div>
+
+<div class="info-card">
+
+<i class="fas fa-database"></i>
+
+<h3>Firebase Protected</h3>
+
+<p>
+
+All applications are securely stored in Firebase.
+
+</p>
+
+</div>
+
+<div class="info-card">
+
+<i class="fas fa-chart-line"></i>
+
+<h3>Dashboard Access</h3>
+
+<p>
+
+Manage, approve, reject and monitor all loan applications.
+
+</p>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { app } from "./firebase.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const auth = getAuth(app);
+
+const form = document.getElementById("loginForm");
+
+const errorBox = document.getElementById("loginError");
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+window.location.href="admin.html";
+
+}
+
+});
+
+form.addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+errorBox.style.display="none";
+
+const email =
+document.getElementById("email").value.trim();
+
+const password =
+document.getElementById("password").value;
+
+try{
+
+await signInWithEmailAndPassword(
+
+auth,
+email,
+password
+
+);
+
+window.location.href="admin.html";
+
+}catch(err){
+
+console.error(err);
+
+errorBox.style.display="block";
+
+}
+
+});
+
+</script>
+
