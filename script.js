@@ -1,131 +1,283 @@
-import {
-  getAuth
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { db } from "./firebase.js";
 
 import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  query,
-  where,
-  getDocs
+collection,
+addDoc,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-window.addEventListener("load", () => {
+const loanForm = document.getElementById("loanForm");
 
-  getAuth(); // Future Firebase OTP ke liye
+const loader = document.getElementById("loader");
+const successMsg = document.getElementById("successMsg");
+const errorMsg = document.getElementById("errorMsg");
 
-  const sendOtpBtn = document.getElementById("sendOtpBtn");
-  const form = document.getElementById("loanForm");
+/* ==========================
+   EMI CALCULATOR
+========================== */
 
-  // DEMO OTP
-  sendOtpBtn.addEventListener("click", () => {
+const calculateBtn = document.getElementById("calculateBtn");
 
-    const mobile = document.getElementById("mobile").value.trim();
+if(calculateBtn){
 
-    if (mobile.length !== 10) {
-      alert("Enter valid mobile number");
-      return;
-    }
+calculateBtn.onclick = () => {
 
-    alert("Demo OTP: 1234");
+const amount =
+parseFloat(document.getElementById("loanAmount").value);
 
-  });
+const rate =
+parseFloat(document.getElementById("interestRate").value);
 
-  form.addEventListener("submit", async (e) => {
+const months =
+parseInt(document.getElementById("loanMonths").value);
 
-    e.preventDefault();
+if(!amount || !rate || !months){
 
-    const btn = form.querySelector('button[type="submit"]');
+document.getElementById("emiResult").innerHTML =
+"Please enter all details.";
 
-    btn.disabled = true;
-    btn.innerHTML = "Submitting...";
+return;
 
-    const name = document.getElementById("name").value.trim();
-    const mobile = document.getElementById("mobile").value.trim();
-    const bike = document.getElementById("bike").value.trim();
-    const city = document.getElementById("city").value.trim();
-    const otp = document.getElementById("otp").value.trim();
+}
 
-    // Demo OTP Check
-    if (otp !== "1234") {
+const r = rate / 12 / 100;
 
-      alert("Invalid OTP");
+const emi =
+(amount * r * Math.pow(1+r,months)) /
+(Math.pow(1+r,months)-1);
 
-      btn.disabled = false;
-      btn.innerHTML = "Apply Now";
+document.getElementById("emiResult").innerHTML =
+"Monthly EMI : ₹ " + emi.toFixed(2);
 
-      return;
-    }
+};
 
-    const q = query(
-      collection(window.db, "applications"),
-      where("mobile", "==", mobile)
-    );
+}
 
-    const snapshot = await getDocs(q);
+/* ==========================
+   OTP SETUP
+========================== */
 
-    if (!snapshot.empty) {
+import {
+getAuth,
+RecaptchaVerifier,
+signInWithPhoneNumber
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-      alert("Application already submitted.");
+import { app } from "./firebase.js";
 
-      btn.disabled = false;
-      btn.innerHTML = "Apply Now";
+const auth = getAuth(app);
 
-      return;
-    }
+let confirmationResult = null;
 
-    try {
+window.onload = () => {
 
-      await addDoc(collection(window.db, "applications"), {
+if(document.getElementById("recaptcha-container")){
 
-        name,
-        mobile,
-        bike,
-        city,
-        status: "Pending",
-        createdAt: serverTimestamp()
+window.recaptchaVerifier = new RecaptchaVerifier(
+auth,
+"recaptcha-container",
+{
+size:"normal",
+callback:(response)=>{
 
-      });
+console.log("reCAPTCHA Verified");
 
-      const message =
-        "🚲 New Loan Application%0A%0A" +
-        "👤 Name: " + name + "%0A" +
-        "📱 Mobile: " + mobile + "%0A" +
-        "🏍 Bike: " + bike + "%0A" +
-        "📍 City: " + city;
+}
+}
+);
 
-      window.open(
-        "https://wa.me/919707040752?text=" + message,
-        "_blank"
-      );
+window.recaptchaVerifier.render();
 
-      document.getElementById("msg").innerHTML =
-        "✅ Application Submitted Successfully!";
+}
 
-      form.reset();
+};
 
-      btn.innerHTML = "Submitted ✓";
+/* ==========================
+   SEND OTP
+========================== */
 
-      setTimeout(() => {
+const sendOtpBtn = document.getElementById("sendOtpBtn");
 
-        btn.disabled = false;
-        btn.innerHTML = "Apply Now";
-        document.getElementById("msg").innerHTML = "";
+if(sendOtpBtn){
 
-      }, 3000);
+sendOtpBtn.onclick = async () => {
 
-    } catch (err) {
+const mobile =
+document.getElementById("mobile").value.trim();
 
-      console.error(err);
+if(mobile.length !== 10){
 
-      alert(err.message);
+alert("Enter a valid 10 digit mobile number");
 
-      btn.disabled = false;
-      btn.innerHTML = "Apply Now";
+return;
 
-    }
+}
 
-  });
+const phoneNumber = "+91" + mobile;
+
+try{
+
+confirmationResult =
+await signInWithPhoneNumber(
+
+auth,
+phoneNumber,
+window.recaptchaVerifier
+
+);
+
+alert("OTP Sent Successfully");
+
+}catch(err){
+
+console.error(err);
+
+alert(err.message);
+
+}
+
+};
+
+}
+
+/* ==========================
+   APPLY FORM SUBMIT
+========================== */
+
+if(loanForm){
+
+loanForm.addEventListener("submit", async(e)=>{
+
+e.preventDefault();
+
+if(!confirmationResult){
+
+alert("Please send OTP first.");
+
+return;
+
+}
+
+const otp = document.getElementById("otp").value.trim();
+
+if(otp===""){
+
+alert("Enter OTP");
+
+return;
+
+}
+
+loader.style.display="block";
+successMsg.style.display="none";
+errorMsg.style.display="none";
+
+try{
+
+await confirmationResult.confirm(otp);
+
+await addDoc(collection(db,"applications"),{
+
+name:document.getElementById("name").value.trim(),
+
+mobile:document.getElementById("mobile").value.trim(),
+
+bike:document.getElementById("bike").value.trim(),
+
+city:document.getElementById("city").value.trim(),
+
+status:"Pending",
+
+createdAt:serverTimestamp()
 
 });
+
+loader.style.display="none";
+
+successMsg.style.display="block";
+
+loanForm.reset();
+
+}catch(err){
+
+console.error(err);
+
+loader.style.display="none";
+
+errorMsg.style.display="block";
+
+}
+
+});
+
+}
+
+/* ==========================
+   FINAL CLEANUP
+========================== */
+
+function showSuccess(message){
+
+successMsg.innerHTML = message;
+
+successMsg.style.display = "block";
+
+setTimeout(()=>{
+
+successMsg.style.display = "none";
+
+},4000);
+
+}
+
+function showError(message){
+
+errorMsg.innerHTML = message;
+
+errorMsg.style.display = "block";
+
+setTimeout(()=>{
+
+errorMsg.style.display = "none";
+
+},4000);
+
+}
+
+/* Hide Loader */
+
+function hideLoader(){
+
+loader.style.display = "none";
+
+}
+
+/* Reset Form */
+
+function resetApplication(){
+
+loanForm.reset();
+
+confirmationResult = null;
+
+}
+
+/* Auto Hide Messages */
+
+setTimeout(()=>{
+
+if(successMsg){
+
+successMsg.style.display = "none";
+
+}
+
+if(errorMsg){
+
+errorMsg.style.display = "none";
+
+}
+
+},5000);
+
+console.log("Assam Finance Hub V2 Loaded Successfully");
