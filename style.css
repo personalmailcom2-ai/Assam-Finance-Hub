@@ -2152,3 +2152,111 @@ box-shadow:0 10px 25px rgba(0,0,0,.2);
 display:none;
 z-index:99999;
 }
+
+/* ==========================================
+   STATUS PAGE
+========================================== */
+
+.status-page{
+padding:80px 20px;
+background:#f5f7fb;
+min-height:80vh;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.status-box{
+max-width:550px;
+width:100%;
+background:#fff;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.10);
+text-align:center;
+}
+
+.status-box h2{
+color:#0d47a1;
+margin-bottom:15px;
+font-size:32px;
+}
+
+.status-box p{
+color:#666;
+margin-bottom:25px;
+}
+
+.status-box input{
+width:100%;
+padding:15px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+margin-bottom:20px;
+outline:none;
+transition:.3s;
+}
+
+.status-box input:focus{
+border-color:#0d6efd;
+box-shadow:0 0 10px rgba(13,110,253,.2);
+}
+
+.status-box .btn{
+width:100%;
+}
+
+#statusResult{
+margin-top:30px;
+text-align:left;
+}
+
+.status-card{
+background:#f8f9fa;
+border-left:5px solid #0d6efd;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+.status-card h3{
+margin-bottom:15px;
+color:#0d47a1;
+}
+
+.status-card p{
+margin:8px 0;
+color:#333;
+}
+
+.status-approved{
+color:#28a745;
+font-weight:bold;
+}
+
+.status-pending{
+color:#ff9800;
+font-weight:bold;
+}
+
+.status-rejected{
+color:#dc3545;
+font-weight:bold;
+}
+
+@media(max-width:768px){
+
+.status-box{
+
+padding:25px;
+
+}
+
+.status-box h2{
+
+font-size:26px;
+
+}
+
+}
