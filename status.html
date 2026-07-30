@@ -1,188 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loan Status - Assam Finance Hub</title>
 
-<style>
-body{
-margin:0;
-padding:20px;
-font-family:Arial,sans-serif;
-background:#f2f5f9;
-}
+<title>Check Loan Status</title>
 
-.container{
-max-width:450px;
-margin:40px auto;
-background:#fff;
-padding:25px;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
-}
+<link rel="stylesheet" href="style.css">
 
-h2{
-text-align:center;
-margin-bottom:20px;
-color:#0d47a1;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-bottom:15px;
-border:1px solid #ccc;
-border-radius:6px;
-font-size:16px;
-box-sizing:border-box;
-}
-
-button{
-width:100%;
-padding:12px;
-background:#1565c0;
-color:white;
-border:none;
-border-radius:6px;
-font-size:16px;
-cursor:pointer;
-}
-
-button:hover{
-background:#0d47a1;
-}
-
-#result{
-margin-top:20px;
-}
-
-.card{
-background:#f8f9fa;
-padding:15px;
-border-radius:10px;
-border:1px solid #ddd;
-line-height:1.8;
-}
-
-.pending{
-color:#ff9800;
-font-weight:bold;
-}
-
-.approved{
-color:green;
-font-weight:bold;
-}
-
-.rejected{
-color:red;
-font-weight:bold;
-}
-</style>
 </head>
 
 <body>
 
-<div class="container">
+<header class="navbar">
 
-<h2>Check Loan Status</h2>
+<div class="logo">
 
-<input
-type="text"
-id="mobile"
-placeholder="Enter Mobile Number">
-
-<button onclick="checkStatus()">
-Check Status
-</button>
-
-<div id="result"></div>
+🚲 Assam Finance Hub
 
 </div>
 
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="index.html#apply">Apply Loan</a>
+
+</nav>
+
+</header>
+
+<section class="form-box">
+
+<h2>
+
+Check Application Status
+
+</h2>
+
+<input
+type="tel"
+id="mobile"
+placeholder="Enter Mobile Number"
+maxlength="10">
+
+<button id="checkBtn">
+
+Check Status
+
+</button>
+
+<div
+id="result"
+class="status-box"
+style="display:none;">
+
+<h3>Application Details</h3>
+
+<p><b>Name:</b> <span id="rName"></span></p>
+
+<p><b>Mobile:</b> <span id="rMobile"></span></p>
+
+<p><b>Bike:</b> <span id="rBike"></span></p>
+
+<p><b>City:</b> <span id="rCity"></span></p>
+
+<p><b>Status:</b> <span id="rStatus"></span></p>
+
+</div>
+
+<div
+id="notFound"
+class="error-box">
+
+Application Not Found
+
+</div>
+
+  </section>
+
+<footer>
+
+<h2>Assam Finance Hub</h2>
+
+<p>Bike Loan • Fast Approval • Easy EMI</p>
+
+</footer>
+
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { app } from "./firebase.js";
 
 import {
 getFirestore,
 collection,
-query,
-where,
 getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
-apiKey:"AIzaSyAnQFG-tdce0gxxfEhIYdpr6BJDcQgbW",
-authDomain:"assam-finance-hub.firebaseapp.com",
-projectId:"assam-finance-hub",
-storageBucket:"assam-finance-hub.firebasestorage.app",
-messagingSenderId:"989678663450",
-appId:"1:989678663450:web:d0499bf58d8dd382325ea3"
-};
-
-const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-window.checkStatus = async () => {
+const checkBtn = document.getElementById("checkBtn");
 
-const mobile = document.getElementById("mobile").value.trim();
+checkBtn.addEventListener("click", async()=>{
 
-const result = document.getElementById("result");
+const mobile =
+document.getElementById("mobile").value.trim();
 
-result.innerHTML = "";
+if(mobile.length!==10){
 
-const q = query(
-collection(db,"applications"),
-where("mobile","==",mobile)
-);
-
-const snap = await getDocs(q);
-
-if(snap.empty){
-
-result.innerHTML =
-"<div class='card'>❌ No Application Found</div>";
+alert("Enter Valid Mobile Number");
 
 return;
 
 }
 
-snap.forEach(doc=>{
+const snapshot =
+await getDocs(collection(db,"applications"));
+
+let found = false;
+
+document.getElementById("result").style.display="none";
+document.getElementById("notFound").style.display="none";
+
+snapshot.forEach((doc)=>{
 
 const data = doc.data();
 
-let statusClass="pending";
+if(data.mobile===mobile){
 
-if(data.status==="Approved") statusClass="approved";
+found = true;
 
-if(data.status==="Rejected") statusClass="rejected";
+document.getElementById("rName").innerText = data.name || "";
 
-result.innerHTML = `
-<div class="card">
+document.getElementById("rMobile").innerText = data.mobile || "";
 
-<b>Name:</b> ${data.name}<br>
+document.getElementById("rBike").innerText = data.bike || "";
 
-<b>Mobile:</b> ${data.mobile}<br>
+document.getElementById("rCity").innerText = data.city || "";
 
-<b>Bike:</b> ${data.bike}<br>
+document.getElementById("rStatus").innerText =
+data.status || "Pending";
 
-<b>City:</b> ${data.city}<br>
+document.getElementById("result").style.display="block";
 
-<b>Status:</b>
-<span class="${statusClass}">
-${data.status}
-</span>
-
-</div>
-`;
+}
 
 });
 
+if(!found){
+
+document.getElementById("notFound").style.display="block";
+
 }
+
+});
 
 </script>
 
 </body>
+
 </html>
