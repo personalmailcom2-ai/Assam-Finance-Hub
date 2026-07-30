@@ -39,25 +39,17 @@ setupNewsletter();
    LOADER
 ========================== */
 
-function hideLoader(){
+function hideLoader() {
 
-const loader = document.getElementById("loader");
+    window.addEventListener("load", () => {
 
-if(!loader) return;
+        const loader = document.getElementById("loader");
 
-window.addEventListener("load",()=>{
+        if (loader) {
+            loader.style.display = "none";
+        }
 
-setTimeout(()=>{
-
-loader.style.opacity="0";
-
-loader.style.visibility="hidden";
-
-loader.style.pointerEvents="none";
-
-},800);
-
-});
+    });
 
 }
 
