@@ -7,19 +7,24 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Application Status</title>
+<title>Check Loan Status | Assam Finance Hub</title>
 
 <link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<header class="navbar">
+<header class="header">
+
+<div class="container">
 
 <div class="logo">
 
-🚲 Assam Finance Hub
+<h2>Assam Finance Hub</h2>
 
 </div>
 
@@ -27,34 +32,55 @@
 
 <a href="index.html">Home</a>
 
-<a href="admin-login.html">Admin</a>
+<a href="about.html">About</a>
+
+<a href="contact.html">Contact</a>
 
 </nav>
 
+</div>
+
 </header>
 
-<section class="status-box">
+<section class="status-page">
+
+<div class="container">
+
+<div class="status-box">
 
 <h2>
 
-Check Loan Application Status
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Check Loan Status
 
 </h2>
 
+<p>
+
+Enter your registered mobile number to check your application status.
+
+</p>
+
 <input
 type="text"
-id="mobile"
-placeholder="Enter Mobile Number">
+id="statusMobile"
+placeholder="Enter Mobile Number"
+maxlength="10">
 
-<button id="checkBtn">
+<button
+class="btn"
+id="checkStatusBtn">
 
 Check Status
 
 </button>
 
-<div id="result" class="mt-20">
+<div id="statusResult">
 
-<p>Enter your registered mobile number to check your application status.</p>
+</div>
+
+</div>
 
 </div>
 
@@ -62,60 +88,7 @@ Check Status
 
 <script type="module" src="status.js"></script>
 
-  <section class="form-box">
+</body>
 
-<h2>
+</html>
 
-Status Information
-
-</h2>
-
-<div class="card">
-
-<h3>Pending</h3>
-
-<p>
-
-Your application has been received and is under verification.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Approved</h3>
-
-<p>
-
-Congratulations! Your bike loan application has been approved.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Rejected</h3>
-
-<p>
-
-Your application could not be approved. Please contact support for more details.
-
-</p>
-
-</div>
-
-</section>
-
-<footer>
-
-<p>
-
-© 2026 Assam Finance Hub
-
-</p>
-
-</footer>
-
-  
