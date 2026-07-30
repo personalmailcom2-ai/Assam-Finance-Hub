@@ -41,14 +41,6 @@ alert("OTP Sent Successfully");
 
 });
 
-window.recaptchaVerifier = new RecaptchaVerifier(
-  auth,
-  "recaptcha-container",
-  {
-    size: "invisible"
-  }
-);
-
   const form = document.getElementById("loanForm");
 
   if (!form) {
