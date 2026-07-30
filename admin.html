@@ -4,202 +4,182 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Assam Finance Hub - Admin Dashboard</title>
+<title>Admin Dashboard | Assam Finance Hub</title>
 
-<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
+<header class="admin-header">
+
 <div class="container">
 
-<header class="header">
+<div class="admin-logo">
 
-<div>
+<i class="fa-solid fa-building-columns"></i>
 
-<h1>Assam Finance Hub</h1>
-
-<p class="subtitle">
-Bike Loan Admin Dashboard
-</p>
+<h2>Assam Finance Hub</h2>
 
 </div>
 
-<button id="logoutBtn" class="logout-btn">
-Logout
+<div class="admin-actions">
+
+<button id="refreshBtn" class="btn">
+
+<i class="fa-solid fa-rotate"></i>
+
+Refresh
+
 </button>
+
+<button id="logoutBtn" class="btn">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</button>
+
+</div>
+
+</div>
 
 </header>
 
 <section class="dashboard">
 
-<div class="box total">
+<div class="container">
+
+<h1>
+
+<i class="fa-solid fa-chart-line"></i>
+
+Admin Dashboard
+
+</h1>
+
+<p>
+
+Manage all bike loan applications from one place.
+
+</p>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="container">
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Total Applications</h3>
 
 <h2 id="totalCount">0</h2>
 
-<p>Total Applications</p>
-
 </div>
 
-<div class="box pending">
+<div class="card">
+
+<h3>Pending</h3>
 
 <h2 id="pendingCount">0</h2>
 
-<p>Pending</p>
-
 </div>
 
-<div class="box approved">
+<div class="card">
+
+<h3>Approved</h3>
 
 <h2 id="approvedCount">0</h2>
 
-<p>Approved</p>
-
 </div>
 
-<div class="box rejected">
+<div class="card">
+
+<h3>Rejected</h3>
 
 <h2 id="rejectedCount">0</h2>
 
-<p>Rejected</p>
+</div>
+
+</div>
 
 </div>
 
 </section>
 
-<section class="search-section">
+  <section class="admin-tools">
+
+<div class="container">
+
+<div class="tool-bar">
 
 <input
 type="text"
-id="searchBox"
-placeholder="Search by Name or Mobile Number">
+id="searchInput"
+placeholder="🔍 Search by Name or Mobile">
+
+<select id="statusFilter">
+
+<option value="all">All Status</option>
+
+<option value="Pending">Pending</option>
+
+<option value="Approved">Approved</option>
+
+<option value="Rejected">Rejected</option>
+
+</select>
+
+<button class="btn" id="exportBtn">
+
+<i class="fa-solid fa-file-excel"></i>
+
+Export Excel
+
+</button>
+
+<button class="btn" id="printBtn">
+
+<i class="fa-solid fa-print"></i>
+
+Print
+
+</button>
+
+</div>
+
+</div>
 
 </section>
 
-<section class="info-card">
+<section class="applications">
 
-<h2>Loan Applications</h2>
+<div class="container">
 
-<p>
+<h2>
 
-All submitted bike loan applications will appear below.
-Use the action buttons to approve, reject or delete applications.
+<i class="fa-solid fa-list"></i>
 
-</p>
+Loan Applications
 
-</section>
-
-<div id="list">
-
-  <!-- Applications loaded from Firebase -->
+</h2>
 
 <div id="applicationsContainer">
 
-<!-- admin.js will render application cards here -->
-
-</div>
-
-<div class="loader" id="loader">
-
-Loading applications...
-
-</div>
-
-<div class="success-box" id="successMsg">
-
-Action completed successfully.
-
-</div>
-
-<div class="error-box" id="errorMsg">
-
-Something went wrong. Please try again.
-
-</div>
-
-<section class="card">
-
-<h2>Dashboard Guide</h2>
-
-<ul>
-
-<li>🔍 Search applications using applicant name or mobile number.</li>
-
-<li>✅ Click <strong>Approve</strong> to approve a bike loan.</li>
-
-<li>❌ Click <strong>Reject</strong> to reject a bike loan.</li>
-
-<li>🗑 Click <strong>Delete</strong> to permanently remove an application.</li>
-
-<li>📊 Dashboard statistics update automatically.</li>
-
-<li>🔄 Applications refresh automatically every 30 seconds.</li>
-
-</ul>
-
-</section>
-
-<section class="card">
-
-<h2>Quick Actions</h2>
-
-<div class="quick-actions">
-
-<button onclick="loadApplications()">
-Refresh Applications
-</button>
-
-<button onclick="window.scrollTo({top:0,behavior:'smooth'})">
-Back To Top
-</button>
-
-</div>
-
-</section>
-
-  <section class="card">
-
-<h2>Admin Instructions</h2>
-
-<p>
-
-Only authorized administrators should access this dashboard.
-Every action performed here updates the Firebase Firestore database instantly.
-
-</p>
-
-</section>
-
-<section class="card">
-
-<h2>Application Status</h2>
-
-<div class="status-grid">
-
-<div class="status-item pending">
-
-<span class="status-dot"></span>
-
-Pending Applications
-
-</div>
-
-<div class="status-item approved">
-
-<span class="status-dot"></span>
-
-Approved Applications
-
-</div>
-
-<div class="status-item rejected">
-
-<span class="status-dot"></span>
-
-Rejected Applications
+<!-- Applications will load here -->
 
 </div>
 
@@ -207,20 +187,51 @@ Rejected Applications
 
 </section>
 
-<section class="card">
+<!-- Application Details Modal -->
 
-<h2>Security Notice</h2>
+<div class="modal" id="detailsModal">
 
-<p>
+<div class="modal-content">
 
-This dashboard is protected using Firebase Authentication.
-If your session expires, you will automatically be redirected to the login page.
+<span id="closeModal" style="float:right;cursor:pointer;font-size:28px;">&times;</span>
 
-</p>
+<h2>Application Details</h2>
 
-</section>
+<div id="modalBody">
 
-<footer class="footer">
+</div>
+
+</div>
+
+</div>
+
+  <!-- Loading Overlay -->
+
+<div id="adminLoader">
+
+<div class="spinner"></div>
+
+<p>Loading Applications...</p>
+
+</div>
+
+<!-- Toast Notification -->
+
+<div id="toastNotification" class="toast">
+
+<span id="toastMessage">
+
+Welcome Admin
+
+</span>
+
+</div>
+
+<!-- Dashboard Footer -->
+
+<footer class="admin-footer">
+
+<div class="container">
 
 <p>
 
@@ -228,17 +239,15 @@ If your session expires, you will automatically be redirected to the login page.
 
 </p>
 
-<p>
-
-Secure Bike Loan Management System powered by Firebase.
-
-</p>
+</div>
 
 </footer>
 
-  </div>
+<!-- Admin JavaScript -->
 
 <script type="module" src="admin.js"></script>
 
 </body>
+
 </html>
+
