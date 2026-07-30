@@ -19,32 +19,48 @@
 
 <div class="header">
 
-<h2>Assam Finance Hub Admin</h2>
+<h2>Assam Finance Hub Admin Dashboard</h2>
 
-<button id="logoutBtn">Logout</button>
+<button id="logoutBtn">
+
+Logout
+
+</button>
 
 </div>
 
 <div class="dashboard">
 
 <div class="box">
+
 <h3 id="totalCount">0</h3>
+
 <p>Total Applications</p>
+
 </div>
 
 <div class="box">
+
 <h3 id="pendingCount">0</h3>
-<p>Pending</p>
+
+<p>Pending Applications</p>
+
 </div>
 
 <div class="box">
+
 <h3 id="approvedCount">0</h3>
+
 <p>Approved</p>
+
 </div>
 
 <div class="box">
+
 <h3 id="rejectedCount">0</h3>
+
 <p>Rejected</p>
+
 </div>
 
 </div>
@@ -52,207 +68,109 @@
 <input
 type="text"
 id="searchBox"
-placeholder="Search by Name or Mobile">
+placeholder="Search by Name or Mobile Number">
 
 <div id="list">
 
-Loading...
+  <div class="card">
+
+<h3>Loan Applications</h3>
+
+<p>
+
+All submitted applications will appear below.
+
+Use the buttons to approve, reject or delete an application.
+
+</p>
 
 </div>
 
-<script type="module">
+<div id="applicationsContainer">
 
-import { app } from "./firebase.js";
-
-import {
-getFirestore,
-collection,
-getDocs,
-doc,
-updateDoc,
-deleteDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-import {
-getAuth,
-onAuthStateChanged,
-signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const db = getFirestore(app);
-
-const auth = getAuth(app);
-
-const list = document.getElementById("list");
-const searchBox = document.getElementById("searchBox");
-
-let applications = [];
-
-  async function loadApplications(){
-
-const snapshot = await getDocs(collection(db,"applications"));
-
-applications = snapshot.docs.map(doc=>({
-
-id:doc.id,
-
-...doc.data()
-
-}));
-
-renderApplications();
-
-}
-
-function renderApplications(){
-
-const search = searchBox.value.toLowerCase();
-
-let total = 0;
-let pending = 0;
-let approved = 0;
-let rejected = 0;
-
-list.innerHTML = "";
-
-applications.forEach(item=>{
-
-const name = (item.name||"").toLowerCase();
-const mobile = (item.mobile||"").toLowerCase();
-
-if(
-!name.includes(search) &&
-!mobile.includes(search)
-){
-return;
-}
-
-total++;
-
-if(item.status==="Approved"){
-approved++;
-}else if(item.status==="Rejected"){
-rejected++;
-}else{
-pending++;
-}
-
-list.innerHTML += `
-
-<div class="card">
-
-<h3>${item.name||""}</h3>
-
-<p><b>Mobile:</b> ${item.mobile||""}</p>
-
-<p><b>Bike:</b> ${item.bike||""}</p>
-
-<p><b>City:</b> ${item.city||""}</p>
-
-<p><b>Status:</b> ${item.status||"Pending"}</p>
-
-<button onclick="changeStatus('${item.id}','Approved')">
-
-Approve
-
-</button>
-
-<button onclick="changeStatus('${item.id}','Rejected')">
-
-Reject
-
-</button>
-
-<button onclick="deleteApplication('${item.id}')">
-
-Delete
-
-</button>
+<!-- Applications loaded by admin.js -->
 
 </div>
 
-`;
+<div class="loader" id="loader">
 
-});
-
-document.getElementById("totalCount").innerText = total;
-document.getElementById("pendingCount").innerText = pending;
-document.getElementById("approvedCount").innerText = approved;
-document.getElementById("rejectedCount").innerText = rejected;
-
-if(total===0){
-
-list.innerHTML="<h3>No Applications Found</h3>";
-
-}
-
-}
-
-searchBox.addEventListener("input",renderApplications);
-
-  window.changeStatus = async(id,status)=>{
-
-try{
-
-await updateDoc(doc(db,"applications",id),{
-
-status:status
-
-});
-
-await loadApplications();
-
-}catch(err){
-
-alert(err.message);
-
-}
-
-};
-
-window.deleteApplication = async(id)=>{
-
-if(!confirm("Delete this application?")) return;
-
-try{
-
-await deleteDoc(doc(db,"applications",id));
-
-await loadApplications();
-
-}catch(err){
-
-alert(err.message);
-
-}
-
-};
-
-document.getElementById("logoutBtn").onclick = async()=>{
-
-await signOut(auth);
-
-window.location.href = "admin-login.html";
-
-};
-
-onAuthStateChanged(auth,(user)=>{
-
-if(!user){
-
-window.location.href="admin-login.html";
-
-return;
-
-}
-
-loadApplications();
-
-});
-
-</script>
+Loading applications...
 
 </div>
+
+<div class="success-box" id="successMsg">
+
+Action completed successfully.
+
+</div>
+
+<div class="error-box" id="errorMsg">
+
+Something went wrong.
+
+</div>
+
+  <section class="card">
+
+<h3>Dashboard Guide</h3>
+
+<ul>
+
+<li>🔍 Use the search box to find applications by name or mobile number.</li>
+
+<li>✅ Click <strong>Approve</strong> to approve a loan application.</li>
+
+<li>❌ Click <strong>Reject</strong> to reject a loan application.</li>
+
+<li>🗑 Click <strong>Delete</strong> to permanently remove an application.</li>
+
+<li>📊 Dashboard counters update automatically.</li>
+
+</ul>
+
+</section>
+
+<hr style="margin:20px 0;">
+
+<div id="applicationList">
+
+<!-- admin.js will render all application cards here -->
+
+</div>
+
+  <section class="card">
+
+<h3>Quick Actions</h3>
+
+<p>
+
+You can manage all bike loan applications from this dashboard.
+
+Use the search bar above to quickly find any applicant.
+
+</p>
+
+</section>
+
+<footer>
+
+<p>
+
+Assam Finance Hub – Admin Dashboard
+
+</p>
+
+<p>
+
+Only authorized administrators are allowed to access this panel.
+
+</p>
+
+</footer>
+
+  </div>
+
+<script type="module" src="admin.js"></script>
 
 </body>
 
