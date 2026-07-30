@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Assam Finance Hub</title>
 
@@ -51,17 +50,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <h1>
 
-Bike Loan Made Easy
+Bike Loan in Assam
 
 </h1>
 
 <p>
 
-Fast Approval • Low EMI • Instant Process
+Fast Approval • Low EMI • Easy Documentation
 
 </p>
 
-<button onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">
+<button
+onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">
 
 Apply Now
 
@@ -72,16 +72,20 @@ Apply Now
 <!-- FEATURES -->
 
 <section
-id="features"
-class="features">
+class="features"
+id="features">
 
 <div class="card">
 
-<h3>⚡ Instant Approval</h3>
+<h3>
+
+Fast Approval
+
+</h3>
 
 <p>
 
-Quick loan approval within minutes.
+Get your bike loan approved quickly.
 
 </p>
 
@@ -89,11 +93,15 @@ Quick loan approval within minutes.
 
 <div class="card">
 
-<h3>💰 Low EMI</h3>
+<h3>
+
+Low Interest
+
+</h3>
 
 <p>
 
-Affordable monthly installments.
+Affordable EMI with low interest rates.
 
 </p>
 
@@ -101,11 +109,15 @@ Affordable monthly installments.
 
 <div class="card">
 
-<h3>📄 Minimal Documents</h3>
+<h3>
+
+Easy Documents
+
+</h3>
 
 <p>
 
-Very few documents required.
+Minimum paperwork required.
 
 </p>
 
@@ -113,11 +125,15 @@ Very few documents required.
 
 <div class="card">
 
-<h3>🔒 Secure Process</h3>
+<h3>
+
+Trusted Service
+
+</h3>
 
 <p>
 
-100% Safe & Secure Application.
+Safe and secure finance process.
 
 </p>
 
@@ -125,13 +141,17 @@ Very few documents required.
 
 </section>
 
-   <!-- EMI CALCULATOR -->
+<!-- EMI CALCULATOR -->
 
 <section
-id="calculator"
-class="calculator">
+class="calculator"
+id="calculator">
 
-<h2>EMI Calculator</h2>
+<h2>
+
+EMI Calculator
+
+</h2>
 
 <input
 type="number"
@@ -146,17 +166,18 @@ placeholder="Interest Rate (%)">
 <input
 type="number"
 id="loanMonths"
-placeholder="Loan Duration (Months)">
+placeholder="Loan Period (Months)">
 
-<button id="calculateBtn">
+<button
+id="calculateBtn">
 
 Calculate EMI
 
 </button>
 
 <div
-id="emiResult"
-class="result">
+class="result"
+id="emiResult">
 
 Your EMI will appear here
 
@@ -164,15 +185,15 @@ Your EMI will appear here
 
 </section>
 
-<!-- LOAN APPLY FORM -->
+<!-- LOAN APPLICATION -->
 
 <section
-id="apply"
-class="form-box">
+class="form-box"
+id="apply">
 
 <h2>
 
-Apply For Bike Loan
+Apply for Bike Loan
 
 </h2>
 
@@ -214,38 +235,39 @@ Send OTP
 </button>
 
 <input
-type="text"
+type="number"
 id="otp"
-placeholder="Enter OTP">
+placeholder="Enter OTP"
+required>
 
 <button
 type="submit">
 
-Apply Now
+Submit Application
 
 </button>
 
 <div
-id="loader"
-class="loader">
+class="loader"
+id="loader">
 
-Processing...
-
-</div>
-
-<div
-id="successMsg"
-class="success-box">
-
-Application Submitted Successfully ✅
+Submitting...
 
 </div>
 
 <div
-id="errorMsg"
-class="error-box">
+class="success-box"
+id="successMsg">
 
-Something went wrong ❌
+Application Submitted Successfully
+
+</div>
+
+<div
+class="error-box"
+id="errorMsg">
+
+Something went wrong
 
 </div>
 
@@ -253,97 +275,18 @@ Something went wrong ❌
 
 </section>
 
-   <!-- STATUS SECTION -->
-
-<section class="status-box">
-
-<h2>
-
-Check Application Status
-
-</h2>
-
-<p>
-
-Already applied?
-
-Click below to check your application status.
-
-</p>
-
-<button
-onclick="window.location.href='status.html'">
-
-Check Status
-
-</button>
-
-</section>
-
-<!-- CONTACT -->
-
-<footer>
-
-<h2>
-
-Assam Finance Hub
-
-</h2>
-
-<p>
-
-📍 Assam, India
-
-</p>
-
-<p>
-
-📞 +91 9707040752
-
-</p>
-
-<p>
-
-📧 support@assamfinancehub.in
-
-</p>
-
-<p>
-
-© 2026 Assam Finance Hub
-
-All Rights Reserved.
-
-</p>
-
-</footer>
-
-<!-- WHATSAPP -->
-
-<a
-href="https://wa.me/919707040752"
-class="whatsapp-btn"
-target="_blank">
-
-<i class="fab fa-whatsapp"></i>
-
-</a>
-
-<script type="module" src="firebase.js"></script>
-
-<script type="module" src="script.js"></script>
-
-   <!-- ABOUT SECTION -->
+   <!-- WHY CHOOSE US -->
 
 <section class="features">
 
 <div class="card">
+
 <h3>Why Choose Assam Finance Hub?</h3>
 
 <p>
 
 We provide instant bike loan approval,
-simple documentation,
+easy documentation,
 low interest rates and trusted service across Assam.
 
 </p>
@@ -358,8 +301,8 @@ low interest rates and trusted service across Assam.
 
 ✔ Aadhaar Card<br>
 ✔ PAN Card<br>
-✔ Driving Licence (Optional)<br>
-✔ Passport Size Photo
+✔ Passport Size Photo<br>
+✔ Bank Passbook
 
 </p>
 
@@ -394,11 +337,7 @@ How It Works
 
 <div class="card">
 
-<h3>
-
-1️⃣ Apply Online
-
-</h3>
+<h3>1️⃣ Apply Online</h3>
 
 <p>
 
@@ -410,11 +349,7 @@ Fill the online application form with your details.
 
 <div class="card">
 
-<h3>
-
-2️⃣ Verification
-
-</h3>
+<h3>2️⃣ Verification</h3>
 
 <p>
 
@@ -426,11 +361,7 @@ Our team verifies your application and documents.
 
 <div class="card">
 
-<h3>
-
-3️⃣ Approval
-
-</h3>
+<h3>3️⃣ Approval</h3>
 
 <p>
 
@@ -442,11 +373,7 @@ After approval our representative will contact you.
 
 <div class="card">
 
-<h3>
-
-4️⃣ Loan Disbursement
-
-</h3>
+<h3>4️⃣ Loan Disbursement</h3>
 
 <p>
 
@@ -462,44 +389,72 @@ Your bike loan process will be completed quickly.
 
 <section class="form-box">
 
-<h2>Frequently Asked Questions</h2>
+<h2>
+
+Frequently Asked Questions
+
+</h2>
 
 <div class="card">
 
-<h3>How much loan can I get?</h3>
+<h3>
+
+How much loan can I get?
+
+</h3>
 
 <p>
-You can get finance according to your eligibility and bike price.
+
+Loan amount depends on your eligibility and bike price.
+
 </p>
 
 </div>
 
 <div class="card">
 
-<h3>How many days does approval take?</h3>
+<h3>
+
+How many days does approval take?
+
+</h3>
 
 <p>
-Normally approval is completed within 24–48 hours after verification.
+
+Normally approval takes 24–48 hours after verification.
+
 </p>
 
 </div>
 
 <div class="card">
 
-<h3>Is there any processing fee?</h3>
+<h3>
+
+Is there any processing fee?
+
+</h3>
 
 <p>
+
 Processing fee depends on the finance company and loan amount.
+
 </p>
 
 </div>
 
 <div class="card">
 
-<h3>Can I apply online?</h3>
+<h3>
+
+Can I apply online?
+
+</h3>
 
 <p>
-Yes, you can complete the entire application online through Assam Finance Hub.
+
+Yes, you can complete your bike loan application online.
+
 </p>
 
 </div>
@@ -510,7 +465,11 @@ Yes, you can complete the entire application online through Assam Finance Hub.
 
 <section class="form-box">
 
-<h2>Contact Us</h2>
+<h2>
+
+Contact Us
+
+</h2>
 
 <input
 type="text"
@@ -548,7 +507,54 @@ Call Now
 
 </section>
 
-   <!-- BACK TO TOP BUTTON -->
+   <!-- FOOTER -->
+
+<footer>
+
+<h2>
+
+Assam Finance Hub
+
+</h2>
+
+<p>
+
+Bike Loan • Fast Approval • Easy EMI
+
+</p>
+
+<p>
+
+📞 +91 9707040752
+
+</p>
+
+<p>
+
+📧 support@assamfinancehub.in
+
+</p>
+
+<p>
+
+© 2026 Assam Finance Hub. All Rights Reserved.
+
+</p>
+
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+
+<a
+href="https://wa.me/919707040752"
+target="_blank"
+class="whatsapp-btn">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+<!-- BACK TO TOP BUTTON -->
 
 <button
 id="topBtn"
@@ -572,13 +578,16 @@ z-index:999;
 
 </button>
 
+<script type="module" src="script.js"></script>
+
 <script>
 
-const topBtn = document.getElementById("topBtn");
+const topBtn=document.getElementById("topBtn");
 
-window.onscroll = function(){
+window.onscroll=function(){
 
-if(document.body.scrollTop>300 || document.documentElement.scrollTop>300){
+if(document.body.scrollTop>300||
+document.documentElement.scrollTop>300){
 
 topBtn.style.display="block";
 
@@ -604,5 +613,26 @@ behavior:"smooth"
 
 </script>
 
+   <script>
+
+window.addEventListener("load",()=>{
+
+console.log("Assam Finance Hub Loaded Successfully");
+
+});
+
+document.querySelectorAll("a").forEach(link=>{
+
+link.addEventListener("click",function(){
+
+console.log("Navigated:",this.href);
+
+});
+
+});
+
+</script>
+
 </body>
+
 </html>
