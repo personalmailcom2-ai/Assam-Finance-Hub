@@ -1,4 +1,17 @@
+// ==========================================
+// ASSAM FINANCE HUB
+// FIREBASE CONFIG
+// ==========================================
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+// Firebase Configuration
 
 const firebaseConfig = {
 
@@ -18,6 +31,30 @@ measurementId: "G-H1SX3EDQJM"
 
 };
 
+// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 
-export { app };
+// Services
+
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+const storage = getStorage(app);
+
+// Export
+
+export {
+
+app,
+
+db,
+
+auth,
+
+storage
+
+};
+
+console.log("✅ Firebase Connected Successfully");
