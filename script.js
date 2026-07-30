@@ -1,22 +1,20 @@
 /* ==========================================
    ASSAM FINANCE HUB
-   PROFESSIONAL EDITION
+   script.js
+   PART 2
 ========================================== */
 
-import { app } from "./firebase.js";
+import { db } from "./firebase.js";
 
 import {
-    getFirestore,
     collection,
     addDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const db = getFirestore(app);
-
-/* ==========================================
+/* ==========================
    DOM READY
-========================================== */
+========================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -24,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-/* ==========================================
-   INITIALIZE WEBSITE
-========================================== */
+/* ==========================
+   INITIALIZE
+========================== */
 
 function initializeWebsite() {
 
@@ -64,27 +62,27 @@ function initializeWebsite() {
 
 }
 
-/* ==========================================
+/* ==========================
    LOADER
-========================================== */
+========================== */
 
 function hideLoader() {
 
+    const loader = document.getElementById("loader");
+
+    if (!loader) return;
+
     window.addEventListener("load", () => {
 
-        const loader = document.getElementById("loader");
-
-        if (loader) {
-            loader.style.display = "none";
-        }
+        loader.style.display = "none";
 
     });
 
 }
 
-/* ==========================================
+/* ==========================
    NAVBAR
-========================================== */
+========================== */
 
 function setupNavbar() {
 
@@ -110,9 +108,9 @@ function setupNavbar() {
 
 }
 
-/* ==========================================
+/* ==========================
    SCROLL TO TOP
-========================================== */
+========================== */
 
 function setupScrollButton() {
 
@@ -122,10 +120,9 @@ function setupScrollButton() {
 
     window.addEventListener("scroll", () => {
 
-        btn.style.display =
-            window.scrollY > 300
-                ? "flex"
-                : "none";
+        btn.style.display = window.scrollY > 300
+            ? "flex"
+            : "none";
 
     });
 
@@ -143,17 +140,17 @@ function setupScrollButton() {
 
 }
 
-/* ==========================================
+/* ==========================
    EMI CALCULATOR
-========================================== */
+========================== */
 
 function setupEMICalculator() {
 
-    const btn = document.getElementById("calculateBtn");
+    const calculateBtn = document.getElementById("calculateBtn");
 
-    if (!btn) return;
+    if (!calculateBtn) return;
 
-    btn.addEventListener("click", calculateEMI);
+    calculateBtn.addEventListener("click", calculateEMI);
 
 }
 
@@ -167,11 +164,23 @@ function calculateEMI() {
 
     const result = document.getElementById("emiResult");
 
-    if (!loan || !rate || !months) {
+    if (!result) return;
+
+    if (isNaN(loan) || isNaN(rate) || isNaN(months)) {
+
+        result.style.color = "#dc3545";
 
         result.innerHTML = "Please fill all fields.";
 
-        result.style.color = "red";
+        return;
+
+    }
+
+    if (loan <= 0 || rate <= 0 || months <= 0) {
+
+        result.style.color = "#dc3545";
+
+        result.innerHTML = "Enter valid values.";
 
         return;
 
@@ -180,119 +189,166 @@ function calculateEMI() {
     const monthlyRate = rate / 12 / 100;
 
     const emi =
+
         (loan * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+
         (Math.pow(1 + monthlyRate, months) - 1);
+
+    if (!isFinite(emi)) {
+
+        result.style.color = "#dc3545";
+
+        result.innerHTML = "Unable to calculate EMI.";
+
+        return;
+
+    }
 
     result.style.color = "#0d6efd";
 
     result.innerHTML =
+
         "Monthly EMI : <strong>₹" +
-        Number(emi).toLocaleString("en-IN", {
-            minimumFractionDigits: 2
-        }) +
+
+        formatCurrency(emi.toFixed(2)) +
+
         "</strong>";
 
 }
 
 /* ==========================
-   FIREBASE
+   CURRENCY FORMAT
 ========================== */
 
-import { app } from "./firebase.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+function formatCurrency(number) {
 
-const db = getFirestore(app);
+    return Number(number).toLocaleString("en-IN", {
+
+        minimumFractionDigits: 2,
+
+        maximumFractionDigits: 2
+
+    });
+
+}
 
 /* ==========================
    LOAN FORM
 ========================== */
 
 function setupLoanForm() {
-  const form = document.getElementById("loanForm");
 
-  if (!form) return;
+    const form = document.getElementById("loanForm");
 
-  form.addEventListener("submit", submitLoanForm);
+    if (!form) return;
+
+    form.addEventListener("submit", submitLoanForm);
+
 }
 
 async function submitLoanForm(e) {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  const submitBtn = e.target.querySelector("button[type='submit']");
+    const form = e.target;
 
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Submitting...";
+    const submitBtn = form.querySelector("button[type='submit']");
 
-  const data = {
+    if (submitBtn) {
 
-    name: document.getElementById("name").value.trim(),
+        submitBtn.disabled = true;
 
-    mobile: document.getElementById("mobile").value.trim(),
+        submitBtn.innerText = "Submitting...";
 
-    email: document.getElementById("email").value.trim(),
+    }
 
-    city: document.getElementById("city").value.trim(),
+    const data = {
 
-    bike: document.getElementById("bike").value,
+        name: document.getElementById("name").value.trim(),
 
-    bikeModel: document.getElementById("bikeModel").value.trim(),
+        mobile: document.getElementById("mobile").value.trim(),
 
-    amount: document.getElementById("amount").value,
+        email: document.getElementById("email").value.trim(),
 
-    income: document.getElementById("income").value,
+        city: document.getElementById("city").value.trim(),
 
-    aadhaar: document.getElementById("aadhaar").value.trim(),
+        bike: document.getElementById("bike").value,
 
-    pan: document.getElementById("pan").value.trim(),
+        bikeModel: document.getElementById("bikeModel").value.trim(),
 
-    address: document.getElementById("address").value.trim(),
+        amount: Number(document.getElementById("amount").value),
 
-    status: "Pending",
+        income: Number(document.getElementById("income").value),
 
-    createdAt: serverTimestamp()
+        aadhaar: document.getElementById("aadhaar").value.trim(),
 
-  };
+        pan: document.getElementById("pan").value.trim().toUpperCase(),
 
-  /* Validation */
+        address: document.getElementById("address").value.trim(),
 
-  if (data.name.length < 3) {
-    alert("Enter valid name.");
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Submit Loan Application";
-    return;
-  }
+        status: "Pending",
 
-  if (!/^[6-9]\d{9}$/.test(data.mobile)) {
-    alert("Enter valid mobile number.");
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Submit Loan Application";
-    return;
-  }
+        createdAt: serverTimestamp()
 
-  try {
+    };
 
-    await addDoc(collection(db, "applications"), data);
+    if (data.name.length < 3) {
 
-    alert("Application Submitted Successfully.");
+        alert("Enter a valid name.");
 
-    document.getElementById("loanForm").reset();
+        resetSubmitButton(submitBtn);
 
-  } catch (error) {
+        return;
 
-    console.error(error);
+    }
 
-    alert("Submission Failed. Please Try Again.");
+    if (!/^[6-9]\d{9}$/.test(data.mobile)) {
 
-  }
+        alert("Enter a valid mobile number.");
 
-  submitBtn.disabled = false;
-  submitBtn.innerText = "Submit Loan Application";
+        resetSubmitButton(submitBtn);
+
+        return;
+
+    }
+
+    try {
+
+        await addDoc(
+
+            collection(db, "applications"),
+
+            data
+
+        );
+
+        alert("Application submitted successfully.");
+
+        form.reset();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Submission failed. Please try again.");
+
+    }
+
+    resetSubmitButton(submitBtn);
+
+}
+
+/* ==========================
+   RESET SUBMIT BUTTON
+========================== */
+
+function resetSubmitButton(button) {
+
+    if (!button) return;
+
+    button.disabled = false;
+
+    button.innerText = "Submit Loan Application";
 
 }
 
@@ -302,106 +358,119 @@ async function submitLoanForm(e) {
 
 function setupCounters() {
 
-  const counters = document.querySelectorAll(".statistics h2");
+    const counters = document.querySelectorAll(".statistics h2");
 
-  if (counters.length === 0) return;
+    if (counters.length === 0) return;
 
-  const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
 
-    entries.forEach(entry => {
+        entries.forEach(entry => {
 
-      if (entry.isIntersecting) {
+            if (entry.isIntersecting) {
 
-        animateCounter(entry.target);
+                animateCounter(entry.target);
 
-        observer.unobserve(entry.target);
+                observer.unobserve(entry.target);
 
-      }
+            }
+
+        });
+
+    }, {
+
+        threshold: 0.5
 
     });
 
-  }, {
-    threshold: 0.5
-  });
+    counters.forEach(counter => {
 
-  counters.forEach(counter => observer.observe(counter));
+        observer.observe(counter);
+
+    });
 
 }
 
 function animateCounter(element) {
 
-  const text = element.innerText;
+    const originalText = element.innerText;
 
-  const target = parseInt(text.replace(/[^\d]/g, ""));
+    const target = parseInt(originalText.replace(/[^\d]/g, ""));
 
-  if (isNaN(target)) return;
+    if (isNaN(target)) return;
 
-  const suffix = text.replace(/[\d,]/g, "");
+    const suffix = originalText.replace(/[\d,]/g, "");
 
-  let current = 0;
+    let current = 0;
 
-  const increment = Math.ceil(target / 80);
+    const increment = Math.max(1, Math.ceil(target / 100));
 
-  const timer = setInterval(() => {
+    const timer = setInterval(() => {
 
-    current += increment;
+        current += increment;
 
-    if (current >= target) {
+        if (current >= target) {
 
-      current = target;
+            current = target;
 
-      clearInterval(timer);
+            clearInterval(timer);
 
-    }
+        }
 
-    element.innerText = current.toLocaleString("en-IN") + suffix;
+        element.innerText = current.toLocaleString("en-IN") + suffix;
 
-  }, 25);
+    }, 20);
 
 }
 
 /* ==========================
-   SCROLL ANIMATION
+   SCROLL REVEAL ANIMATION
 ========================== */
 
 function setupScrollAnimation() {
 
-  const items = document.querySelectorAll(
-    ".card,.partner-box,.faq-item,.support-card,.newsletter-box"
-  );
+    const items = document.querySelectorAll(
 
-  if (items.length === 0) return;
+        ".card, .partner-box, .faq-item, .support-card, .newsletter-box"
 
-  const observer = new IntersectionObserver((entries) => {
+    );
 
-    entries.forEach(entry => {
+    if (items.length === 0) return;
 
-      if (entry.isIntersecting) {
+    const observer = new IntersectionObserver((entries) => {
 
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
+        entries.forEach(entry => {
 
-      }
+            if (entry.isIntersecting) {
+
+                entry.target.style.opacity = "1";
+
+                entry.target.style.transform = "translateY(0)";
+
+                observer.unobserve(entry.target);
+
+            }
+
+        });
+
+    }, {
+
+        threshold: 0.15
 
     });
 
-  }, {
-    threshold: 0.15
-  });
+    items.forEach(item => {
 
-  items.forEach(item => {
+        item.style.opacity = "0";
 
-    item.style.opacity = "0";
-    item.style.transform = "translateY(40px)";
-    item.style.transition = "all .7s ease";
+        item.style.transform = "translateY(40px)";
 
-    observer.observe(item);
+        item.style.transition = "all 0.7s ease";
 
-  });
+        observer.observe(item);
+
+    });
 
 }
-
-setupScrollAnimation();
 
 /* ==========================
    NEWSLETTER
@@ -409,33 +478,39 @@ setupScrollAnimation();
 
 function setupNewsletter() {
 
-  const form = document.querySelector(".newsletter-form");
+    const form = document.querySelector(".newsletter-form");
 
-  if (!form) return;
+    if (!form) return;
 
-  form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    const email = form.querySelector("input").value.trim();
+        const email = form.querySelector("input[type='email']").value.trim();
 
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (email === "") {
-      showError("Please enter your email.");
-      return;
-    }
+        if (email === "") {
 
-    if (!pattern.test(email)) {
-      showError("Please enter a valid email address.");
-      return;
-    }
+            showError("Please enter your email.");
 
-    showSuccess("Thank you for subscribing!");
+            return;
 
-    form.reset();
+        }
 
-  });
+        if (!pattern.test(email)) {
+
+            showError("Please enter a valid email address.");
+
+            return;
+
+        }
+
+        showSuccess("Thank you for subscribing!");
+
+        form.reset();
+
+    });
 
 }
 
@@ -445,60 +520,75 @@ function setupNewsletter() {
 
 function setupFAQ() {
 
-  const faqItems = document.querySelectorAll(".faq-item");
+    const faqItems = document.querySelectorAll(".faq-item");
 
-  if (faqItems.length === 0) return;
+    if (faqItems.length === 0) return;
 
-  faqItems.forEach(item => {
+    faqItems.forEach(item => {
 
-    const title = item.querySelector("h3");
+        const title = item.querySelector("h3");
 
-    const content = item.querySelector("p");
+        const content = item.querySelector("p");
 
-    if (!title || !content) return;
+        if (!title || !content) return;
 
-    content.style.display = "none";
+        content.style.display = "none";
 
-    title.style.cursor = "pointer";
+        title.style.cursor = "pointer";
 
-    title.addEventListener("click", () => {
+        title.addEventListener("click", () => {
 
-      const isOpen = content.style.display === "block";
+            const isOpen = content.style.display === "block";
 
-      faqItems.forEach(box => {
+            faqItems.forEach(box => {
 
-        const p = box.querySelector("p");
+                const p = box.querySelector("p");
 
-        if (p) p.style.display = "none";
+                if (p) {
 
-      });
+                    p.style.display = "none";
 
-      content.style.display = isOpen ? "none" : "block";
+                }
+
+            });
+
+            content.style.display = isOpen ? "none" : "block";
+
+        });
 
     });
-
-  });
 
 }
 
 /* ==========================
-   ALERT HELPERS
+   SUCCESS MESSAGE
 ========================== */
 
 function showSuccess(message) {
-  alert("✅ " + message);
+
+    alert("✅ " + message);
+
 }
+
+/* ==========================
+   ERROR MESSAGE
+========================== */
 
 function showError(message) {
-  alert("❌ " + message);
+
+    alert("❌ " + message);
+
 }
+
+/* ==========================
+   SIMPLE NOTIFICATION
+========================== */
 
 function notify(message) {
-  console.log(message);
-}
 
-setupNewsletter();
-setupFAQ();
+    console.log(message);
+
+}
 
 /* ==========================
    ACTIVE NAVIGATION
@@ -506,70 +596,75 @@ setupFAQ();
 
 function setupActiveNavigation() {
 
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll("nav a");
+    const sections = document.querySelectorAll("section");
 
-  if (sections.length === 0 || navLinks.length === 0) return;
+    const navLinks = document.querySelectorAll("nav a");
 
-  window.addEventListener("scroll", () => {
+    if (sections.length === 0 || navLinks.length === 0) return;
 
-    let current = "";
+    window.addEventListener("scroll", () => {
 
-    sections.forEach(section => {
+        let current = "";
 
-      const sectionTop = section.offsetTop - 150;
+        sections.forEach(section => {
 
-      if (window.scrollY >= sectionTop) {
-        current = section.getAttribute("id");
-      }
+            const sectionTop = section.offsetTop - 150;
+
+            if (window.scrollY >= sectionTop) {
+
+                current = section.getAttribute("id");
+
+            }
+
+        });
+
+        navLinks.forEach(link => {
+
+            link.classList.remove("active");
+
+            const href = link.getAttribute("href");
+
+            if (href === "#" + current) {
+
+                link.classList.add("active");
+
+            }
+
+        });
 
     });
-
-    navLinks.forEach(link => {
-
-      link.classList.remove("active");
-
-      const href = link.getAttribute("href");
-
-      if (href === "#" + current) {
-        link.classList.add("active");
-      }
-
-    });
-
-  });
 
 }
 
 /* ==========================
-   SMOOTH SCROLL
+   SMOOTH NAVIGATION
 ========================== */
 
 function setupSmoothNavigation() {
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-    anchor.addEventListener("click", function (e) {
+        anchor.addEventListener("click", function (e) {
 
-      const target = document.querySelector(this.getAttribute("href"));
+            const target = document.querySelector(this.getAttribute("href"));
 
-      if (!target) return;
+            if (!target) return;
 
-      e.preventDefault();
+            e.preventDefault();
 
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+            target.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+        });
 
     });
 
-  });
-
 }
-
-setupActiveNavigation();
-setupSmoothNavigation();
 
 /* ==========================
    INPUT VALIDATION
@@ -584,7 +679,9 @@ function setupInputValidation() {
         mobile.addEventListener("input", () => {
 
             mobile.value = mobile.value
+
                 .replace(/\D/g, "")
+
                 .slice(0, 10);
 
         });
@@ -598,7 +695,9 @@ function setupInputValidation() {
         aadhaar.addEventListener("input", () => {
 
             aadhaar.value = aadhaar.value
+
                 .replace(/\D/g, "")
+
                 .slice(0, 12);
 
         });
@@ -612,8 +711,11 @@ function setupInputValidation() {
         pan.addEventListener("input", () => {
 
             pan.value = pan.value
+
                 .toUpperCase()
+
                 .replace(/[^A-Z0-9]/g, "")
+
                 .slice(0, 10);
 
         });
@@ -623,16 +725,22 @@ function setupInputValidation() {
 }
 
 /* ==========================
-   WHATSAPP BUTTON
+   FLOATING WHATSAPP BUTTON
 ========================== */
 
 function setupWhatsAppButton() {
+
+    const existing = document.querySelector(".floating-whatsapp");
+
+    if (existing) return;
 
     const btn = document.createElement("a");
 
     btn.href = "https://wa.me/919707040752";
 
     btn.target = "_blank";
+
+    btn.rel = "noopener noreferrer";
 
     btn.className = "floating-whatsapp";
 
@@ -643,10 +751,14 @@ function setupWhatsAppButton() {
 }
 
 /* ==========================
-   CALL BUTTON
+   FLOATING CALL BUTTON
 ========================== */
 
 function setupCallButton() {
+
+    const existing = document.querySelector(".floating-call");
+
+    if (existing) return;
 
     const btn = document.createElement("a");
 
@@ -666,15 +778,19 @@ function setupCallButton() {
 
 function setupDarkMode() {
 
-    const btn = document.createElement("button");
+    const existing = document.getElementById("darkModeBtn");
 
-    btn.id = "darkModeBtn";
+    if (existing) return;
 
-    btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    const darkBtn = document.createElement("button");
 
-    document.body.appendChild(btn);
+    darkBtn.id = "darkModeBtn";
 
-    btn.addEventListener("click", () => {
+    darkBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+
+    document.body.appendChild(darkBtn);
+
+    darkBtn.addEventListener("click", () => {
 
         document.body.classList.toggle("dark");
 
@@ -682,8 +798,235 @@ function setupDarkMode() {
 
 }
 
-setupInputValidation();
-setupWhatsAppButton();
-setupCallButton();
-setupDarkMode();
+/* ==========================
+   KEYBOARD SHORTCUT
+========================== */
+
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Home") {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+});
+
+/* ==========================
+   COPY MOBILE NUMBER
+========================== */
+
+document.querySelectorAll(".copy-mobile").forEach(link => {
+
+    link.addEventListener("click", async () => {
+
+        try {
+
+            await navigator.clipboard.writeText(link.innerText);
+
+            showSuccess("Mobile number copied.");
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            showError("Unable to copy mobile number.");
+
+        }
+
+    });
+
+});
+
+/* ==========================
+   IMAGE LAZY LOADING
+========================== */
+
+function setupLazyLoading() {
+
+    document.querySelectorAll("img").forEach(img => {
+
+        img.loading = "lazy";
+
+    });
+
+}
+
+/* ==========================
+   PAGE TITLE CHANGE
+========================== */
+
+document.addEventListener("visibilitychange", () => {
+
+    if (document.hidden) {
+
+        document.title = "Come Back 😊 | Assam Finance Hub";
+
+    } else {
+
+        document.title = "Assam Finance Hub | Fast Bike Loan Approval";
+
+    }
+
+});
+
+/* ==========================
+   ONLINE / OFFLINE STATUS
+========================== */
+
+window.addEventListener("online", () => {
+
+    showSuccess("Internet Connected.");
+
+});
+
+window.addEventListener("offline", () => {
+
+    showError("Internet Connection Lost.");
+
+});
+
+function checkConnection() {
+
+    if (!navigator.onLine) {
+
+        console.warn("You are currently offline.");
+
+    }
+
+}
+
+/* ==========================
+   GLOBAL ERROR HANDLER
+========================== */
+
+window.addEventListener("error", (event) => {
+
+    console.error("JavaScript Error:", event.message);
+
+});
+
+/* ==========================
+   UNHANDLED PROMISE
+========================== */
+
+window.addEventListener("unhandledrejection", (event) => {
+
+    console.error("Unhandled Promise:", event.reason);
+
+});
+
+/* ==========================
+   PAGE PERFORMANCE
+========================== */
+
+window.addEventListener("load", () => {
+
+    if ("performance" in window) {
+
+        console.log(
+
+            "Website Loaded in",
+
+            performance.now().toFixed(0),
+
+            "ms"
+
+        );
+
+    }
+
+});
+
+/* ==========================
+   SAFE CONSOLE
+========================== */
+
+console.log(`
+==========================================
+ Assam Finance Hub
+ Professional Edition
+==========================================
+Website Initialized Successfully.
+`);
+
+/* ==========================
+   VERSION
+========================== */
+
+const APP_VERSION = "1.0.0";
+
+console.log("Version:", APP_VERSION);
+
+/* ==========================
+   START LAZY LOADING
+========================== */
+
+setupLazyLoading();
+
+/* ==========================================
+   PREVENT DOUBLE FORM SUBMIT
+========================================== */
+
+document.querySelectorAll("form").forEach(form => {
+
+    form.addEventListener("submit", () => {
+
+        const btn = form.querySelector("button[type='submit']");
+
+        if (!btn) return;
+
+        btn.disabled = true;
+
+        setTimeout(() => {
+
+            btn.disabled = false;
+
+        }, 3000);
+
+    });
+
+});
+
+/* ==========================================
+   PAGE SHOW
+========================================== */
+
+window.addEventListener("pageshow", () => {
+
+    hideLoader();
+
+});
+
+/* ==========================================
+   WINDOW LOAD
+========================================== */
+
+window.addEventListener("load", () => {
+
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+
+        loader.style.display = "none";
+
+    }
+
+});
+
+/* ==========================================
+   FINAL INITIALIZATION
+========================================== */
+
+console.log("All Components Loaded Successfully.");
+
+console.log("Assam Finance Hub Ready.");
 
