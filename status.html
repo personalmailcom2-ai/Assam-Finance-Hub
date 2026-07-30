@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check Loan Status</title>
+<title>Application Status</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -27,25 +27,24 @@
 
 <a href="index.html">Home</a>
 
-<a href="index.html#apply">Apply Loan</a>
+<a href="admin-login.html">Admin</a>
 
 </nav>
 
 </header>
 
-<section class="form-box">
+<section class="status-box">
 
 <h2>
 
-Check Application Status
+Check Loan Application Status
 
 </h2>
 
 <input
-type="tel"
+type="text"
 id="mobile"
-placeholder="Enter Mobile Number"
-maxlength="10">
+placeholder="Enter Mobile Number">
 
 <button id="checkBtn">
 
@@ -53,113 +52,70 @@ Check Status
 
 </button>
 
-<div
-id="result"
-class="status-box"
-style="display:none;">
+<div id="result" class="mt-20">
 
-<h3>Application Details</h3>
-
-<p><b>Name:</b> <span id="rName"></span></p>
-
-<p><b>Mobile:</b> <span id="rMobile"></span></p>
-
-<p><b>Bike:</b> <span id="rBike"></span></p>
-
-<p><b>City:</b> <span id="rCity"></span></p>
-
-<p><b>Status:</b> <span id="rStatus"></span></p>
+<p>Enter your registered mobile number to check your application status.</p>
 
 </div>
 
-<div
-id="notFound"
-class="error-box">
+</section>
 
-Application Not Found
+<script type="module" src="status.js"></script>
+
+  <section class="form-box">
+
+<h2>
+
+Status Information
+
+</h2>
+
+<div class="card">
+
+<h3>Pending</h3>
+
+<p>
+
+Your application has been received and is under verification.
+
+</p>
 
 </div>
 
-  </section>
+<div class="card">
+
+<h3>Approved</h3>
+
+<p>
+
+Congratulations! Your bike loan application has been approved.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Rejected</h3>
+
+<p>
+
+Your application could not be approved. Please contact support for more details.
+
+</p>
+
+</div>
+
+</section>
 
 <footer>
 
-<h2>Assam Finance Hub</h2>
+<p>
 
-<p>Bike Loan • Fast Approval • Easy EMI</p>
+© 2026 Assam Finance Hub
+
+</p>
 
 </footer>
 
-<script type="module">
-
-import { app } from "./firebase.js";
-
-import {
-getFirestore,
-collection,
-getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const db = getFirestore(app);
-
-const checkBtn = document.getElementById("checkBtn");
-
-checkBtn.addEventListener("click", async()=>{
-
-const mobile =
-document.getElementById("mobile").value.trim();
-
-if(mobile.length!==10){
-
-alert("Enter Valid Mobile Number");
-
-return;
-
-}
-
-const snapshot =
-await getDocs(collection(db,"applications"));
-
-let found = false;
-
-document.getElementById("result").style.display="none";
-document.getElementById("notFound").style.display="none";
-
-snapshot.forEach((doc)=>{
-
-const data = doc.data();
-
-if(data.mobile===mobile){
-
-found = true;
-
-document.getElementById("rName").innerText = data.name || "";
-
-document.getElementById("rMobile").innerText = data.mobile || "";
-
-document.getElementById("rBike").innerText = data.bike || "";
-
-document.getElementById("rCity").innerText = data.city || "";
-
-document.getElementById("rStatus").innerText =
-data.status || "Pending";
-
-document.getElementById("result").style.display="block";
-
-}
-
-});
-
-if(!found){
-
-document.getElementById("notFound").style.display="block";
-
-}
-
-});
-
-</script>
-
-</body>
-
-</html>
+  
