@@ -1,16 +1,132 @@
+// ==========================================
+// ASSAM FINANCE HUB
+// login.js
+// ==========================================
+
+import { auth } from "./firebase.js";
+
+import {
+signInWithEmailAndPassword,
+sendPasswordResetEmail,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* ==========================================
+   DOM
+========================================== */
+
+const loginForm = document.getElementById("loginForm");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const forgotPassword = document.getElementById("forgotPassword");
+const togglePassword = document.getElementById("togglePassword");
+
+/* ==========================================
+   AUTO LOGIN
+========================================== */
+
+onAuthStateChanged(auth, (user) => {
+
+if(user){
+
+window.location.href = "admin.html";
+
+}
+
+});
+
+/* ==========================================
+   LOGIN
+========================================== */
+
+let isLoggingIn = false;
+
+loginForm.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+if(isLoggingIn) return;
+
+const userEmail = email.value.trim();
+const userPassword = password.value;
+
+if(userEmail==="" || userPassword===""){
+
+alert("Please enter email and password.");
+
+return;
+
+}
+
+isLoggingIn=true;
+
+loginBtn.disabled=true;
+loginBtn.innerText="Logging in...";
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+userEmail,
+userPassword
+);
+
+alert("Login Successful");
+
+window.location.href="admin.html";
+
+}catch(error){
+
+alert(getFirebaseError(error.code));
+
+}
+
+loginBtn.disabled=false;
+loginBtn.innerText="Login";
+isLoggingIn=false;
+
+});
+
+/* ==========================================
+   SHOW / HIDE PASSWORD
+========================================== */
+
+if(togglePassword){
+
+togglePassword.addEventListener("click",()=>{
+
+if(password.type==="password"){
+
+password.type="text";
+togglePassword.classList.remove("fa-eye");
+togglePassword.classList.add("fa-eye-slash");
+
+}else{
+
+password.type="password";
+togglePassword.classList.remove("fa-eye-slash");
+togglePassword.classList.add("fa-eye");
+
+}
+
+});
+
+}
+
 /* ==========================================
    FORGOT PASSWORD
 ========================================== */
 
-forgotPassword.addEventListener("click", async (e) => {
+forgotPassword.addEventListener("click",async(e)=>{
 
 e.preventDefault();
 
-const userEmail = email.value.trim();
+const userEmail=email.value.trim();
 
 if(userEmail===""){
 
-alert("Please enter your email first.");
+alert("Enter your email first.");
 
 email.focus();
 
@@ -22,18 +138,18 @@ try{
 
 await sendPasswordResetEmail(auth,userEmail);
 
-alert("Password reset email has been sent.");
+alert("Password reset email sent.");
 
 }catch(error){
 
-alert(error.message);
+alert(getFirebaseError(error.code));
 
 }
 
 });
 
 /* ==========================================
-   ENTER KEY SUPPORT
+   ENTER KEY
 ========================================== */
 
 password.addEventListener("keypress",(e)=>{
@@ -47,29 +163,7 @@ loginForm.requestSubmit();
 });
 
 /* ==========================================
-   AUTO LOGIN CHECK
-========================================== */
-
-import {
-
-onAuthStateChanged
-
-}
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-onAuthStateChanged(auth,(user)=>{
-
-if(user){
-
-window.location.href="admin.html";
-
-}
-
-});
-
-/* ==========================================
-   FRIENDLY ERROR MESSAGE
+   FRIENDLY ERRORS
 ========================================== */
 
 function getFirebaseError(code){
@@ -77,99 +171,32 @@ function getFirebaseError(code){
 switch(code){
 
 case "auth/invalid-credential":
-
 return "Invalid email or password.";
 
 case "auth/user-not-found":
-
-return "Account not found.";
+return "User not found.";
 
 case "auth/wrong-password":
-
 return "Incorrect password.";
 
 case "auth/invalid-email":
-
-return "Invalid email address.";
-
-case "auth/too-many-requests":
-
-return "Too many attempts. Try again later.";
+return "Invalid email.";
 
 case "auth/network-request-failed":
+return "No internet connection.";
 
-return "Check your internet connection.";
+case "auth/too-many-requests":
+return "Too many attempts. Try later.";
 
 default:
-
-return "Login failed. Please try again.";
-
-}
+return "Login failed.";
 
 }
 
-/* ==========================================
-   SESSION STORAGE
-========================================== */
-
-sessionStorage.setItem("appName","Assam Finance Hub");
-
-/* ==========================================
-   WINDOW FOCUS
-========================================== */
-
-window.addEventListener("focus",()=>{
-
-email.blur();
-
-password.blur();
-
-});
-
-/* ==========================================
-   PREVENT MULTIPLE CLICKS
-========================================== */
-
-let isLoggingIn=false;
-
-loginForm.addEventListener("submit",async(e)=>{
-
-if(isLoggingIn){
-
-e.preventDefault();
-
-return;
-
 }
-
-isLoggingIn=true;
-
-setTimeout(()=>{
-
-isLoggingIn=false;
-
-},3000);
-
-});
-
-/* ==========================================
-   PAGE LOADED
-========================================== */
-
-window.addEventListener("load",()=>{
-
-console.log("Login Page Loaded");
-
-});
 
 /* ==========================================
    VERSION
 ========================================== */
 
-const LOGIN_VERSION="1.0.0";
-
-console.log("Login Version:",LOGIN_VERSION);
-
-/* ==========================================
-   END OF LOGIN.JS
-========================================== */
+console.log("Login.js v1.0 Loaded");
