@@ -5,24 +5,26 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>Assam Finance Hub | Bike Loan | Instant Approval</title>
+<meta name="theme-color"
+content="#0057ff">
 
 <meta name="description"
-content="Assam Finance Hub provides fast bike loans with low interest rates and instant approval.">
+content="Assam Finance Hub - Loan, EMI, Banking & Financial Services">
 
-<meta name="keywords"
-content="Bike Loan, Assam Finance Hub, EMI, Finance, Loan">
+<title>Assam Finance Hub</title>
 
-<meta name="author"
-content="Assam Finance Hub">
+<!-- Manifest -->
+<link rel="manifest"
+href="manifest.json">
 
+<!-- Favicon -->
 <link rel="icon"
-href="assets/favicon.ico">
+href="assets/icons/icon-192.png">
 
-<!-- Google Font -->
-
+<!-- Google Fonts -->
 <link rel="preconnect"
 href="https://fonts.googleapis.com">
 
@@ -30,53 +32,50 @@ href="https://fonts.googleapis.com">
 href="https://fonts.gstatic.com"
 crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 rel="stylesheet">
 
 <!-- Font Awesome -->
-
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-<!-- AOS Animation -->
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-rel="stylesheet">
+<!-- Razorpay -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<!-- CSS -->
-
+<!-- Main CSS -->
 <link rel="stylesheet"
-href="style.css">
+href="assets/css/style.css">
 
 </head>
 
 <body>
 
-<!-- ===========================
-LOADER
-=========================== -->
-
+<!-- Loader -->
 <div id="loader">
 
-<div class="spinner"></div>
+<div class="loader-circle"></div>
 
 <h2>Assam Finance Hub</h2>
 
-<p>Loading...</p>
+</div>
+
+<!-- Offline Banner -->
+<div id="offlineBanner">
+
+⚠️ You are Offline
 
 </div>
 
-<!-- ===========================
-HEADER
-=========================== -->
-
+<!-- Header -->
 <header class="header">
-
-<div class="container">
 
 <div class="logo">
 
-<img src="assets/logo.png"
+<img
+src="assets/images/logo.png"
 alt="Logo">
 
 <h2>Assam Finance Hub</h2>
@@ -87,33 +86,29 @@ alt="Logo">
 
 <ul>
 
-<li><a href="#home">Home</a></li>
-
-<li><a href="#services">Services</a></li>
-
-<li><a href="#calculator">EMI</a></li>
-
-<li><a href="#loan">Apply</a></li>
-
-<li><a href="#contact">Contact</a></li>
+<li>
+<a href="index.html">Home</a>
+</li>
 
 <li>
+<a href="loan.html">Loans</a>
+</li>
 
-<a href="status.html">
+<li>
+<a href="emi.html">EMI</a>
+</li>
 
-Track Status
-
-</a>
-
+<li>
+<a href="contact.html">Contact</a>
 </li>
 
 <li>
 
-<a href="login.html">
+<button id="loginBtn">
 
-Admin
+Login
 
-</a>
+</button>
 
 </li>
 
@@ -121,8 +116,126 @@ Admin
 
 </nav>
 
-<a href="#loan"
-class="apply-btn">
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+
+Smart Financial Solutions
+
+</h1>
+
+<p>
+
+Loans, EMI Calculator, Digital Banking,
+KYC & Secure Payments.
+
+</p>
+
+<button id="applyLoanBtn">
+
+Apply Loan
+
+</button>
+
+</div>
+
+<div class="hero-image">
+
+<img
+src="assets/images/hero.png"
+alt="Hero">
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+Dashboard Overview
+========================================== -->
+
+<section class="dashboard-overview">
+
+<div class="section-title">
+<h2>Dashboard Overview</h2>
+<p>Quick summary of your financial activities.</p>
+</div>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-wallet"></i>
+
+<h3 id="totalBalance">₹0</h3>
+
+<p>Total Balance</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+<h3 id="activeLoans">0</h3>
+
+<p>Active Loans</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+<h3 id="nextEMI">--</h3>
+
+<p>Next EMI Date</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-credit-card"></i>
+
+<h3 id="transactionsCount">0</h3>
+
+<p>Total Transactions</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+Loan Services
+========================================== -->
+
+<section class="loan-services">
+
+<div class="section-title">
+
+<h2>Loan Services</h2>
+
+<p>Select the loan that suits your needs.</p>
+
+</div>
+
+<div class="loan-grid">
+
+<div class="loan-card">
+
+<i class="fa-solid fa-house"></i>
+
+<h3>Home Loan</h3>
+
+<p>Affordable home financing with flexible EMI options.</p>
+
+<a href="loan.html" class="btn-primary">
 
 Apply Now
 
@@ -130,65 +243,89 @@ Apply Now
 
 </div>
 
-</header>
+<div class="loan-card">
 
-<!-- ===========================
-HERO
-=========================== -->
+<i class="fa-solid fa-graduation-cap"></i>
 
-<section class="hero"
-id="home">
+<h3>Education Loan</h3>
 
-<div class="container hero-grid">
+<p>Support your education with low-interest financing.</p>
 
-<div class="hero-left"
-data-aos="fade-right">
+<a href="loan.html" class="btn-primary">
 
-<h1>
-
-Instant Bike Loan
-
-for Everyone
-
-</h1>
-
-<p>
-
-Fast Approval • Low Interest
-
-• Simple Documentation
-
-</p>
-
-<div class="hero-buttons">
-
-<a href="#loan"
-class="btn-primary">
-
-Apply Loan
-
-</a>
-
-<a href="#calculator"
-class="btn-secondary">
-
-EMI Calculator
+Apply Now
 
 </a>
 
 </div>
 
-<div class="hero-stats">
+<div class="loan-card">
 
-<div>
+<i class="fa-solid fa-briefcase"></i>
 
-<h2>25K+</h2>
+<h3>Business Loan</h3>
+
+<p>Grow your business with fast approval loans.</p>
+
+<a href="loan.html" class="btn-primary">
+
+Apply Now
+
+</a>
+
+</div>
+
+<div class="loan-card">
+
+<i class="fa-solid fa-user"></i>
+
+<h3>Personal Loan</h3>
+
+<p>Instant personal loans with simple documentation.</p>
+
+<a href="loan.html" class="btn-primary">
+
+Apply Now
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+Statistics
+========================================== -->
+
+<section class="statistics">
+
+<div class="section-title">
+
+<h2>Platform Statistics</h2>
+
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-box">
+
+<h2>10K+</h2>
 
 <p>Happy Customers</p>
 
 </div>
 
-<div>
+<div class="stat-box">
+
+<h2>₹50Cr+</h2>
+
+<p>Loans Processed</p>
+
+</div>
+
+<div class="stat-box">
 
 <h2>98%</h2>
 
@@ -196,70 +333,11 @@ EMI Calculator
 
 </div>
 
-<div>
+<div class="stat-box">
 
-<h2>24 Hours</h2>
+<h2>24×7</h2>
 
-<p>Fast Process</p>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="hero-right"
-data-aos="fade-left">
-
-<img src="assets/hero-bike.png"
-alt="Bike">
-
-</div>
-
-</div>
-
-</section>
-
-   <!-- ==========================================
-FINANCE PARTNERS
-========================================== -->
-
-<section class="partners">
-
-<div class="container">
-
-<h2 class="section-title" data-aos="fade-up">
-
-Trusted Finance Partners
-
-</h2>
-
-<div class="partner-grid">
-
-<div class="partner-card">
-<img src="assets/partner1.png" alt="">
-<h4>Hero FinCorp</h4>
-</div>
-
-<div class="partner-card">
-<img src="assets/partner2.png" alt="">
-<h4>Bajaj Finance</h4>
-</div>
-
-<div class="partner-card">
-<img src="assets/partner3.png" alt="">
-<h4>TVS Credit</h4>
-</div>
-
-<div class="partner-card">
-<img src="assets/partner4.png" alt="">
-<h4>HDFC Bank</h4>
-</div>
-
-<div class="partner-card">
-<img src="assets/partner5.png" alt="">
-<h4>IDFC First</h4>
-</div>
+<p>Customer Support</p>
 
 </div>
 
@@ -268,190 +346,54 @@ Trusted Finance Partners
 </section>
 
 <!-- ==========================================
-STATISTICS
+Quick Actions
 ========================================== -->
 
-<section class="statistics">
+<section class="quick-actions">
 
-<div class="container">
+<h2>Quick Actions</h2>
 
-<h2 class="section-title">
+<div class="action-grid">
 
-Why Thousands Trust Us
+<button onclick="location.href='loan.html'">
 
-</h2>
+Apply Loan
 
-<div class="statistics-grid">
+</button>
 
-<div class="statistics-card">
-
-<i class="fa-solid fa-users"></i>
-
-<h2>25000+</h2>
-
-<p>Happy Customers</p>
-
-</div>
-
-<div class="statistics-card">
-
-<i class="fa-solid fa-money-bill-wave"></i>
-
-<h2>₹500Cr+</h2>
-
-<p>Loan Disbursed</p>
-
-</div>
-
-<div class="statistics-card">
-
-<i class="fa-solid fa-motorcycle"></i>
-
-<h2>18000+</h2>
-
-<p>Bike Loans</p>
-
-</div>
-
-<div class="statistics-card">
-
-<i class="fa-solid fa-star"></i>
-
-<h2>4.9</h2>
-
-<p>Customer Rating</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-FEATURES
-========================================== -->
-
-<section id="services" class="features">
-
-<div class="container">
-
-<h2 class="section-title">
-
-Our Services
-
-</h2>
-
-<div class="feature-grid">
-
-<div class="feature-card">
-
-<i class="fa-solid fa-clock"></i>
-
-<h3>Fast Approval</h3>
-
-<p>
-
-Get your bike loan approved in as little as 24 hours.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<i class="fa-solid fa-percent"></i>
-
-<h3>Low Interest</h3>
-
-<p>
-
-Competitive interest rates with flexible EMI options.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<i class="fa-solid fa-file-circle-check"></i>
-
-<h3>Easy Documentation</h3>
-
-<p>
-
-Minimum documents required for quick processing.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<i class="fa-solid fa-headset"></i>
-
-<h3>24×7 Support</h3>
-
-<p>
-
-Dedicated customer support whenever you need help.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<i class="fa-solid fa-shield-halved"></i>
-
-<h3>100% Secure</h3>
-
-<p>
-
-Your personal information is protected with secure systems.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<i class="fa-solid fa-mobile-screen"></i>
-
-<h3>Online Process</h3>
-
-<p>
-
-Apply for your bike loan completely online.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-   <!-- ==========================================
-EMI CALCULATOR
-========================================== -->
-
-<section id="calculator" class="emi-section">
-
-<div class="container">
-
-<h2 class="section-title">
+<button onclick="location.href='emi.html'">
 
 EMI Calculator
 
-</h2>
+</button>
 
-<div class="emi-wrapper">
+<button onclick="location.href='dashboard.html'">
 
-<div class="emi-card">
+Dashboard
+
+</button>
+
+<button onclick="location.href='contact.html'">
+
+Support
+
+</button>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+EMI Calculator Section
+========================================== -->
+
+<section id="emi-section" class="section">
+
+<div class="container">
+
+<h2>EMI Calculator</h2>
+
+<div class="calculator-card">
 
 <div class="form-group">
 
@@ -460,7 +402,7 @@ EMI Calculator
 <input
 type="number"
 id="loanAmount"
-placeholder="200000">
+placeholder="Enter Loan Amount">
 
 </div>
 
@@ -471,7 +413,7 @@ placeholder="200000">
 <input
 type="number"
 id="interestRate"
-placeholder="9.5">
+placeholder="Annual Interest Rate">
 
 </div>
 
@@ -481,38 +423,25 @@ placeholder="9.5">
 
 <input
 type="number"
-id="loanMonths"
-placeholder="36">
+id="loanTenure"
+placeholder="Loan Duration">
 
 </div>
 
-<button
-class="calculate-btn"
-id="calculateEMI">
+<button id="calculateEMI" class="btn-primary">
 
 Calculate EMI
 
 </button>
 
-<div class="emi-result">
+<div class="result-box">
 
-<h3>Your Monthly EMI</h3>
+<h3>
 
-<h1 id="emiResult">
+Monthly EMI:
+<span id="emiResult">₹0</span>
 
-₹0
-
-</h1>
-
-</div>
-
-</div>
-
-<div class="emi-image">
-
-<img
-src="assets/calculator.png"
-alt="EMI Calculator">
+</h3>
 
 </div>
 
@@ -523,72 +452,60 @@ alt="EMI Calculator">
 </section>
 
 <!-- ==========================================
-WHY CHOOSE US
+Loan Eligibility
 ========================================== -->
 
-<section class="why-us">
+<section id="eligibility-section" class="section">
 
 <div class="container">
 
-<h2 class="section-title">
+<h2>Loan Eligibility Checker</h2>
 
-Why Choose Assam Finance Hub?
+<div class="calculator-card">
 
-</h2>
+<div class="form-group">
 
-<div class="why-grid">
+<label>Monthly Income (₹)</label>
 
-<div class="why-card">
-
-<i class="fa-solid fa-circle-check"></i>
-
-<h3>High Approval Rate</h3>
-
-<p>
-
-Maximum applications get approved quickly.
-
-</p>
+<input
+type="number"
+id="monthlyIncome">
 
 </div>
 
-<div class="why-card">
+<div class="form-group">
 
-<i class="fa-solid fa-bolt"></i>
+<label>Monthly Expenses (₹)</label>
 
-<h3>Instant Processing</h3>
-
-<p>
-
-Fast verification & quick loan disbursement.
-
-</p>
+<input
+type="number"
+id="monthlyExpenses">
 
 </div>
 
-<div class="why-card">
+<div class="form-group">
 
-<i class="fa-solid fa-wallet"></i>
+<label>Existing EMI (₹)</label>
 
-<h3>Affordable EMI</h3>
-
-<p>
-
-Flexible EMI according to your income.
-
-</p>
+<input
+type="number"
+id="existingEMI">
 
 </div>
 
-<div class="why-card">
+<button
+id="checkEligibility"
+class="btn-primary">
 
-<i class="fa-solid fa-headset"></i>
+Check Eligibility
 
-<h3>Dedicated Support</h3>
+</button>
 
-<p>
+<div class="result-box">
 
-Professional customer support available.
+<p id="eligibilityResult">
+
+Eligibility Result will appear here.
 
 </p>
 
@@ -600,641 +517,120 @@ Professional customer support available.
 
 </section>
 
-   <!-- ==========================================
-LOAN APPLICATION
+<!-- ==========================================
+Payment Section
 ========================================== -->
 
-<section id="loan" class="loan-section">
+<section id="payment-section" class="section">
 
 <div class="container">
 
-<h2 class="section-title">
+<h2>Online Payment</h2>
 
-Apply For Bike Loan
-
-</h2>
-
-<p class="section-subtitle">
-
-Fill your details below. Our executive will contact you shortly.
-
-</p>
-
-<form id="loanForm" class="loan-form">
-
-<!-- =========================
-PERSONAL DETAILS
-========================= -->
-
-<div class="form-box">
-
-<h3>
-
-<i class="fa-solid fa-user"></i>
-
-Personal Details
-
-</h3>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>Full Name *</label>
+<div class="payment-card">
 
 <input
 type="text"
-id="name"
-placeholder="Enter Full Name"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Mobile Number *</label>
-
-<input
-type="tel"
-id="mobile"
-maxlength="10"
-placeholder="9876543210"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Email Address *</label>
+id="customerName"
+placeholder="Full Name">
 
 <input
 type="email"
-id="email"
-placeholder="example@gmail.com"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Date of Birth *</label>
+id="customerEmail"
+placeholder="Email">
 
 <input
-type="date"
-id="dob"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Gender *</label>
-
-<select id="gender" required>
-
-<option value="">Select Gender</option>
-
-<option>Male</option>
-
-<option>Female</option>
-
-<option>Other</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Marital Status *</label>
-
-<select id="maritalStatus" required>
-
-<option value="">Select</option>
-
-<option>Single</option>
-
-<option>Married</option>
-
-<option>Divorced</option>
-
-<option>Widowed</option>
-
-</select>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-ADDRESS DETAILS
-========================= -->
-
-<div class="form-box">
-
-<h3>
-
-<i class="fa-solid fa-location-dot"></i>
-
-Address Details
-
-</h3>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>State *</label>
-
-<input
-type="text"
-id="state"
-value="Assam"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>District *</label>
-
-<input
-type="text"
-id="district"
-placeholder="District"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>City *</label>
-
-<input
-type="text"
-id="city"
-placeholder="City"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>PIN Code *</label>
+type="tel"
+id="customerPhone"
+placeholder="Mobile Number">
 
 <input
 type="number"
-id="pincode"
-placeholder="781001"
-required>
+id="paymentAmount"
+placeholder="Amount">
 
-</div>
+<div class="payment-buttons">
 
-<div class="form-group full-width">
+<button id="payNow">
 
-<label>Full Address *</label>
+Pay with Razorpay
 
-<textarea
-id="address"
-rows="4"
-placeholder="Complete Address"
-required></textarea>
+</button>
 
-</div>
+<button id="upiPayment">
 
-</div>
-
-</div>
-
-   <!-- =========================
-EMPLOYMENT DETAILS
-========================= -->
-
-<div class="form-box">
-
-<h3>
-
-<i class="fa-solid fa-briefcase"></i>
-
-Employment Details
-
-</h3>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>Employment Type *</label>
-
-<select id="employment" required>
-
-<option value="">Select</option>
-
-<option>Salaried</option>
-
-<option>Self Employed</option>
-
-<option>Business</option>
-
-<option>Student</option>
-
-<option>Farmer</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Company / Business Name *</label>
-
-<input
-type="text"
-id="company"
-placeholder="Company Name">
-
-</div>
-
-<div class="form-group">
-
-<label>Monthly Income *</label>
-
-<input
-type="number"
-id="income"
-placeholder="25000"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Work Experience *</label>
-
-<select id="experience">
-
-<option value="">Select</option>
-
-<option>Less than 1 Year</option>
-
-<option>1 - 2 Years</option>
-
-<option>2 - 5 Years</option>
-
-<option>5 - 10 Years</option>
-
-<option>10+ Years</option>
-
-</select>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-BIKE DETAILS
-========================= -->
-
-<div class="form-box">
-
-<h3>
-
-<i class="fa-solid fa-motorcycle"></i>
-
-Bike Details
-
-</h3>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>Bike Brand *</label>
-
-<select id="bike">
-
-<option value="">Select Brand</option>
-
-<option>Hero</option>
-
-<option>Honda</option>
-
-<option>TVS</option>
-
-<option>Bajaj</option>
-
-<option>Royal Enfield</option>
-
-<option>Yamaha</option>
-
-<option>Suzuki</option>
-
-<option>KTM</option>
-
-<option>Other</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Bike Model *</label>
-
-<input
-type="text"
-id="bikeModel"
-placeholder="Bike Model">
-
-</div>
-
-<div class="form-group">
-
-<label>On Road Price *</label>
-
-<input
-type="number"
-id="bikePrice"
-placeholder="150000">
-
-</div>
-
-<div class="form-group">
-
-<label>Down Payment *</label>
-
-<input
-type="number"
-id="downPayment"
-placeholder="30000">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-LOAN DETAILS
-========================= -->
-
-<div class="form-box">
-
-<h3>
-
-<i class="fa-solid fa-money-bill-wave"></i>
-
-Loan Details
-
-</h3>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>Loan Amount *</label>
-
-<input
-type="number"
-id="amount"
-placeholder="120000"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Loan Tenure *</label>
-
-<select id="tenure">
-
-<option>12 Months</option>
-
-<option>24 Months</option>
-
-<option>36 Months</option>
-
-<option>48 Months</option>
-
-<option>60 Months</option>
-
-</select>
-
-</div>
-
-<div class="form-group full-width">
-
-<div id="emiResultBox">
-
-<h4>Estimated EMI</h4>
-
-<h2 id="emiResult">₹0 / Month</h2>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-   <!-- =========================
-IDENTITY DETAILS
-========================= -->
-
-<div class="form-box">
-
-<h3>
-
-<i class="fa-solid fa-id-card"></i>
-
-Identity Verification
-
-</h3>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>Aadhaar Number *</label>
-
-<input
-type="text"
-id="aadhaar"
-maxlength="12"
-placeholder="123412341234"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>PAN Number *</label>
-
-<input
-type="text"
-id="pan"
-maxlength="10"
-placeholder="ABCDE1234F"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Driving License (Optional)</label>
-
-<input
-type="text"
-id="license"
-placeholder="Driving License Number">
-
-</div>
-
-<div class="form-group">
-
-<label>Occupation ID</label>
-
-<input
-type="text"
-id="occupationId"
-placeholder="Employee ID (Optional)">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-DOCUMENT UPLOAD
-========================= -->
-
-<div class="form-box">
-
-<h3>
-
-<i class="fa-solid fa-cloud-arrow-up"></i>
-
-Upload Documents
-
-</h3>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>Aadhaar Front *</label>
-
-<input
-type="file"
-id="aadhaarFront"
-accept="image/*,.pdf"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Aadhaar Back *</label>
-
-<input
-type="file"
-id="aadhaarBack"
-accept="image/*,.pdf"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>PAN Card *</label>
-
-<input
-type="file"
-id="panFile"
-accept="image/*,.pdf"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Passport Size Photo *</label>
-
-<input
-type="file"
-id="photo"
-accept="image/*"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Salary Slip (Optional)</label>
-
-<input
-type="file"
-id="salarySlip"
-accept="image/*,.pdf">
-
-</div>
-
-<div class="form-group">
-
-<label>Bank Statement (Optional)</label>
-
-<input
-type="file"
-id="bankStatement"
-accept="image/*,.pdf">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-DECLARATION
-========================= -->
-
-<div class="form-box">
-
-<h3>
-
-<i class="fa-solid fa-file-signature"></i>
-
-Declaration
-
-</h3>
-
-<label class="checkbox">
-
-<input
-type="checkbox"
-required>
-
-I confirm that all the information provided is true and I authorize Assam Finance Hub to verify my documents for loan processing.
-
-</label>
-
-<button
-type="submit"
-class="submit-btn">
-
-<i class="fa-solid fa-paper-plane"></i>
-
-Submit Loan Application
+Pay with UPI
 
 </button>
 
 </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+Loan Application Form
+========================================== -->
+
+<section id="loan-form" class="section">
+
+<div class="container">
+
+<h2>Loan Application</h2>
+
+<form id="loanApplicationForm">
+
+<input
+type="text"
+id="applicantName"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+id="applicantEmail"
+placeholder="Email"
+required>
+
+<input
+type="tel"
+id="applicantPhone"
+placeholder="Mobile Number"
+required>
+
+<select id="loanType">
+
+<option>Personal Loan</option>
+
+<option>Home Loan</option>
+
+<option>Education Loan</option>
+
+<option>Business Loan</option>
+
+</select>
+
+<input
+type="number"
+id="requestedAmount"
+placeholder="Requested Amount">
+
+<textarea
+id="loanPurpose"
+placeholder="Purpose of Loan">
+
+</textarea>
+
+<button
+type="submit"
+class="btn-primary">
+
+Submit Application
+
+</button>
 
 </form>
 
@@ -1243,66 +639,548 @@ Submit Loan Application
 </section>
 
    <!-- ==========================================
-LOAN PROCESS
+AUTHENTICATION SECTION
 ========================================== -->
 
-<section class="loan-process">
+<section id="authSection" class="section">
 
 <div class="container">
 
-<h2 class="section-title">
+<div class="auth-wrapper">
 
-Loan Process
+<!-- ==========================
+LOGIN CARD
+========================== -->
 
-</h2>
+<div class="auth-card" id="loginCard">
 
-<div class="process-grid">
+<h2>Login</h2>
 
-<div class="process-card">
+<form id="loginForm">
 
-<div class="step">1</div>
+<div class="form-group">
 
-<i class="fa-solid fa-file-circle-plus"></i>
+<label>Email Address</label>
 
-<h3>Apply Online</h3>
-
-<p>Fill the online application form with your details.</p>
-
-</div>
-
-<div class="process-card">
-
-<div class="step">2</div>
-
-<i class="fa-solid fa-id-card"></i>
-
-<h3>Document Verification</h3>
-
-<p>Our team verifies your submitted documents.</p>
+<input
+type="email"
+id="loginEmail"
+placeholder="Enter Email"
+required>
 
 </div>
 
-<div class="process-card">
+<div class="form-group">
 
-<div class="step">3</div>
+<label>Password</label>
 
-<i class="fa-solid fa-circle-check"></i>
-
-<h3>Loan Approval</h3>
-
-<p>Your application is reviewed and approved.</p>
+<input
+type="password"
+id="loginPassword"
+placeholder="Enter Password"
+required>
 
 </div>
 
-<div class="process-card">
+<div class="remember-box">
 
-<div class="step">4</div>
+<label>
 
-<i class="fa-solid fa-money-bill-transfer"></i>
+<input type="checkbox">
 
-<h3>Loan Disbursement</h3>
+Remember Me
 
-<p>Loan amount is processed quickly.</p>
+</label>
+
+<a href="#" id="forgotPasswordBtn">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+<button
+type="submit"
+class="btn-primary">
+
+Login
+
+</button>
+
+<button
+type="button"
+id="googleLoginBtn"
+class="google-btn">
+
+<i class="fab fa-google"></i>
+
+Continue with Google
+
+</button>
+
+</form>
+
+<p class="switch-form">
+
+Don't have an account?
+
+<a href="#" id="showRegister">
+
+Register Now
+
+</a>
+
+</p>
+
+</div>
+
+<!-- ==========================
+REGISTER CARD
+========================== -->
+
+<div
+class="auth-card"
+id="registerCard"
+style="display:none;">
+
+<h2>Create Account</h2>
+
+<form id="registerForm">
+
+<input
+type="text"
+id="registerName"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+id="registerEmail"
+placeholder="Email Address"
+required>
+
+<input
+type="tel"
+id="registerPhone"
+placeholder="Mobile Number"
+required>
+
+<input
+type="password"
+id="registerPassword"
+placeholder="Password"
+required>
+
+<p id="passwordStrength">
+
+Password Strength
+
+</p>
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm Password"
+required>
+
+<button
+type="submit"
+class="btn-primary">
+
+Create Account
+
+</button>
+
+</form>
+
+<p class="switch-form">
+
+Already have an account?
+
+<a href="#" id="showLogin">
+
+Login
+
+</a>
+
+</p>
+
+</div>
+
+<!-- ==========================
+FORGOT PASSWORD
+========================== -->
+
+<div
+class="auth-card"
+id="forgotCard"
+style="display:none;">
+
+<h2>Reset Password</h2>
+
+<form id="forgotPasswordForm">
+
+<input
+type="email"
+id="resetEmail"
+placeholder="Enter Registered Email"
+required>
+
+<button
+type="submit"
+class="btn-primary">
+
+Send Reset Link
+
+</button>
+
+</form>
+
+<p>
+
+<a href="#" id="backToLogin">
+
+← Back to Login
+
+</a>
+
+</p>
+
+</div>
+
+<!-- ==========================
+EMAIL VERIFICATION
+========================== -->
+
+<div class="verification-box">
+
+<h3>Email Verification</h3>
+
+<p>
+
+Please verify your email address after registration to access all features.
+
+</p>
+
+<button
+id="sendVerificationEmail"
+class="btn-secondary">
+
+Send Verification Email
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+USER DASHBOARD
+========================================== -->
+
+<section id="dashboardSection" class="section">
+
+<div class="container">
+
+<h2>User Dashboard</h2>
+
+<div class="dashboard-grid">
+
+<!-- Profile Card -->
+<div class="card profile-card">
+
+<div class="profile-image">
+
+<img
+id="profilePhoto"
+src="assets/images/default-user.png"
+alt="Profile">
+
+</div>
+
+<h3 id="profileName">
+
+Guest User
+
+</h3>
+
+<p id="profileEmail">
+
+guest@example.com
+
+</p>
+
+<p id="profilePhone">
+
++91 XXXXX XXXXX
+
+</p>
+
+<button id="editProfileBtn"
+class="btn-primary">
+
+Edit Profile
+
+</button>
+
+</div>
+
+<!-- Balance Card -->
+<div class="card">
+
+<h3>
+
+Available Balance
+
+</h3>
+
+<h1 id="dashboardBalance">
+
+₹0.00
+
+</h1>
+
+<button id="addMoneyBtn"
+class="btn-success">
+
+Add Money
+
+</button>
+
+</div>
+
+<!-- Loan Status -->
+<div class="card">
+
+<h3>
+
+Loan Status
+
+</h3>
+
+<p>
+
+Status:
+<strong id="loanStatusText">
+
+No Active Loan
+
+</strong>
+
+</p>
+
+<p>
+
+Loan Amount:
+<strong id="loanAmountText">
+
+₹0
+
+</strong>
+
+</p>
+
+<p>
+
+Next EMI:
+<strong id="nextEmiDate">
+
+--
+
+</strong>
+
+</p>
+
+<button
+id="viewLoanBtn"
+class="btn-primary">
+
+View Details
+
+</button>
+
+</div>
+
+<!-- EMI Progress -->
+<div class="card">
+
+<h3>
+
+EMI Progress
+
+</h3>
+
+<progress
+id="emiProgress"
+value="0"
+max="100">
+
+</progress>
+
+<p id="emiProgressText">
+
+0% Completed
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ==========================
+RECENT TRANSACTIONS
+========================== -->
+
+<div class="table-container">
+
+<h3>
+
+Recent Transactions
+
+</h3>
+
+<table
+id="transactionTable">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Type</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="transactionTableBody">
+
+<tr>
+
+<td colspan="4">
+
+No Transactions Found
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ==========================
+QUICK ACTIONS
+========================== -->
+
+<div class="quick-action-grid">
+
+<button
+id="transferMoneyBtn">
+
+Transfer Money
+
+</button>
+
+<button
+id="downloadStatementBtn">
+
+Download Statement
+
+</button>
+
+<button
+id="applyNewLoanBtn">
+
+Apply New Loan
+
+</button>
+
+<button
+id="contactSupportBtn">
+
+Contact Support
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+AI CHATBOT
+========================================== -->
+
+<section id="aiAssistantSection" class="section">
+
+<div class="container">
+
+<h2>AI Finance Assistant</h2>
+
+<div class="chatbot-container">
+
+<div class="chat-header">
+
+<div class="chat-title">
+
+<i class="fa-solid fa-robot"></i>
+
+<h3>Finance AI Assistant</h3>
+
+</div>
+
+<div class="chat-actions">
+
+<button id="clearChat">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</div>
+
+</div>
+
+<div
+id="chatBody"
+class="chat-body">
+
+<div class="ai-message ai-bot">
+
+👋 Hello! Welcome to Assam Finance Hub.
+
+How can I help you today?
+
+</div>
+
+</div>
+
+<div class="chat-input-area">
+
+<input
+type="text"
+id="chatInput"
+placeholder="Ask anything about loans, EMI, banking...">
+
+<button id="sendMessage">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+</button>
 
 </div>
 
@@ -1313,78 +1191,986 @@ Loan Process
 </section>
 
 <!-- ==========================================
-CUSTOMER REVIEWS
+NOTIFICATION CENTER
 ========================================== -->
 
-<section class="reviews">
+<section class="section">
 
 <div class="container">
 
-<h2 class="section-title">
+<h2>Notifications</h2>
 
-Customer Reviews
+<div class="notification-card">
+
+<div class="notification-header">
+
+<h3>
+
+Notification Center
+
+</h3>
+
+<span
+id="notificationBadge"
+class="badge">
+
+0
+
+</span>
+
+</div>
+
+<div
+id="notificationCenter"
+class="notification-list">
+
+</div>
+
+<div class="notification-actions">
+
+<button
+id="markAllRead">
+
+Mark All Read
+
+</button>
+
+<button
+id="clearNotifications">
+
+Clear All
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+EMI REMINDER
+========================================== -->
+
+<section class="section">
+
+<div class="container">
+
+<h2>EMI Reminder</h2>
+
+<div class="reminder-card">
+
+<label>
+
+Select EMI Due Date
+
+</label>
+
+<input
+type="date"
+id="emiDueDate">
+
+<button
+id="saveDueDate">
+
+Save Date
+
+</button>
+
+<h3>
+
+Countdown
+
+</h3>
+
+<p id="countdown">
+
+No Due Date Selected
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+MINI ANALYTICS
+========================================== -->
+
+<section class="section">
+
+<div class="container">
+
+<h2>Quick Analytics</h2>
+
+<div class="mini-card-grid">
+
+<div class="mini-card">
+
+<h3 id="totalUsers">
+
+0
+
+</h3>
+
+<p>Total Users</p>
+
+</div>
+
+<div class="mini-card">
+
+<h3 id="totalLoans">
+
+0
+
+</h3>
+
+<p>Total Loans</p>
+
+</div>
+
+<div class="mini-card">
+
+<h3 id="totalTransactions">
+
+0
+
+</h3>
+
+<p>Transactions</p>
+
+</div>
+
+<div class="mini-card">
+
+<h3 id="storageInfo">
+
+Loading...
+
+</h3>
+
+<p>Storage Usage</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+KYC & DOCUMENT UPLOAD
+========================================== -->
+
+<section id="kycSection" class="section">
+
+<div class="container">
+
+<h2>KYC Verification</h2>
+
+<p>
+Upload your documents securely to complete KYC verification.
+</p>
+
+<div class="kyc-grid">
+
+<!-- Profile Photo -->
+<div class="upload-card">
+
+<h3>Profile Photo</h3>
+
+<img
+id="profilePreview"
+src="assets/images/default-user.png"
+alt="Profile Preview"
+class="upload-preview">
+
+<input
+type="file"
+id="profilePhotoUpload"
+accept="image/*">
+
+<progress
+id="profileUploadProgress"
+value="0"
+max="100">
+
+</progress>
+
+<button
+id="uploadProfilePhoto"
+class="btn-primary">
+
+Upload Photo
+
+</button>
+
+</div>
+
+<!-- Aadhaar -->
+<div class="upload-card">
+
+<h3>Aadhaar Card</h3>
+
+<input
+type="file"
+id="aadhaarUpload"
+accept=".jpg,.jpeg,.png,.pdf">
+
+<progress
+id="aadhaarProgress"
+value="0"
+max="100">
+
+</progress>
+
+<button
+id="uploadAadhaar"
+class="btn-primary">
+
+Upload Aadhaar
+
+</button>
+
+</div>
+
+<!-- PAN -->
+<div class="upload-card">
+
+<h3>PAN Card</h3>
+
+<input
+type="file"
+id="panUpload"
+accept=".jpg,.jpeg,.png,.pdf">
+
+<progress
+id="panProgress"
+value="0"
+max="100">
+
+</progress>
+
+<button
+id="uploadPAN"
+class="btn-primary">
+
+Upload PAN
+
+</button>
+
+</div>
+
+<!-- Bank Passbook -->
+<div class="upload-card">
+
+<h3>Bank Passbook</h3>
+
+<input
+type="file"
+id="passbookUpload"
+accept=".jpg,.jpeg,.png,.pdf">
+
+<progress
+id="passbookProgress"
+value="0"
+max="100">
+
+</progress>
+
+<button
+id="uploadPassbook"
+class="btn-primary">
+
+Upload Passbook
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+KYC STATUS
+========================================== -->
+
+<div class="kyc-status">
+
+<h3>KYC Status</h3>
+
+<p>
+
+Current Status:
+
+<strong id="kycStatus">
+
+Pending
+
+</strong>
+
+</p>
+
+<button
+id="verifyKYC"
+class="btn-success">
+
+Submit for Verification
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+BANKING SERVICES
+========================================== -->
+
+<section id="bankingServices" class="section">
+
+<div class="container">
+
+<h2>Digital Banking Services</h2>
+
+<div class="banking-grid">
+
+<!-- Money Transfer -->
+<div class="service-card">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<h3>Money Transfer</h3>
+
+<p>Transfer money securely to any bank account.</p>
+
+<button
+id="transferMoneyBtn"
+class="btn-primary">
+
+Transfer Now
+
+</button>
+
+</div>
+
+<!-- UPI -->
+<div class="service-card">
+
+<i class="fa-brands fa-google-pay"></i>
+
+<h3>UPI Payments</h3>
+
+<p>Pay instantly using your UPI ID.</p>
+
+<button
+id="upiServiceBtn"
+class="btn-primary">
+
+Pay via UPI
+
+</button>
+
+</div>
+
+<!-- Card -->
+<div class="service-card">
+
+<i class="fa-solid fa-credit-card"></i>
+
+<h3>Card Management</h3>
+
+<p>Manage debit and credit cards.</p>
+
+<button
+id="manageCardBtn"
+class="btn-primary">
+
+Manage Cards
+
+</button>
+
+</div>
+
+<!-- Statement -->
+<div class="service-card">
+
+<i class="fa-solid fa-file-invoice"></i>
+
+<h3>Account Statement</h3>
+
+<p>Download monthly transaction statements.</p>
+
+<button
+id="statementBtn"
+class="btn-primary">
+
+Download
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+MONEY TRANSFER FORM
+========================================== -->
+
+<div class="bank-form">
+
+<h3>Transfer Money</h3>
+
+<form id="moneyTransferForm">
+
+<input
+type="text"
+id="beneficiaryName"
+placeholder="Beneficiary Name"
+required>
+
+<input
+type="text"
+id="accountNumber"
+placeholder="Account Number"
+required>
+
+<input
+type="text"
+id="ifscCode"
+placeholder="IFSC Code"
+required>
+
+<input
+type="number"
+id="transferAmount"
+placeholder="Amount (₹)"
+required>
+
+<button
+type="submit"
+class="btn-success">
+
+Transfer
+
+</button>
+
+</form>
+
+</div>
+
+<!-- ==========================================
+UPI PAYMENT
+========================================== -->
+
+<div class="upi-box">
+
+<h3>UPI Payment</h3>
+
+<input
+type="text"
+id="upiId"
+placeholder="example@upi">
+
+<input
+type="number"
+id="upiAmount"
+placeholder="Amount">
+
+<button
+id="payUPI"
+class="btn-primary">
+
+Pay Now
+
+</button>
+
+</div>
+
+<!-- ==========================================
+TRANSACTION FILTER
+========================================== -->
+
+<div class="transaction-filter">
+
+<h3>Transaction History</h3>
+
+<div class="filter-row">
+
+<input
+type="date"
+id="fromDate">
+
+<input
+type="date"
+id="toDate">
+
+<select id="transactionType">
+
+<option value="">All</option>
+
+<option value="Credit">Credit</option>
+
+<option value="Debit">Debit</option>
+
+</select>
+
+<button
+id="filterTransactions"
+class="btn-secondary">
+
+Filter
+
+</button>
+
+</div>
+
+<table id="historyTable">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Type</th>
+
+<th>Description</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyTableBody">
+
+<tr>
+
+<td colspan="5">
+
+No Records Found
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+ANALYTICS DASHBOARD
+========================================== -->
+
+<section id="analyticsSection" class="section">
+
+<div class="container">
+
+<h2>Financial Analytics</h2>
+
+<div class="analytics-grid">
+
+<div class="chart-card">
+
+<h3>Monthly Loan Statistics</h3>
+
+<canvas id="loanChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h3>Income vs Expense</h3>
+
+<canvas id="incomeExpenseChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h3>Expense Categories</h3>
+
+<canvas id="expensePieChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h3>Monthly Savings</h3>
+
+<canvas id="savingChart"></canvas>
+
+</div>
+
+</div>
+
+<!-- Summary -->
+
+<div class="summary-grid">
+
+<div class="summary-card">
+
+<h2 id="monthlyIncome">
+
+₹0
 
 </h2>
 
-<div class="review-grid">
-
-<div class="review-card">
-
-<img src="assets/customer1.jpg" alt="Customer">
-
-<h3>Rahul Sharma</h3>
-
-<div class="stars">
-
-★★★★★
+<p>Monthly Income</p>
 
 </div>
+
+<div class="summary-card">
+
+<h2 id="monthlyExpense">
+
+₹0
+
+</h2>
+
+<p>Monthly Expense</p>
+
+</div>
+
+<div class="summary-card">
+
+<h2 id="monthlySaving">
+
+₹0
+
+</h2>
+
+<p>Total Savings</p>
+
+</div>
+
+<div class="summary-card">
+
+<h2 id="creditScore">
+
+750
+
+</h2>
+
+<p>Credit Score</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+BANK LOCATOR & SUPPORT
+========================================== -->
+
+<section id="bankLocatorSection" class="section">
+
+<div class="container">
+
+<h2>Bank & ATM Locator</h2>
+
+<p>Find nearby bank branches and ATMs.</p>
+
+<div class="locator-grid">
+
+<!-- Google Map -->
+<div class="map-card">
+
+<h3>Location Map</h3>
+
+<div id="googleMap" style="width:100%;height:400px;">
+
+<!-- Google Map will load here -->
+
+</div>
+
+</div>
+
+<!-- Search -->
+<div class="search-card">
+
+<h3>Search Nearby</h3>
+
+<input
+type="text"
+id="locationSearch"
+placeholder="Enter city or PIN code">
+
+<div class="button-group">
+
+<button
+id="findBanksBtn"
+class="btn-primary">
+
+Find Banks
+
+</button>
+
+<button
+id="findATMsBtn"
+class="btn-secondary">
+
+Find ATMs
+
+</button>
+
+</div>
+
+<ul id="locationResults">
+
+<li>No locations found.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+CUSTOMER SUPPORT
+========================================== -->
+
+<section id="supportSection" class="section">
+
+<div class="container">
+
+<h2>Customer Support</h2>
+
+<div class="support-grid">
+
+<div class="support-card">
+
+<i class="fa-solid fa-phone"></i>
+
+<h3>Call Support</h3>
+
+<p>+91-1800-123-4567</p>
+
+</div>
+
+<div class="support-card">
+
+<i class="fa-solid fa-envelope"></i>
+
+<h3>Email Support</h3>
+
+<p>support@assamfinancehub.com</p>
+
+</div>
+
+<div class="support-card">
+
+<i class="fa-solid fa-comments"></i>
+
+<h3>Live Chat</h3>
+
+<button
+id="openLiveChat"
+class="btn-primary">
+
+Start Chat
+
+</button>
+
+</div>
+
+<div class="support-card">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<h3>Head Office</h3>
+
+<p>Guwahati, Assam, India</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+LATEST NEWS & OFFERS
+========================================== -->
+
+<section id="newsSection" class="section">
+
+<div class="container">
+
+<h2>Latest News & Offers</h2>
+
+<div class="news-grid">
+
+<div class="news-card">
+
+<img
+src="assets/images/news1.jpg"
+alt="News">
+
+<h3>New Personal Loan Scheme</h3>
 
 <p>
 
-Very fast approval. Excellent customer support.
+Get personal loans with attractive interest rates for a limited period.
 
 </p>
 
-</div>
+<a href="#" class="btn-primary">
 
-<div class="review-card">
+Read More
 
-<img src="assets/customer2.jpg" alt="Customer">
-
-<h3>Amit Das</h3>
-
-<div class="stars">
-
-★★★★★
+</a>
 
 </div>
+
+<div class="news-card">
+
+<img
+src="assets/images/news2.jpg"
+alt="Offer">
+
+<h3>Cashback Offer</h3>
 
 <p>
 
-Got my bike loan within one day.
+Pay your EMI online and receive exciting cashback rewards.
 
 </p>
 
-</div>
+<a href="#" class="btn-primary">
 
-<div class="review-card">
+View Offer
 
-<img src="assets/customer3.jpg" alt="Customer">
-
-<h3>Sanjay Roy</h3>
-
-<div class="stars">
-
-★★★★★
+</a>
 
 </div>
+
+<div class="news-card">
+
+<img
+src="assets/images/news3.jpg"
+alt="Update">
+
+<h3>Digital Banking Update</h3>
 
 <p>
 
-Simple process and lowest EMI.
+Enjoy faster, safer, and more secure digital banking services.
 
 </p>
+
+<a href="#" class="btn-primary">
+
+Learn More
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+CUSTOMER TESTIMONIALS
+========================================== -->
+
+<section id="testimonialSection" class="section">
+
+<div class="container">
+
+<h2>Customer Testimonials</h2>
+
+<div class="testimonial-grid">
+
+<div class="testimonial-card">
+
+<p>
+
+★★★★★
+
+</p>
+
+<p>
+
+"Very fast loan approval process. Excellent support."
+
+</p>
+
+<h4>
+
+— Rahul Sharma
+
+</h4>
+
+</div>
+
+<div class="testimonial-card">
+
+<p>
+
+★★★★★
+
+</p>
+
+<p>
+
+"The EMI calculator helped me choose the best plan."
+
+</p>
+
+<h4>
+
+— Priya Das
+
+</h4>
+
+</div>
+
+<div class="testimonial-card">
+
+<p>
+
+★★★★★
+
+</p>
+
+<p>
+
+"Simple interface and secure online payment experience."
+
+</p>
+
+<h4>
+
+— Amit Roy
+
+</h4>
 
 </div>
 
@@ -1398,169 +2184,77 @@ Simple process and lowest EMI.
 FAQ
 ========================================== -->
 
-<section class="faq">
+<section id="faqSection" class="section">
 
 <div class="container">
 
-<h2 class="section-title">
+<h2>Frequently Asked Questions</h2>
 
-Frequently Asked Questions
+<div class="faq-container">
 
-</h2>
+<details>
 
-<div class="faq-box">
+<summary>
 
-<div class="faq-item">
+How can I apply for a loan?
 
-<h3>
-
-How much loan can I get?
-
-</h3>
+</summary>
 
 <p>
 
-Loan amount depends on your income and eligibility.
+Create an account, complete KYC, and submit the loan application form.
 
 </p>
 
-</div>
+</details>
 
-<div class="faq-item">
+<details>
 
-<h3>
+<summary>
 
 How long does approval take?
 
-</h3>
+</summary>
 
 <p>
 
-Normally within 24 hours after verification.
+Approval time depends on document verification and eligibility.
 
 </p>
 
-</div>
+</details>
 
-<div class="faq-item">
+<details>
 
-<h3>
+<summary>
 
-Is CIBIL mandatory?
+Can I repay my loan early?
 
-</h3>
+</summary>
 
 <p>
 
-Some lenders require it while others offer options based on eligibility.
+Yes. Early repayment options are available according to loan terms.
 
 </p>
 
-</div>
+</details>
 
-<div class="faq-item">
+<details>
 
-<h3>
+<summary>
 
-Can I prepay my loan?
+Is my information secure?
 
-</h3>
+</summary>
 
 <p>
 
-Yes, depending on lender policy.
+Yes. Your data is protected using modern security practices.
 
 </p>
 
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-   <!-- ==========================================
-CONTACT SECTION
-========================================== -->
-
-<section id="contact" class="contact-section">
-
-<div class="container">
-
-<h2 class="section-title">
-
-Contact Us
-
-</h2>
-
-<div class="contact-wrapper">
-
-<div class="contact-info">
-
-<h3>Assam Finance Hub</h3>
-
-<p>
-
-<i class="fa-solid fa-location-dot"></i>
-
-Guwahati, Assam, India
-
-</p>
-
-<p>
-
-<i class="fa-solid fa-phone"></i>
-
-+91 9876543210
-
-</p>
-
-<p>
-
-<i class="fa-solid fa-envelope"></i>
-
-support@assamfinancehub.in
-
-</p>
-
-<p>
-
-<i class="fa-solid fa-clock"></i>
-
-Monday - Saturday
-
-9:00 AM - 7:00 PM
-
-</p>
-
-</div>
-
-<div class="contact-form">
-
-<input
-type="text"
-placeholder="Your Name">
-
-<input
-type="email"
-placeholder="Email Address">
-
-<input
-type="tel"
-placeholder="Mobile Number">
-
-<textarea
-rows="6"
-placeholder="Write your message..."></textarea>
-
-<button class="contact-btn">
-
-Send Message
-
-</button>
-
-</div>
+</details>
 
 </div>
 
@@ -1569,20 +2263,134 @@ Send Message
 </section>
 
 <!-- ==========================================
-GOOGLE MAP
+FINANCIAL TIPS
 ========================================== -->
 
-<section class="map-section">
+<section id="tipsSection" class="section">
 
-<iframe
+<div class="container">
 
-src="https://www.google.com/maps?q=Guwahati&output=embed"
+<h2>Financial Tips</h2>
 
-loading="lazy"
+<ul class="tips-list">
 
-allowfullscreen>
+<li>Create a monthly budget and follow it.</li>
 
-</iframe>
+<li>Pay EMIs on time to maintain a healthy credit score.</li>
+
+<li>Build an emergency savings fund.</li>
+
+<li>Avoid unnecessary debt whenever possible.</li>
+
+<li>Review your financial goals regularly.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+CONTACT & FEEDBACK SECTION
+========================================== -->
+
+<section id="contactSection" class="section">
+
+<div class="container">
+
+<h2>Contact Us</h2>
+
+<div class="contact-grid">
+
+<!-- Contact Form -->
+<div class="contact-card">
+
+<h3>Send us a Message</h3>
+
+<form id="contactForm">
+
+<input
+type="text"
+id="contactName"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+id="contactEmail"
+placeholder="Email Address"
+required>
+
+<input
+type="tel"
+id="contactPhone"
+placeholder="Mobile Number">
+
+<textarea
+id="contactMessage"
+rows="6"
+placeholder="Write your message..."
+required>
+
+</textarea>
+
+<button
+type="submit"
+class="btn-primary">
+
+Send Message
+
+</button>
+
+</form>
+
+</div>
+
+<!-- Feedback -->
+<div class="contact-card">
+
+<h3>Feedback</h3>
+
+<form id="feedbackForm">
+
+<label>Rate Our Service</label>
+
+<select id="feedbackRating">
+
+<option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+
+<option value="4">⭐⭐⭐⭐ Very Good</option>
+
+<option value="3">⭐⭐⭐ Good</option>
+
+<option value="2">⭐⭐ Fair</option>
+
+<option value="1">⭐ Poor</option>
+
+</select>
+
+<textarea
+id="feedbackMessage"
+rows="5"
+placeholder="Share your experience...">
+
+</textarea>
+
+<button
+type="submit"
+class="btn-success">
+
+Submit Feedback
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
@@ -1590,33 +2398,30 @@ allowfullscreen>
 NEWSLETTER
 ========================================== -->
 
-<section class="newsletter">
+<section id="newsletterSection" class="section">
 
 <div class="container">
 
 <div class="newsletter-box">
 
-<h2>
-
-Subscribe Our Newsletter
-
-</h2>
+<h2>Subscribe to our Newsletter</h2>
 
 <p>
 
-Receive latest loan offers and updates.
+Receive updates on new loans, offers and financial tips.
 
 </p>
 
 <div class="newsletter-form">
 
 <input
-
 type="email"
+id="newsletterEmail"
+placeholder="Enter your email">
 
-placeholder="Enter Email Address">
-
-<button>
+<button
+id="subscribeBtn"
+class="btn-primary">
 
 Subscribe
 
@@ -1636,15 +2441,17 @@ FOOTER
 
 <footer class="footer">
 
-<div class="container footer-grid">
+<div class="container">
+
+<div class="footer-grid">
 
 <div>
 
-<h2>Assam Finance Hub</h2>
+<h3>Assam Finance Hub</h3>
 
 <p>
 
-Providing trusted bike loan services across Assam with fast approval and easy EMI.
+Secure Digital Banking, Loans, EMI Calculator and Financial Services.
 
 </p>
 
@@ -1656,33 +2463,13 @@ Providing trusted bike loan services across Assam with fast approval and easy EM
 
 <ul>
 
-<li><a href="#home">Home</a></li>
+<li><a href="index.html">Home</a></li>
 
-<li><a href="#services">Services</a></li>
+<li><a href="loan.html">Loans</a></li>
 
-<li><a href="#loan">Apply</a></li>
+<li><a href="emi.html">EMI Calculator</a></li>
 
-<li><a href="#contact">Contact</a></li>
-
-<li><a href="status.html">Track Status</a></li>
-
-</ul>
-
-</div>
-
-<div>
-
-<h3>Support</h3>
-
-<ul>
-
-<li>Email Support</li>
-
-<li>WhatsApp</li>
-
-<li>Customer Care</li>
-
-<li>FAQ</li>
+<li><a href="contact.html">Contact</a></li>
 
 </ul>
 
@@ -1694,375 +2481,166 @@ Providing trusted bike loan services across Assam with fast approval and easy EM
 
 <div class="social-links">
 
-<a href="#"><i class="fab fa-facebook"></i></a>
+<a href="#"><i class="fab fa-facebook-f"></i></a>
 
 <a href="#"><i class="fab fa-instagram"></i></a>
 
+<a href="#"><i class="fab fa-x-twitter"></i></a>
+
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
+
 <a href="#"><i class="fab fa-youtube"></i></a>
 
-<a href="#"><i class="fab fa-linkedin"></i></a>
+</div>
+
+</div>
+
+<div>
+
+<h3>Contact</h3>
+
+<p>Email: support@assamfinancehub.com</p>
+
+<p>Phone: +91-1800-123-4567</p>
+
+<p>Guwahati, Assam, India</p>
 
 </div>
 
 </div>
 
-</div>
+<hr>
 
 <div class="copyright">
 
+<p>
+
 © 2026 Assam Finance Hub. All Rights Reserved.
+
+</p>
+
+</div>
 
 </div>
 
 </footer>
 
-<!-- ==========================================
-FLOATING BUTTONS
-========================================== -->
-
-<a
-
-href="https://wa.me/919876543210"
-
-class="whatsapp-btn"
-
-target="_blank">
-
-<i class="fab fa-whatsapp"></i>
-
-</a>
-
-<a
-
-href="tel:+919876543210"
-
-class="call-btn">
-
-<i class="fa-solid fa-phone"></i>
-
-</a>
-
-<button
-
-id="scrollTop"
-
-class="scroll-top">
-
-<i class="fa-solid fa-arrow-up"></i>
-
-</button>
-
-<button
-
-id="darkMode"
-
-class="dark-mode">
-
-<i class="fa-solid fa-moon"></i>
-
-</button>
-
    <!-- ==========================================
-LOAN ELIGIBILITY CHECKER
+FLOATING UI COMPONENTS
 ========================================== -->
 
-<section class="eligibility-section">
+<!-- Dark Mode Toggle -->
+<button
+id="themeToggle"
+class="floating-btn"
+title="Toggle Theme">
 
-<div class="container">
+<i
+id="themeIcon"
+class="fa-solid fa-moon">
 
-<h2 class="section-title">
+</i>
 
-Check Your Eligibility
+</button>
 
-</h2>
+<!-- Language Switcher -->
+<div
+id="languageSwitcher"
+class="language-switcher">
 
-<div class="eligibility-grid">
+<label for="languageSelect">
 
-<div class="eligibility-card">
+Language
 
-<div class="form-group">
+</label>
 
-<label>Monthly Income</label>
+<select id="languageSelect">
 
-<input
-type="number"
-id="eligibilityIncome"
-placeholder="25000">
+<option value="en">
 
-</div>
+English
 
-<div class="form-group">
+</option>
 
-<label>Age</label>
+<option value="hi">
 
-<input
-type="number"
-id="eligibilityAge"
-placeholder="21">
+Hindi
 
-</div>
+</option>
 
-<div class="form-group">
+<option value="as">
 
-<label>Employment</label>
+Assamese
 
-<select id="eligibilityEmployment">
+</option>
 
-<option>Salaried</option>
+<option value="bn">
 
-<option>Business</option>
+Bengali
 
-<option>Self Employed</option>
+</option>
 
 </select>
 
 </div>
 
+<!-- ==========================================
+NOTIFICATION POPUP
+========================================== -->
+
+<div
+id="notificationPopup"
+class="notification-popup">
+
+<div class="notification-content">
+
+<div class="notification-icon">
+
+<i class="fa-solid fa-bell"></i>
+
+</div>
+
+<div class="notification-text">
+
+<h4 id="notificationTitle">
+
+Notification
+
+</h4>
+
+<p id="notificationMessage">
+
+Welcome to Assam Finance Hub.
+
+</p>
+
+</div>
+
 <button
-id="checkEligibility"
-class="check-btn">
+id="closeNotification">
 
-Check Eligibility
-
-</button>
-
-<div id="eligibilityResult">
-
-Eligible Amount: ₹0
-
-</div>
-
-</div>
-
-<div class="eligibility-image">
-
-<img
-src="assets/eligibility.png"
-alt="Eligibility">
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-DOWNLOAD APP
-========================================== -->
-
-<section class="download-app">
-
-<div class="container">
-
-<div class="download-grid">
-
-<div>
-
-<h2>
-
-Download Our Mobile App
-
-</h2>
-
-<p>
-
-Track your application, upload documents,
-view EMI and get instant notifications.
-
-</p>
-
-<div class="store-buttons">
-
-<a href="#">
-
-<img
-src="assets/google-play.png"
-alt="Google Play">
-
-</a>
-
-<a href="#">
-
-<img
-src="assets/app-store.png"
-alt="App Store">
-
-</a>
-
-</div>
-
-</div>
-
-<div>
-
-<img
-src="assets/mobile-app.png"
-alt="Mobile App">
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-LIVE COUNTER
-========================================== -->
-
-<section class="live-counter">
-
-<div class="container">
-
-<div class="counter-grid">
-
-<div>
-
-<h2 id="counterCustomers">
-
-25000+
-
-</h2>
-
-<p>
-
-Customers
-
-</p>
-
-</div>
-
-<div>
-
-<h2 id="counterLoan">
-
-₹500 Cr+
-
-</h2>
-
-<p>
-
-Loan Amount
-
-</p>
-
-</div>
-
-<div>
-
-<h2 id="counterCities">
-
-30+
-
-</h2>
-
-<p>
-
-Cities
-
-</p>
-
-</div>
-
-<div>
-
-<h2 id="counterBranches">
-
-12
-
-</h2>
-
-<p>
-
-Branches
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-COOKIE NOTICE
-========================================== -->
-
-<div id="cookieNotice"
-class="cookie-notice">
-
-<p>
-
-This website uses cookies to improve your experience.
-
-</p>
-
-<button id="acceptCookie">
-
-Accept
+<i class="fa-solid fa-xmark"></i>
 
 </button>
 
 </div>
 
-   <!-- ==========================================
-LOGIN POPUP
-========================================== -->
-
-<div id="loginPopup" class="popup">
-
-<div class="popup-box">
-
-<span class="close-popup">&times;</span>
-
-<h2>Customer Login</h2>
-
-<input
-type="email"
-id="customerEmail"
-placeholder="Email Address">
-
-<input
-type="password"
-id="customerPassword"
-placeholder="Password">
-
-<button id="customerLoginBtn">
-
-Login
-
-</button>
-
-<p>
-
-Don't have an account?
-
-<a href="#loan">
-
-Apply Loan
-
-</a>
-
-</p>
-
-</div>
-
 </div>
 
 <!-- ==========================================
-SUCCESS TOAST
+TOAST MESSAGE
 ========================================== -->
 
-<div id="toast" class="toast">
+<div
+id="toastContainer"
+class="toast-container">
 
-<i class="fa-solid fa-circle-check"></i>
+<div
+id="toastMessage"
+class="toast">
 
-<span id="toastText">
+<span
+id="toastText">
 
 Success
 
@@ -2070,13 +2648,32 @@ Success
 
 </div>
 
+</div>
+
 <!-- ==========================================
-PAGE OVERLAY
+BACK TO TOP
 ========================================== -->
 
-<div id="overlayLoader">
+<button
+id="backToTop"
+class="back-to-top"
+title="Back to Top">
 
-<div class="overlay-spinner"></div>
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<!-- ==========================================
+LOADING OVERLAY
+========================================== -->
+
+<div
+id="loadingOverlay"
+class="loading-overlay">
+
+<div class="loading-box">
+
+<div class="spinner"></div>
 
 <h3>
 
@@ -2084,79 +2681,1429 @@ Please Wait...
 
 </h3>
 
+<p>
+
+Loading data...
+
+</p>
+
+</div>
+
 </div>
 
 <!-- ==========================================
-CHAT SUPPORT
+NETWORK STATUS
 ========================================== -->
 
-<div class="chat-support">
+<div
+id="networkStatus"
+class="network-status">
+
+<i class="fa-solid fa-wifi"></i>
+
+<span>
+
+Online
+
+</span>
+
+</div>
+
+<!-- ==========================================
+COOKIE CONSENT
+========================================== -->
+
+<div
+id="cookieBanner"
+class="cookie-banner">
+
+<p>
+
+This website uses cookies to improve your experience.
+
+</p>
+
+<div class="cookie-buttons">
+
+<button
+id="acceptCookies"
+class="btn-success">
+
+Accept
+
+</button>
+
+<button
+id="rejectCookies"
+class="btn-secondary">
+
+Reject
+
+</button>
+
+</div>
+
+</div>
+
+   <!-- ==========================================
+SETTINGS PANEL
+========================================== -->
+
+<section id="settingsSection" class="section">
+
+<div class="container">
+
+<h2>Account Settings</h2>
+
+<div class="settings-grid">
+
+<div class="setting-item">
+
+<label>
+
+Enable Notifications
+
+</label>
+
+<input
+type="checkbox"
+id="enableNotifications"
+checked>
+
+</div>
+
+<div class="setting-item">
+
+<label>
+
+Enable Dark Mode
+
+</label>
+
+<input
+type="checkbox"
+id="enableDarkMode">
+
+</div>
+
+<div class="setting-item">
+
+<label>
+
+Auto Logout (Minutes)
+
+</label>
+
+<input
+type="number"
+id="autoLogoutTime"
+value="15"
+min="5">
+
+</div>
+
+<div class="setting-item">
+
+<label>
+
+Preferred Language
+
+</label>
+
+<select id="preferredLanguage">
+
+<option value="en">English</option>
+
+<option value="hi">Hindi</option>
+
+<option value="as">Assamese</option>
+
+<option value="bn">Bengali</option>
+
+</select>
+
+</div>
+
+<button
+id="saveSettings"
+class="btn-primary">
+
+Save Settings
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+EDIT PROFILE MODAL
+========================================== -->
+
+<div
+id="profileModal"
+class="modal">
+
+<div class="modal-content">
+
+<span
+id="closeProfileModal"
+class="close">
+
+&times;
+
+</span>
+
+<h2>Edit Profile</h2>
+
+<img
+id="profilePreviewImage"
+src="assets/images/default-user.png"
+alt="Profile Preview"
+class="profile-preview">
+
+<input
+type="file"
+id="changeProfileImage"
+accept="image/*">
+
+<input
+type="text"
+id="editFullName"
+placeholder="Full Name">
+
+<input
+type="email"
+id="editEmail"
+placeholder="Email">
+
+<input
+type="tel"
+id="editPhone"
+placeholder="Phone Number">
+
+<button
+id="saveProfile"
+class="btn-success">
+
+Save Profile
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CHANGE PASSWORD MODAL
+========================================== -->
+
+<div
+id="passwordModal"
+class="modal">
+
+<div class="modal-content">
+
+<span
+id="closePasswordModal"
+class="close">
+
+&times;
+
+</span>
+
+<h2>Change Password</h2>
+
+<input
+type="password"
+id="currentPassword"
+placeholder="Current Password">
+
+<input
+type="password"
+id="newPassword"
+placeholder="New Password">
+
+<input
+type="password"
+id="confirmNewPassword"
+placeholder="Confirm New Password">
+
+<button
+id="updatePassword"
+class="btn-primary">
+
+Update Password
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+PWA INSTALL PROMPT
+========================================== -->
+
+<div
+id="installAppBanner"
+class="install-banner">
+
+<div class="install-content">
+
+<i class="fa-solid fa-mobile-screen-button"></i>
+
+<div>
+
+<h3>
+
+Install Assam Finance Hub
+
+</h3>
+
+<p>
+
+Install the app for a faster experience.
+
+</p>
+
+</div>
+
+<button
+id="installPWA"
+class="btn-primary">
+
+Install
+
+</button>
+
+<button
+id="closeInstallBanner"
+class="btn-secondary">
+
+Later
+
+</button>
+
+</div>
+
+</div>
+
+   <!-- ==========================================
+REWARDS & REFERRAL SECTION
+========================================== -->
+
+<section id="rewardsSection" class="section">
+
+<div class="container">
+
+<h2>Rewards & Referral Program</h2>
+
+<p>
+
+Earn exciting rewards by using Assam Finance Hub and inviting your friends.
+
+</p>
+
+<div class="rewards-grid">
+
+<!-- Loyalty Points -->
+<div class="reward-card">
+
+<i class="fa-solid fa-gem"></i>
+
+<h3>Loyalty Points</h3>
+
+<h2 id="loyaltyPoints">
+
+0 Points
+
+</h2>
+
+<p>
+
+Collect points on every successful transaction.
+
+</p>
+
+</div>
+
+<!-- Referral -->
+<div class="reward-card">
+
+<i class="fa-solid fa-user-group"></i>
+
+<h3>Refer & Earn</h3>
+
+<input
+type="text"
+id="referralCode"
+value="AFH123456"
+readonly>
+
+<button
+id="copyReferralCode"
+class="btn-primary">
+
+Copy Referral Code
+
+</button>
+
+</div>
+
+<!-- Coupon -->
+<div class="reward-card">
+
+<i class="fa-solid fa-ticket"></i>
+
+<h3>Promo Code</h3>
+
+<input
+type="text"
+id="promoCode"
+placeholder="Enter Promo Code">
+
+<button
+id="applyPromoCode"
+class="btn-success">
+
+Apply
+
+</button>
+
+<p
+id="promoStatus">
+
+No promo applied.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ACHIEVEMENTS
+========================================== -->
+
+<div class="achievement-section">
+
+<h3>Your Achievements</h3>
+
+<div class="achievement-grid">
+
+<div class="achievement-card">
+
+<i class="fa-solid fa-medal"></i>
+
+<h4>First Loan</h4>
+
+<p>Apply your first loan.</p>
+
+</div>
+
+<div class="achievement-card">
+
+<i class="fa-solid fa-star"></i>
+
+<h4>5 Transactions</h4>
+
+<p>Complete five successful transactions.</p>
+
+</div>
+
+<div class="achievement-card">
+
+<i class="fa-solid fa-crown"></i>
+
+<h4>Premium User</h4>
+
+<p>Unlock premium membership.</p>
+
+</div>
+
+<div class="achievement-card">
+
+<i class="fa-solid fa-trophy"></i>
+
+<h4>Top Referrer</h4>
+
+<p>Invite 10 successful users.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+REWARD HISTORY
+========================================== -->
+
+<div class="reward-history">
+
+<h3>Reward History</h3>
+
+<table id="rewardHistoryTable">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Reward</th>
+
+<th>Points</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="rewardHistoryBody">
+
+<tr>
+
+<td colspan="4">
+
+No reward history available.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+AI FINANCIAL ADVISOR
+========================================== -->
+
+<section id="financialAdvisorSection" class="section">
+
+<div class="container">
+
+<h2>AI Financial Advisor</h2>
+
+<p>
+
+Get personalized financial guidance based on your profile.
+
+</p>
+
+<div class="advisor-grid">
+
+<!-- AI Advice -->
+<div class="advisor-card">
+
+<h3>
+
+AI Recommendation
+
+</h3>
+
+<div
+id="aiAdviceResult">
+
+<p>
+
+Welcome! Click the button below to receive financial suggestions.
+
+</p>
+
+</div>
+
+<button
+id="generateAdvice"
+class="btn-primary">
+
+Generate Advice
+
+</button>
+
+</div>
+
+<!-- Credit Score -->
+<div class="advisor-card">
+
+<h3>
+
+Credit Score Analyzer
+
+</h3>
+
+<div class="credit-score-circle">
+
+<span
+id="creditScoreValue">
+
+750
+
+</span>
+
+</div>
+
+<p
+id="creditRemark">
+
+Good Credit Score
+
+</p>
+
+<button
+id="analyzeCreditScore"
+class="btn-success">
+
+Analyze
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LOAN COMPARISON
+========================================== -->
+
+<div class="comparison-section">
+
+<h3>Loan Comparison</h3>
+
+<table id="loanComparisonTable">
+
+<thead>
+
+<tr>
+
+<th>Loan Type</th>
+
+<th>Interest</th>
+
+<th>Tenure</th>
+
+<th>Processing Fee</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Personal Loan</td>
+
+<td>10.5%</td>
+
+<td>5 Years</td>
+
+<td>1%</td>
+
+<td>
+
+<button class="btn-primary">
+
+Compare
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Home Loan</td>
+
+<td>8.2%</td>
+
+<td>30 Years</td>
+
+<td>0.5%</td>
+
+<td>
+
+<button class="btn-primary">
+
+Compare
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Education Loan</td>
+
+<td>7.8%</td>
+
+<td>15 Years</td>
+
+<td>Nil</td>
+
+<td>
+
+<button class="btn-primary">
+
+Compare
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ==========================================
+INVESTMENT SUGGESTIONS
+========================================== -->
+
+<div class="investment-section">
+
+<h3>Suggested Investments</h3>
+
+<div class="investment-grid">
+
+<div class="investment-card">
+
+<h4>Fixed Deposit</h4>
+
+<p>Safe investment with fixed returns.</p>
+
+</div>
+
+<div class="investment-card">
+
+<h4>Mutual Funds</h4>
+
+<p>Long-term wealth creation option.</p>
+
+</div>
+
+<div class="investment-card">
+
+<h4>Gold Investment</h4>
+
+<p>Protect against inflation.</p>
+
+</div>
+
+<div class="investment-card">
+
+<h4>SIP</h4>
+
+<p>Start investing monthly with small amounts.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+FINANCIAL HEALTH REPORT
+========================================== -->
+
+<div class="health-report">
+
+<h3>Financial Health Report</h3>
+
+<ul>
+
+<li>
+
+Monthly Income:
+<strong id="reportIncome">
+
+₹0
+
+</strong>
+
+</li>
+
+<li>
+
+Monthly Expenses:
+<strong id="reportExpense">
+
+₹0
+
+</strong>
+
+</li>
+
+<li>
+
+Savings Rate:
+<strong id="reportSavingRate">
+
+0%
+
+</strong>
+
+</li>
+
+<li>
+
+Debt Ratio:
+<strong id="reportDebtRatio">
+
+0%
+
+</strong>
+
+</li>
+
+<li>
+
+Overall Health:
+<strong id="financialHealth">
+
+Excellent
+
+</strong>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+EMI PAYMENT CENTER
+========================================== -->
+
+<section id="emiPaymentSection" class="section">
+
+<div class="container">
+
+<h2>EMI Payment Center</h2>
+
+<p>
+
+Track your EMI payments and upcoming due dates.
+
+</p>
+
+<!-- ==========================================
+UPCOMING EMI
+========================================== -->
+
+<div class="emi-summary-grid">
+
+<div class="emi-card">
+
+<h3>Next EMI</h3>
+
+<h2 id="nextEmiAmount">
+
+₹0
+
+</h2>
+
+<p>
+
+Due Date:
+
+<strong id="nextEmiDueDate">
+
+--
+
+</strong>
+
+</p>
+
+<button
+id="payEmiNow"
+class="btn-primary">
+
+Pay EMI
+
+</button>
+
+</div>
+
+<div class="emi-card">
+
+<h3>Total Paid</h3>
+
+<h2 id="totalPaidAmount">
+
+₹0
+
+</h2>
+
+</div>
+
+<div class="emi-card">
+
+<h3>Remaining Balance</h3>
+
+<h2 id="remainingLoanBalance">
+
+₹0
+
+</h2>
+
+</div>
+
+<div class="emi-card">
+
+<h3>EMIs Remaining</h3>
+
+<h2 id="remainingEmis">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+PAYMENT HISTORY
+========================================== -->
+
+<div class="payment-history">
+
+<h3>EMI Payment History</h3>
+
+<table id="emiHistoryTable">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Amount</th>
+
+<th>Transaction ID</th>
+
+<th>Status</th>
+
+<th>Receipt</th>
+
+</tr>
+
+</thead>
+
+<tbody id="emiHistoryBody">
+
+<tr>
+
+<td colspan="5">
+
+No EMI records available.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ==========================================
+PAYMENT CALENDAR
+========================================== -->
+
+<div class="calendar-section">
+
+<h3>Payment Calendar</h3>
+
+<input
+type="month"
+id="emiCalendar">
+
+<div
+id="calendarPreview">
+
+Calendar will appear here.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+UPCOMING ALERTS
+========================================== -->
+
+<div class="alert-section">
+
+<h3>Upcoming Alerts</h3>
+
+<ul id="emiAlertList">
+
+<li>
+
+No upcoming alerts.
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- ==========================================
+LOAN PROGRESS
+========================================== -->
+
+<div class="progress-section">
+
+<h3>Loan Repayment Progress</h3>
+
+<progress
+id="loanRepaymentProgress"
+value="0"
+max="100">
+
+</progress>
+
+<p
+id="loanProgressText">
+
+0% Loan Repaid
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+SECURITY CENTER
+========================================== -->
+
+<section id="securityCenterSection" class="section">
+
+<div class="container">
+
+<h2>Security Center</h2>
+
+<p>
+
+Manage your account security and monitor login activity.
+
+</p>
+
+<!-- ==========================================
+SECURITY SETTINGS
+========================================== -->
+
+<div class="security-grid">
+
+<div class="security-card">
+
+<h3>
+
+Two-Factor Authentication (2FA)
+
+</h3>
+
+<p>
+
+Add an extra layer of security to your account.
+
+</p>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="enable2FA">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<div class="security-card">
+
+<h3>
+
+Biometric Login
+
+</h3>
+
+<p>
+
+Enable fingerprint or face authentication.
+
+</p>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="enableBiometric">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<div class="security-card">
+
+<h3>
+
+Session Timeout
+
+</h3>
+
+<select id="sessionTimeout">
+
+<option value="10">
+
+10 Minutes
+
+</option>
+
+<option value="15" selected>
+
+15 Minutes
+
+</option>
+
+<option value="30">
+
+30 Minutes
+
+</option>
+
+<option value="60">
+
+1 Hour
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+DEVICE MANAGEMENT
+========================================== -->
+
+<div class="device-section">
+
+<h3>Trusted Devices</h3>
+
+<table id="deviceTable">
+
+<thead>
+
+<tr>
+
+<th>Device</th>
+
+<th>Location</th>
+
+<th>Last Active</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="deviceTableBody">
+
+<tr>
+
+<td colspan="4">
+
+No devices found.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ==========================================
+LOGIN HISTORY
+========================================== -->
+
+<div class="login-history">
+
+<h3>Recent Login Activity</h3>
+
+<table id="loginHistoryTable">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>IP Address</th>
+
+<th>Device</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="loginHistoryBody">
+
+<tr>
+
+<td colspan="4">
+
+No login history available.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ==========================================
+SECURITY ALERTS
+========================================== -->
+
+<div class="security-alerts">
+
+<h3>Security Alerts</h3>
+
+<ul id="securityAlertList">
+
+<li>
+
+No security alerts.
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- ==========================================
+ACCOUNT ACTIONS
+========================================== -->
+
+<div class="account-actions">
+
+<button
+id="logoutAllDevices"
+class="btn-danger">
+
+Logout From All Devices
+
+</button>
+
+<button
+id="downloadSecurityReport"
+class="btn-primary">
+
+Download Security Report
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+HELP & SUPPORT CENTER
+========================================== -->
+
+<section id="helpCenterSection" class="section">
+
+<div class="container">
+
+<h2>Help & Support Center</h2>
+
+<p>
+
+Need assistance? Our support team is here to help you.
+
+</p>
+
+<div class="help-grid">
+
+<!-- Admin Contact -->
+<div class="help-card">
+
+<i class="fa-solid fa-user-tie"></i>
+
+<h3>Admin Support</h3>
+
+<p>
+
+For account verification and administrative assistance.
+
+</p>
+
+<button
+id="contactAdminBtn"
+class="btn-primary">
+
+Contact Admin
+
+</button>
+
+</div>
+
+<!-- Live Help -->
+<div class="help-card">
+
+<i class="fa-solid fa-headset"></i>
+
+<h3>24×7 Help Desk</h3>
+
+<p>
+
+Our customer support team is available around the clock.
+
+</p>
+
+<button
+id="openHelpDesk"
+class="btn-success">
+
+Chat Now
+
+</button>
+
+</div>
+
+<!-- User Guide -->
+<div class="help-card">
+
+<i class="fa-solid fa-book-open"></i>
+
+<h3>User Guide</h3>
+
+<p>
+
+Learn how to use Assam Finance Hub step by step.
+
+</p>
+
+<button
+id="openUserGuide"
+class="btn-primary">
+
+Open Guide
+
+</button>
+
+</div>
+
+<!-- FAQ -->
+<div class="help-card">
+
+<i class="fa-solid fa-circle-question"></i>
+
+<h3>FAQs</h3>
+
+<p>
+
+Find answers to the most common questions.
+
+</p>
+
+<button
+id="viewFAQ"
+class="btn-secondary">
+
+View FAQs
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LEGAL DOCUMENTS
+========================================== -->
+
+<div class="legal-section">
+
+<h3>Legal Information</h3>
+
+<div class="legal-buttons">
 
 <a
+href="terms.html"
+class="btn-primary">
 
-href="https://wa.me/919876543210"
-
-target="_blank">
-
-<i class="fab fa-whatsapp"></i>
-
-Need Help?
+Terms & Conditions
 
 </a>
 
-</div>
+<a
+href="privacy.html"
+class="btn-primary">
 
-<!-- ==========================================
-BACK TO TOP BAR
-========================================== -->
+Privacy Policy
 
-<div id="progressBar"></div>
+</a>
 
-<!-- ==========================================
-AOS
-========================================== -->
+<a
+href="refund.html"
+class="btn-primary">
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+Refund Policy
 
-<script>
+</a>
 
-AOS.init({
+<a
+href="disclaimer.html"
+class="btn-primary">
 
-duration:1000,
+Disclaimer
 
-once:true
-
-});
-
-</script>
-
-<!-- ==========================================
-FIREBASE
-========================================== -->
-
-<script type="module"
-src="firebase.js">
-
-</script>
-
-<!-- ==========================================
-MAIN SCRIPT
-========================================== -->
-
-<script type="module"
-src="script.js">
-
-</script>
-
-   <!-- ==========================================
-TOP OFFER BAR
-========================================== -->
-
-<div class="offer-bar">
-
-<div class="offer-text">
-
-🔥 Limited Time Offer • Bike Loan Interest Starting From 7.99%* • Instant Approval • No Hidden Charges
+</a>
 
 </div>
 
@@ -2166,488 +4113,31 @@ TOP OFFER BAR
 EMERGENCY CONTACT
 ========================================== -->
 
-<div class="emergency-contact">
+<div class="emergency-section">
 
-<div class="container">
-
-<div class="emergency-grid">
-
-<div>
-
-<i class="fa-solid fa-phone-volume"></i>
-
-<strong>Customer Care</strong>
-
-<p>+91 9876543210</p>
-
-</div>
-
-<div>
-
-<i class="fa-solid fa-envelope-circle-check"></i>
-
-<strong>Email Support</strong>
-
-<p>support@assamfinancehub.in</p>
-
-</div>
-
-<div>
-
-<i class="fa-solid fa-headset"></i>
-
-<strong>Working Hours</strong>
-
-<p>9:00 AM - 7:00 PM</p>
-
-</div>
-
-<div>
-
-<i class="fa-solid fa-location-dot"></i>
-
-<strong>Office</strong>
-
-<p>Guwahati, Assam</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ==========================================
-LOAN BENEFITS
-========================================== -->
-
-<section class="loan-benefits">
-
-<div class="container">
-
-<h2 class="section-title">
-
-Benefits of Choosing Us
-
-</h2>
-
-<div class="benefit-grid">
-
-<div class="benefit-card">
-
-<i class="fa-solid fa-shield-halved"></i>
-
-<h3>100% Secure</h3>
+<h3>Emergency Support</h3>
 
 <p>
 
-Your data remains fully encrypted and protected.
+If you suspect unauthorized account activity, contact us immediately.
 
 </p>
 
-</div>
+<div class="emergency-buttons">
 
-<div class="benefit-card">
+<a
+href="tel:+9118001234567"
+class="btn-danger">
 
-<i class="fa-solid fa-stopwatch"></i>
+Call Emergency Support
 
-<h3>Fast Verification</h3>
+</a>
 
-<p>
+<a
+href="mailto:support@assamfinancehub.com"
+class="btn-primary">
 
-Application verification completed quickly.
-
-</p>
-
-</div>
-
-<div class="benefit-card">
-
-<i class="fa-solid fa-wallet"></i>
-
-<h3>Flexible EMI</h3>
-
-<p>
-
-Affordable repayment plans for everyone.
-
-</p>
-
-</div>
-
-<div class="benefit-card">
-
-<i class="fa-solid fa-building-columns"></i>
-
-<h3>Trusted Lenders</h3>
-
-<p>
-
-Partnered with India's leading finance companies.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-LATEST UPDATES
-========================================== -->
-
-<section class="latest-news">
-
-<div class="container">
-
-<h2 class="section-title">
-
-Latest Updates
-
-</h2>
-
-<div class="news-grid">
-
-<div class="news-card">
-
-<h3>
-
-New Bike Loan Scheme
-
-</h3>
-
-<p>
-
-Special EMI offers for salaried customers.
-
-</p>
-
-</div>
-
-<div class="news-card">
-
-<h3>
-
-Zero Processing Fee
-
-</h3>
-
-<p>
-
-Available for selected finance partners.
-
-</p>
-
-</div>
-
-<div class="news-card">
-
-<h3>
-
-Online Approval
-
-</h3>
-
-<p>
-
-Apply from home without visiting office.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-   <!-- ==========================================
-AWARDS SECTION
-========================================== -->
-
-<section class="awards-section">
-
-<div class="container">
-
-<h2 class="section-title">
-
-Our Achievements
-
-</h2>
-
-<div class="awards-grid">
-
-<div class="award-card">
-
-<i class="fa-solid fa-trophy"></i>
-
-<h3>Best Finance Service</h3>
-
-<p>Recognized for excellent customer satisfaction.</p>
-
-</div>
-
-<div class="award-card">
-
-<i class="fa-solid fa-medal"></i>
-
-<h3>Trusted Company</h3>
-
-<p>Thousands of happy customers across Assam.</p>
-
-</div>
-
-<div class="award-card">
-
-<i class="fa-solid fa-handshake"></i>
-
-<h3>Verified Partners</h3>
-
-<p>Partnered with India's leading finance companies.</p>
-
-</div>
-
-<div class="award-card">
-
-<i class="fa-solid fa-certificate"></i>
-
-<h3>Secure Platform</h3>
-
-<p>Advanced security and encrypted customer data.</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-TRUSTED BRANDS
-========================================== -->
-
-<section class="trusted-brands">
-
-<div class="container">
-
-<h2 class="section-title">
-
-Our Finance Partners
-
-</h2>
-
-<div class="brand-slider">
-
-<img src="assets/brand1.png" alt="">
-
-<img src="assets/brand2.png" alt="">
-
-<img src="assets/brand3.png" alt="">
-
-<img src="assets/brand4.png" alt="">
-
-<img src="assets/brand5.png" alt="">
-
-<img src="assets/brand6.png" alt="">
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-ANNOUNCEMENT BAR
-========================================== -->
-
-<section class="announcement">
-
-<div class="container">
-
-<marquee behavior="scroll" direction="left">
-
-🚀 Instant Bike Loan • Minimum Documentation • Low Interest Rate • Fast Approval • Apply Online Today
-
-</marquee>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-SECURITY SECTION
-========================================== -->
-
-<section class="security-section">
-
-<div class="container">
-
-<div class="security-grid">
-
-<div>
-
-<i class="fa-solid fa-lock"></i>
-
-<h3>SSL Protected</h3>
-
-<p>Your information is protected with modern encryption.</p>
-
-</div>
-
-<div>
-
-<i class="fa-solid fa-user-shield"></i>
-
-<h3>Privacy First</h3>
-
-<p>We never share your information without permission.</p>
-
-</div>
-
-<div>
-
-<i class="fa-solid fa-database"></i>
-
-<h3>Secure Database</h3>
-
-<p>All applications are safely stored in Firebase Cloud.</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-PROMOTIONAL POPUP
-========================================== -->
-
-<div id="offerPopup" class="offer-popup">
-
-<div class="offer-popup-content">
-
-<span id="closeOfferPopup">&times;</span>
-
-<h2>🎉 Special Offer</h2>
-
-<p>
-
-Apply today and get processing fee discounts on selected finance partners.
-
-</p>
-
-<button id="offerApplyBtn">
-
-Apply Now
-
-</button>
-
-</div>
-
-</div>
-
-   <!-- ==========================================
-OUR TEAM
-========================================== -->
-
-<section class="team-section">
-
-<div class="container">
-
-<h2 class="section-title">
-
-Meet Our Team
-
-</h2>
-
-<div class="team-grid">
-
-<div class="team-card">
-
-<img src="assets/team1.jpg" alt="">
-
-<h3>Rahul Das</h3>
-
-<p>Loan Manager</p>
-
-</div>
-
-<div class="team-card">
-
-<img src="assets/team2.jpg" alt="">
-
-<h3>Amit Sharma</h3>
-
-<p>Finance Advisor</p>
-
-</div>
-
-<div class="team-card">
-
-<img src="assets/team3.jpg" alt="">
-
-<h3>Priya Roy</h3>
-
-<p>Customer Support</p>
-
-</div>
-
-<div class="team-card">
-
-<img src="assets/team4.jpg" alt="">
-
-<h3>Arjun Kalita</h3>
-
-<p>Verification Officer</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-DOWNLOAD BROCHURE
-========================================== -->
-
-<section class="brochure-section">
-
-<div class="container">
-
-<div class="brochure-box">
-
-<h2>
-
-Download Loan Brochure
-
-</h2>
-
-<p>
-
-Read complete information regarding bike loans,
-eligibility, EMI and documentation.
-
-</p>
-
-<a href="assets/Brochure.pdf"
-
-download
-
-class="download-btn">
-
-<i class="fa-solid fa-download"></i>
-
-Download PDF
+Email Support
 
 </a>
 
@@ -2655,486 +4145,2246 @@ Download PDF
 
 </div>
 
+</div>
+
 </section>
 
-<!-- ==========================================
-PWA INSTALL
+   <!-- ==========================================
+GLOBAL MODALS
 ========================================== -->
 
-<div id="installApp"
+<!-- Loading Modal -->
+<div id="globalLoadingModal" class="modal">
 
-class="install-app">
+<div class="modal-content loading-content">
 
-<div>
+<div class="spinner"></div>
 
 <h3>
 
-Install Assam Finance Hub App
+Loading...
 
 </h3>
 
 <p>
 
-Get faster access directly from your Home Screen.
+Please wait while we process your request.
 
 </p>
 
 </div>
 
-<button id="installBtn">
+</div>
 
-Install
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+
+<div class="modal-content">
+
+<i class="fa-solid fa-circle-check success-icon"></i>
+
+<h2>
+
+Success
+
+</h2>
+
+<p id="successMessage">
+
+Operation completed successfully.
+
+</p>
+
+<button
+id="closeSuccessModal"
+class="btn-success">
+
+OK
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Error Modal -->
+<div id="errorModal" class="modal">
+
+<div class="modal-content">
+
+<i class="fa-solid fa-circle-xmark error-icon"></i>
+
+<h2>
+
+Something Went Wrong
+
+</h2>
+
+<p id="errorMessage">
+
+Please try again later.
+
+</p>
+
+<button
+id="closeErrorModal"
+class="btn-danger">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+JAVASCRIPT FILES
+========================================== -->
+
+<!-- Firebase -->
+<script type="module"
+src="assets/js/firebase.js"></script>
+
+<!-- Main App -->
+<script
+type="module"
+src="assets/js/app.js"></script>
+
+<!-- ==========================================
+SERVICE WORKER
+========================================== -->
+
+<script>
+
+if("serviceWorker" in navigator){
+
+window.addEventListener("load",()=>{
+
+navigator.serviceWorker.register(
+
+"/service-worker.js"
+
+)
+
+.then((registration)=>{
+
+console.log(
+
+"Service Worker Registered",
+
+registration
+
+);
+
+})
+
+.catch((error)=>{
+
+console.error(
+
+"Service Worker Error",
+
+error
+
+);
+
+});
+
+});
+
+}
+
+</script>
+
+<!-- ==========================================
+CHART.JS INITIALIZATION
+========================================== -->
+
+<script>
+
+window.addEventListener("DOMContentLoaded",()=>{
+
+console.log(
+
+"Charts Ready"
+
+);
+
+// Chart initialization
+// will be handled
+// inside app.js
+
+});
+
+</script>
+
+   <!-- ==========================================
+FLOATING ACTION BUTTONS
+========================================== -->
+
+<!-- AI Assistant -->
+<div
+id="floatingAI"
+class="floating-widget">
+
+<button
+id="openAIChat"
+class="fab-btn ai-btn"
+title="AI Assistant">
+
+<i class="fa-solid fa-robot"></i>
+
+</button>
+
+</div>
+
+<!-- Notifications -->
+<div
+id="floatingNotification"
+class="floating-widget">
+
+<button
+id="notificationBell"
+class="fab-btn notification-btn"
+title="Notifications">
+
+<i class="fa-solid fa-bell"></i>
+
+<span
+id="notificationCount"
+class="notification-count">
+
+0
+
+</span>
+
+</button>
+
+</div>
+
+<!-- Emergency Call -->
+<div
+id="floatingCall"
+class="floating-widget">
+
+<a
+href="tel:+9118001234567"
+class="fab-btn call-btn"
+title="Call Support">
+
+<i class="fa-solid fa-phone"></i>
+
+</a>
+
+</div>
+
+<!-- WhatsApp -->
+<div
+id="floatingWhatsapp"
+class="floating-widget">
+
+<a
+href="https://wa.me/9118001234567"
+target="_blank"
+rel="noopener noreferrer"
+class="fab-btn whatsapp-btn"
+title="WhatsApp Support">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+</div>
+
+<!-- Floating Theme -->
+<div
+id="floatingTheme"
+class="floating-widget">
+
+<button
+id="floatingThemeToggle"
+class="fab-btn theme-btn"
+title="Theme">
+
+<i
+id="floatingThemeIcon"
+class="fa-solid fa-circle-half-stroke">
+
+</i>
 
 </button>
 
 </div>
 
 <!-- ==========================================
-NOTIFICATION BAR
+QUICK MENU
 ========================================== -->
 
-<div id="notificationBar"
+<div
+id="quickMenu"
+class="quick-menu">
 
-class="notification-bar">
+<button
+id="quickMenuToggle"
+class="fab-btn menu-btn">
 
-<i class="fa-solid fa-bell"></i>
+<i class="fa-solid fa-bars"></i>
 
-<span>
+</button>
 
-Welcome to Assam Finance Hub
+<div
+id="quickMenuItems"
+class="quick-menu-items">
 
-</span>
+<a
+href="#dashboardSection">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Dashboard
+
+</a>
+
+<a
+href="#loan-form">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+Loan
+
+</a>
+
+<a
+href="#emi-section">
+
+<i class="fa-solid fa-calculator"></i>
+
+EMI
+
+</a>
+
+<a
+href="#contactSection">
+
+<i class="fa-solid fa-headset"></i>
+
+Support
+
+</a>
 
 </div>
 
-<!-- ==========================================
-LIVE VISITOR
-========================================== -->
-
-<div class="visitor-counter">
-
-<i class="fa-solid fa-eye"></i>
-
-<span id="visitorCount">
-
-1,254
-
-</span>
-
-Visitors Online
-
 </div>
-
-<!-- ==========================================
-END PAGE SPACER
-========================================== -->
-
-<div style="height:30px"></div>
 
    <!-- ==========================================
-BANKING SECURITY
+LOAN AGREEMENT SECTION
 ========================================== -->
 
-<section class="bank-security">
+<section id="loanAgreementSection" class="section">
 
 <div class="container">
 
-<h2 class="section-title">
-
-Bank Grade Security
-
-</h2>
-
-<div class="security-wrapper">
-
-<div class="security-item">
-
-<i class="fa-solid fa-fingerprint"></i>
-
-<h3>Identity Protection</h3>
+<h2>Loan Agreement</h2>
 
 <p>
 
-Your identity and personal information remain fully protected.
+Please review the agreement carefully before accepting the terms.
+
+</p>
+
+<!-- ==========================================
+AGREEMENT PREVIEW
+========================================== -->
+
+<div class="agreement-card">
+
+<div
+id="agreementPreview"
+class="agreement-preview">
+
+<h3>
+
+Loan Agreement
+
+</h3>
+
+<p>
+
+This Loan Agreement is entered into between
+<strong>Assam Finance Hub</strong>
+and the Applicant.
+
+</p>
+
+<p>
+
+The borrower agrees to repay the sanctioned loan
+amount with applicable interest according to the
+approved repayment schedule.
+
+</p>
+
+<p>
+
+Failure to pay EMIs on time may result in
+additional charges as per company policy.
+
+</p>
+
+<p>
+
+By signing below, you acknowledge that you have
+read and accepted all loan terms and conditions.
 
 </p>
 
 </div>
 
-<div class="security-item">
+</div>
 
-<i class="fa-solid fa-lock"></i>
+<!-- ==========================================
+DIGITAL SIGNATURE
+========================================== -->
 
-<h3>256-bit Encryption</h3>
+<div class="signature-section">
 
-<p>
+<h3>Digital Signature</h3>
 
-Industry standard encryption for every transaction.
+<canvas
+id="signaturePad"
+width="700"
+height="220">
+
+</canvas>
+
+<div class="signature-buttons">
+
+<button
+id="clearSignature"
+class="btn-secondary">
+
+Clear Signature
+
+</button>
+
+<button
+id="saveSignature"
+class="btn-primary">
+
+Save Signature
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+AGREEMENT ACTIONS
+========================================== -->
+
+<div class="agreement-actions">
+
+<label>
+
+<input
+type="checkbox"
+id="acceptTerms">
+
+I have read and agree to the Loan Agreement.
+
+</label>
+
+<div class="agreement-buttons">
+
+<button
+id="downloadAgreement"
+class="btn-primary">
+
+Download PDF
+
+</button>
+
+<button
+id="printAgreement"
+class="btn-secondary">
+
+Print Agreement
+
+</button>
+
+<button
+id="submitAgreement"
+class="btn-success">
+
+Accept & Submit
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+ANNOUNCEMENTS & INFORMATION
+========================================== -->
+
+<section id="announcementSection" class="section">
+
+<div class="container">
+
+<!-- Admin Announcement -->
+<div class="announcement-banner">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+<div>
+
+<h3>Admin Announcement</h3>
+
+<p id="adminAnnouncement">
+
+Welcome to Assam Finance Hub. Stay updated with our latest services and offers.
 
 </p>
 
 </div>
 
-<div class="security-item">
+</div>
+
+<!-- ==========================================
+USER NOTICE BOARD
+========================================== -->
+
+<div class="notice-board">
+
+<h2>Notice Board</h2>
+
+<ul id="noticeList">
+
+<li>
+
+📢 EMI payment reminders will be sent 3 days before the due date.
+
+</li>
+
+<li>
+
+🎉 Complete your KYC to unlock all financial services.
+
+</li>
+
+<li>
+
+💳 Online payments are available 24×7.
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- ==========================================
+PROMOTIONAL SLIDER
+========================================== -->
+
+<div class="offer-slider">
+
+<h2>Latest Campaigns & Offers</h2>
+
+<div id="offerSliderContainer">
+
+<div class="offer-slide active">
+
+<h3>🎁 Cashback Offer</h3>
+
+<p>
+
+Pay your EMI online and earn cashback rewards.
+
+</p>
+
+</div>
+
+<div class="offer-slide">
+
+<h3>🏡 Home Loan Festival</h3>
+
+<p>
+
+Special interest rates available for a limited time.
+
+</p>
+
+</div>
+
+<div class="offer-slide">
+
+<h3>🎓 Education Loan</h3>
+
+<p>
+
+Quick approval with minimal documentation.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="slider-controls">
+
+<button id="previousOffer">
+
+<i class="fa-solid fa-chevron-left"></i>
+
+</button>
+
+<button id="nextOffer">
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+EVENTS
+========================================== -->
+
+<div class="event-section">
+
+<h2>Upcoming Events</h2>
+
+<div class="event-grid">
+
+<div class="event-card">
+
+<h4>
+
+Financial Literacy Webinar
+
+</h4>
+
+<p>
+
+Date:
+<strong>
+
+15 August 2026
+
+</strong>
+
+</p>
+
+</div>
+
+<div class="event-card">
+
+<h4>
+
+Customer Awareness Camp
+
+</h4>
+
+<p>
+
+Date:
+<strong>
+
+25 August 2026
+
+</strong>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LIVE FINANCE TICKER
+========================================== -->
+
+<div class="finance-ticker">
+
+<div class="ticker-label">
+
+LIVE
+
+</div>
+
+<marquee
+behavior="scroll"
+direction="left">
+
+📈 Gold ↑ 1.5% |
+💵 USD/INR 86.20 |
+🏦 Repo Rate 6.50% |
+📊 Market updates and financial news will appear here.
+
+</marquee>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+LEARNING & RESOURCES CENTER
+========================================== -->
+
+<section id="resourcesSection" class="section">
+
+<div class="container">
+
+<h2>Learning & Resources</h2>
+
+<p>
+
+Explore tutorials, download important documents, and use financial tools.
+
+</p>
+
+<!-- ==========================================
+VIDEO TUTORIALS
+========================================== -->
+
+<div class="resource-block">
+
+<h3>Video Tutorials</h3>
+
+<div class="video-grid">
+
+<div class="video-card">
+
+<iframe
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+title="Loan Tutorial"
+allowfullscreen>
+
+</iframe>
+
+<p>How to Apply for a Loan</p>
+
+</div>
+
+<div class="video-card">
+
+<iframe
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+title="EMI Tutorial"
+allowfullscreen>
+
+</iframe>
+
+<p>Understanding EMI Calculation</p>
+
+</div>
+
+<div class="video-card">
+
+<iframe
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+title="Digital Banking"
+allowfullscreen>
+
+</iframe>
+
+<p>Digital Banking Guide</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+DOWNLOAD CENTER
+========================================== -->
+
+<div class="resource-block">
+
+<h3>Download Center</h3>
+
+<div class="download-grid">
+
+<a href="#" class="download-card">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+Loan Application Form
+
+</a>
+
+<a href="#" class="download-card">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+KYC Document Checklist
+
+</a>
+
+<a href="#" class="download-card">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+EMI Schedule Sample
+
+</a>
+
+<a href="#" class="download-card">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+User Manual
+
+</a>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+FINANCIAL TOOLS
+========================================== -->
+
+<div class="resource-block">
+
+<h3>Financial Calculators</h3>
+
+<div class="tool-grid">
+
+<a href="#emi-section" class="tool-card">
+
+<i class="fa-solid fa-calculator"></i>
+
+EMI Calculator
+
+</a>
+
+<a href="#eligibility-section" class="tool-card">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Loan Eligibility
+
+</a>
+
+<a href="#financialAdvisorSection" class="tool-card">
+
+<i class="fa-solid fa-coins"></i>
+
+Investment Planner
+
+</a>
+
+<a href="#analyticsSection" class="tool-card">
+
+<i class="fa-solid fa-wallet"></i>
+
+Budget Planner
+
+</a>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+USEFUL LINKS
+========================================== -->
+
+<div class="resource-block">
+
+<h3>Useful Resources</h3>
+
+<ul class="resource-links">
+
+<li><a href="#">Financial Education</a></li>
+
+<li><a href="#">Government Schemes</a></li>
+
+<li><a href="#">Loan Guidelines</a></li>
+
+<li><a href="#">Security Tips</a></li>
+
+<li><a href="#">Customer Help Center</a></li>
+
+</ul>
+
+</div>
+
+<!-- ==========================================
+FEATURED SERVICES
+========================================== -->
+
+<div class="featured-services">
+
+<h3>Featured Services</h3>
+
+<div class="featured-grid">
+
+<div class="featured-card">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<h4>Instant Loan Approval</h4>
+
+</div>
+
+<div class="featured-card">
+
+<i class="fa-solid fa-mobile-screen"></i>
+
+<h4>Mobile Banking</h4>
+
+</div>
+
+<div class="featured-card">
 
 <i class="fa-solid fa-shield-halved"></i>
 
-<h3>Secure Cloud Storage</h3>
-
-<p>
-
-Documents are securely stored using Firebase Cloud.
-
-</p>
+<h4>Secure Transactions</h4>
 
 </div>
 
-<div class="security-item">
+<div class="featured-card">
 
-<i class="fa-solid fa-user-check"></i>
+<i class="fa-solid fa-headset"></i>
 
-<h3>Verified Team</h3>
-
-<p>
-
-Every loan application is verified by professionals.
-
-</p>
+<h4>24×7 Support</h4>
 
 </div>
 
 </div>
 
 </div>
-
-</section>
-
-<!-- ==========================================
-OUR PROMISE
-========================================== -->
-
-<section class="our-promise">
-
-<div class="container">
-
-<h2 class="section-title">
-
-Our Promise
-
-</h2>
-
-<div class="promise-grid">
-
-<div>
-
-<h3>
-
-✔ Fast Processing
-
-</h3>
-
-<p>
-
-Most applications are reviewed within one working day.
-
-</p>
-
-</div>
-
-<div>
-
-<h3>
-
-✔ Transparent Charges
-
-</h3>
-
-<p>
-
-No hidden charges or unexpected fees.
-
-</p>
-
-</div>
-
-<div>
-
-<h3>
-
-✔ Trusted Service
-
-</h3>
-
-<p>
-
-Thousands of satisfied customers across Assam.
-
-</p>
-
-</div>
-
-<div>
-
-<h3>
-
-✔ Dedicated Support
-
-</h3>
-
-<p>
-
-Our support team is always available to assist you.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-APP DOWNLOAD QR
-========================================== -->
-
-<section class="qr-section">
-
-<div class="container">
-
-<h2>
-
-Download Mobile App
-
-</h2>
-
-<img
-
-src="assets/qr-code.png"
-
-class="qr-image"
-
-alt="QR">
-
-<p>
-
-Scan to install Assam Finance Hub.
-
-</p>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-SYSTEM STATUS
-========================================== -->
-
-<section class="system-status">
-
-<div class="container">
-
-<div class="status-box">
-
-<div>
-
-🟢 Server Status
-
-<strong>Online</strong>
-
-</div>
-
-<div>
-
-🔥 Firebase
-
-<strong>Connected</strong>
-
-</div>
-
-<div>
-
-🔒 SSL
-
-<strong>Secured</strong>
-
-</div>
-
-<div>
-
-⚡ Version
-
-<strong>3.0</strong>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-BOTTOM NOTICE
-========================================== -->
-
-<section class="bottom-notice">
-
-<div class="container">
-
-<p>
-
-By using this website you agree to our Terms &
-Privacy Policy.
-
-</p>
 
 </div>
 
 </section>
 
    <!-- ==========================================
-SERVICE WORKER
+PROFILE SUMMARY & ACCOUNT MANAGEMENT
+========================================== -->
+
+<section id="accountManagementSection" class="section">
+
+<div class="container">
+
+<h2>My Account</h2>
+
+<div class="account-grid">
+
+<!-- ==========================================
+PROFILE SUMMARY
+========================================== -->
+
+<div class="account-card">
+
+<img
+id="summaryProfileImage"
+src="assets/images/default-user.png"
+alt="Profile"
+class="profile-avatar">
+
+<h3 id="summaryUserName">
+
+Guest User
+
+</h3>
+
+<p id="summaryUserEmail">
+
+guest@example.com
+
+</p>
+
+<p>
+
+Account Status:
+
+<strong id="accountStatus">
+
+Verified
+
+</strong>
+
+</p>
+
+<button
+id="editAccountProfile"
+class="btn-primary">
+
+Edit Profile
+
+</button>
+
+</div>
+
+<!-- ==========================================
+ACCOUNT TIMELINE
+========================================== -->
+
+<div class="account-card">
+
+<h3>Recent Activity</h3>
+
+<ul
+id="activityTimeline"
+class="timeline">
+
+<li>
+
+✅ Logged into the account
+
+</li>
+
+<li>
+
+💳 EMI payment completed
+
+</li>
+
+<li>
+
+📄 Loan application submitted
+
+</li>
+
+<li>
+
+🪪 KYC verified
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LINKED BANK ACCOUNTS
+========================================== -->
+
+<div class="linked-bank-section">
+
+<h3>Linked Bank Accounts</h3>
+
+<table id="bankAccountTable">
+
+<thead>
+
+<tr>
+
+<th>Bank</th>
+
+<th>Account Number</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td colspan="4">
+
+No linked bank accounts.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<button
+id="addBankAccount"
+class="btn-success">
+
+Add Bank Account
+
+</button>
+
+</div>
+
+<!-- ==========================================
+SAVED PAYMENT METHODS
+========================================== -->
+
+<div class="payment-method-section">
+
+<h3>Saved Payment Methods</h3>
+
+<div class="payment-method-grid">
+
+<div class="payment-method-card">
+
+<i class="fa-solid fa-credit-card"></i>
+
+<h4>Debit Card</h4>
+
+<p>
+
+No card saved.
+
+</p>
+
+</div>
+
+<div class="payment-method-card">
+
+<i class="fa-brands fa-google-pay"></i>
+
+<h4>UPI</h4>
+
+<p>
+
+No UPI ID linked.
+
+</p>
+
+</div>
+
+<div class="payment-method-card">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<h4>Net Banking</h4>
+
+<p>
+
+Not configured.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+QUICK SETTINGS
+========================================== -->
+
+<div class="quick-settings">
+
+<h3>Quick Settings</h3>
+
+<div class="settings-buttons">
+
+<button
+id="changeLanguageBtn"
+class="btn-secondary">
+
+Change Language
+
+</button>
+
+<button
+id="notificationSettingsBtn"
+class="btn-secondary">
+
+Notification Settings
+
+</button>
+
+<button
+id="privacySettingsBtn"
+class="btn-secondary">
+
+Privacy Settings
+
+</button>
+
+<button
+id="logoutAccountBtn"
+class="btn-danger">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+FILE & DATA MANAGEMENT
+========================================== -->
+
+<section id="dataManagementSection" class="section">
+
+<div class="container">
+
+<h2>File & Data Management</h2>
+
+<p>
+
+Manage your documents, backups, and account data securely.
+
+</p>
+
+<!-- ==========================================
+DOCUMENT UPLOAD CENTER
+========================================== -->
+
+<div class="data-card">
+
+<h3>Upload Documents</h3>
+
+<input
+type="file"
+id="documentUpload"
+multiple
+accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+
+<progress
+id="documentUploadProgress"
+value="0"
+max="100">
+
+</progress>
+
+<button
+id="uploadDocumentsBtn"
+class="btn-primary">
+
+Upload Documents
+
+</button>
+
+</div>
+
+<!-- ==========================================
+DOCUMENT MANAGER
+========================================== -->
+
+<div class="data-card">
+
+<h3>My Documents</h3>
+
+<table id="documentsTable">
+
+<thead>
+
+<tr>
+
+<th>Document Name</th>
+
+<th>Type</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="documentsTableBody">
+
+<tr>
+
+<td colspan="4">
+
+No documents uploaded.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ==========================================
+CLOUD BACKUP
+========================================== -->
+
+<div class="data-card">
+
+<h3>Cloud Backup</h3>
+
+<p>
+
+Backup Status:
+
+<strong id="backupStatus">
+
+Not Available
+
+</strong>
+
+</p>
+
+<button
+id="backupNowBtn"
+class="btn-success">
+
+Backup Now
+
+</button>
+
+<button
+id="restoreBackupBtn"
+class="btn-secondary">
+
+Restore Backup
+
+</button>
+
+</div>
+
+<!-- ==========================================
+IMPORT / EXPORT
+========================================== -->
+
+<div class="data-card">
+
+<h3>Import / Export Data</h3>
+
+<div class="button-group">
+
+<button
+id="exportDataBtn"
+class="btn-primary">
+
+Export Data
+
+</button>
+
+<button
+id="importDataBtn"
+class="btn-secondary">
+
+Import Data
+
+</button>
+
+</div>
+
+<input
+type="file"
+id="importFile"
+accept=".json,.csv"
+hidden>
+
+</div>
+
+<!-- ==========================================
+ACCOUNT MANAGEMENT
+========================================== -->
+
+<div class="data-card">
+
+<h3>Account Management</h3>
+
+<p>
+
+You can permanently delete your account and all associated data.
+
+</p>
+
+<label>
+
+<input
+type="checkbox"
+id="confirmDeleteAccount">
+
+I understand this action cannot be undone.
+
+</label>
+
+<br><br>
+
+<button
+id="deleteAccountBtn"
+class="btn-danger">
+
+Delete My Account
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+PERFORMANCE & INSIGHTS DASHBOARD
+========================================== -->
+
+<section id="performanceSection" class="section">
+
+<div class="container">
+
+<h2>Performance & Insights</h2>
+
+<p>
+
+Track your financial performance and view personalized insights.
+
+</p>
+
+<!-- ==========================================
+STATISTICS CARDS
+========================================== -->
+
+<div class="performance-grid">
+
+<div class="performance-card">
+
+<i class="fa-solid fa-users"></i>
+
+<h3 id="activeUsersCount">
+
+0
+
+</h3>
+
+<p>Active Users</p>
+
+</div>
+
+<div class="performance-card">
+
+<i class="fa-solid fa-money-check-dollar"></i>
+
+<h3 id="loanDisbursedCount">
+
+₹0
+
+</h3>
+
+<p>Total Loan Disbursed</p>
+
+</div>
+
+<div class="performance-card">
+
+<i class="fa-solid fa-chart-column"></i>
+
+<h3 id="transactionVolume">
+
+0
+
+</h3>
+
+<p>Transaction Volume</p>
+
+</div>
+
+<div class="performance-card">
+
+<i class="fa-solid fa-award"></i>
+
+<h3 id="customerRating">
+
+5.0★
+
+</h3>
+
+<p>Customer Rating</p>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+USER LEADERBOARD
+========================================== -->
+
+<div class="leaderboard-section">
+
+<h3>Top Referral Leaderboard</h3>
+
+<table id="leaderboardTable">
+
+<thead>
+
+<tr>
+
+<th>Rank</th>
+
+<th>User</th>
+
+<th>Referrals</th>
+
+<th>Reward</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td colspan="4">
+
+Leaderboard data not available.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ==========================================
+DAILY GOALS
+========================================== -->
+
+<div class="goals-section">
+
+<h3>Daily Financial Goals</h3>
+
+<ul id="goalList">
+
+<li>
+
+☐ Save at least ₹100 today
+
+</li>
+
+<li>
+
+☐ Check account activity
+
+</li>
+
+<li>
+
+☐ Review monthly budget
+
+</li>
+
+<li>
+
+☐ Complete pending KYC task
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- ==========================================
+PERFORMANCE METRICS
+========================================== -->
+
+<div class="metrics-section">
+
+<h3>Performance Metrics</h3>
+
+<div class="metrics-grid">
+
+<div class="metric-box">
+
+<h4>Loan Success Rate</h4>
+
+<progress
+value="92"
+max="100">
+
+</progress>
+
+<p>92%</p>
+
+</div>
+
+<div class="metric-box">
+
+<h4>Profile Completion</h4>
+
+<progress
+value="80"
+max="100">
+
+</progress>
+
+<p>80%</p>
+
+</div>
+
+<div class="metric-box">
+
+<h4>Security Score</h4>
+
+<progress
+value="95"
+max="100">
+
+</progress>
+
+<p>95%</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+AI INSIGHTS
+========================================== -->
+
+<div class="ai-insights">
+
+<h3>AI Financial Insights</h3>
+
+<div id="insightBox">
+
+<p>
+
+💡 Keep your EMI payments on time to improve your credit score.
+
+</p>
+
+<p>
+
+📈 Consider increasing your monthly savings by 10%.
+
+</p>
+
+<p>
+
+🏦 You're eligible for better interest rates based on your repayment history.
+
+</p>
+
+</div>
+
+<button
+id="refreshInsights"
+class="btn-primary">
+
+Refresh Insights
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+MULTI-CURRENCY & FOREX CENTER
+========================================== -->
+
+<section id="currencySection" class="section">
+
+<div class="container">
+
+<h2>Multi-Currency & Forex Center</h2>
+
+<p>
+
+Convert currencies, view exchange rates, and manage international transfers.
+
+</p>
+
+<!-- ==========================================
+CURRENCY CONVERTER
+========================================== -->
+
+<div class="currency-grid">
+
+<div class="currency-card">
+
+<h3>Currency Converter</h3>
+
+<input
+type="number"
+id="currencyAmount"
+placeholder="Enter Amount">
+
+<select id="fromCurrency">
+
+<option value="INR">INR</option>
+
+<option value="USD">USD</option>
+
+<option value="EUR">EUR</option>
+
+<option value="GBP">GBP</option>
+
+<option value="JPY">JPY</option>
+
+<option value="AED">AED</option>
+
+</select>
+
+<select id="toCurrency">
+
+<option value="USD">USD</option>
+
+<option value="INR">INR</option>
+
+<option value="EUR">EUR</option>
+
+<option value="GBP">GBP</option>
+
+<option value="JPY">JPY</option>
+
+<option value="AED">AED</option>
+
+</select>
+
+<button
+id="convertCurrencyBtn"
+class="btn-primary">
+
+Convert
+
+</button>
+
+<h3 id="convertedAmount">
+
+Converted Amount: --
+
+</h3>
+
+</div>
+
+<!-- ==========================================
+LIVE EXCHANGE RATES
+========================================== -->
+
+<div class="currency-card">
+
+<h3>Exchange Rates</h3>
+
+<table id="exchangeRateTable">
+
+<thead>
+
+<tr>
+
+<th>Currency</th>
+
+<th>Rate</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>USD</td>
+
+<td id="usdRate">--</td>
+
+</tr>
+
+<tr>
+
+<td>EUR</td>
+
+<td id="eurRate">--</td>
+
+</tr>
+
+<tr>
+
+<td>GBP</td>
+
+<td id="gbpRate">--</td>
+
+</tr>
+
+<tr>
+
+<td>AED</td>
+
+<td id="aedRate">--</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+FOREX SERVICES
+========================================== -->
+
+<div class="forex-services">
+
+<h3>International Transfer</h3>
+
+<form id="internationalTransferForm">
+
+<input
+type="text"
+id="receiverName"
+placeholder="Receiver Name"
+required>
+
+<input
+type="text"
+id="receiverCountry"
+placeholder="Country"
+required>
+
+<input
+type="text"
+id="receiverBank"
+placeholder="Bank Name"
+required>
+
+<input
+type="number"
+id="internationalAmount"
+placeholder="Amount"
+required>
+
+<select id="transferCurrency">
+
+<option value="USD">USD</option>
+
+<option value="EUR">EUR</option>
+
+<option value="GBP">GBP</option>
+
+<option value="AED">AED</option>
+
+</select>
+
+<button
+type="submit"
+class="btn-success">
+
+Send International Transfer
+
+</button>
+
+</form>
+
+</div>
+
+<!-- ==========================================
+FOREX CHART
+========================================== -->
+
+<div class="forex-chart">
+
+<h3>Currency History</h3>
+
+<canvas id="currencyHistoryChart"></canvas>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+WELCOME TOUR & APP INFORMATION
+========================================== -->
+
+<section id="welcomeTourSection" class="section">
+
+<div class="container">
+
+<h2>Welcome & App Updates</h2>
+
+<p>
+
+Discover the latest features and track your progress with Assam Finance Hub.
+
+</p>
+
+<!-- ==========================================
+WELCOME TOUR
+========================================== -->
+
+<div class="tour-card">
+
+<h3>Getting Started</h3>
+
+<ol id="welcomeSteps">
+
+<li>Create your account.</li>
+
+<li>Complete KYC verification.</li>
+
+<li>Apply for your first loan.</li>
+
+<li>Pay EMIs on time.</li>
+
+<li>Earn rewards and referral bonuses.</li>
+
+</ol>
+
+<button
+id="startTourBtn"
+class="btn-primary">
+
+Start Guided Tour
+
+</button>
+
+</div>
+
+<!-- ==========================================
+WHAT'S NEW
+========================================== -->
+
+<div class="updates-card">
+
+<h3>What's New</h3>
+
+<ul id="whatsNewList">
+
+<li>🤖 AI Financial Advisor added.</li>
+
+<li>📊 Advanced Analytics Dashboard.</li>
+
+<li>🌍 Multi-Currency Converter.</li>
+
+<li>🛡️ Improved Security Center.</li>
+
+<li>🎁 New Rewards & Referral Program.</li>
+
+</ul>
+
+</div>
+
+<!-- ==========================================
+USER MILESTONES
+========================================== -->
+
+<div class="milestone-card">
+
+<h3>Your Milestones</h3>
+
+<div class="milestone-grid">
+
+<div class="milestone-item">
+
+<i class="fa-solid fa-user-check"></i>
+
+<p>Account Created</p>
+
+</div>
+
+<div class="milestone-item">
+
+<i class="fa-solid fa-id-card"></i>
+
+<p>KYC Verified</p>
+
+</div>
+
+<div class="milestone-item">
+
+<i class="fa-solid fa-money-check-dollar"></i>
+
+<p>First Loan</p>
+
+</div>
+
+<div class="milestone-item">
+
+<i class="fa-solid fa-trophy"></i>
+
+<p>Reward Earned</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+APP INFORMATION
+========================================== -->
+
+<div class="version-card">
+
+<h3>Application Information</h3>
+
+<table>
+
+<tr>
+
+<td>Application Name</td>
+
+<td>Assam Finance Hub</td>
+
+</tr>
+
+<tr>
+
+<td>Version</td>
+
+<td id="appVersion">
+
+v1.0.0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Build</td>
+
+<td>
+
+2026.07.31
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Status</td>
+
+<td>
+
+Stable Release
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<!-- ==========================================
+FINAL QUICK ACTIONS
+========================================== -->
+
+<div class="quick-actions-final">
+
+<button
+id="refreshDashboard"
+class="btn-primary">
+
+Refresh Dashboard
+
+</button>
+
+<button
+id="syncData"
+class="btn-success">
+
+Sync Data
+
+</button>
+
+<button
+id="reportIssue"
+class="btn-secondary">
+
+Report Issue
+
+</button>
+
+<button
+id="checkUpdates"
+class="btn-primary">
+
+Check Updates
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+   <!-- ==========================================
+APPLICATION STATUS COMPONENTS
+========================================== -->
+
+<!-- Offline Banner -->
+<div
+id="offlineBanner"
+class="offline-banner"
+hidden>
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+<span>
+
+You are currently offline. Some features may not be available.
+
+</span>
+
+</div>
+
+<!-- Sync Indicator -->
+<div
+id="syncIndicator"
+class="sync-indicator"
+hidden>
+
+<i class="fa-solid fa-rotate"></i>
+
+<span>
+
+Synchronizing data...
+
+</span>
+
+</div>
+
+<!-- Floating App Version -->
+<div
+id="appVersionBadge"
+class="version-badge">
+
+<span>
+
+Version
+
+</span>
+
+<strong>
+
+v1.0.0
+
+</strong>
+
+</div>
+
+<!-- ==========================================
+OPTIONAL THIRD-PARTY LIBRARIES
+========================================== -->
+
+<!-- Chart.js -->
+<script
+src="https://cdn.jsdelivr.net/npm/chart.js">
+
+</script>
+
+<!-- Font Awesome JS -->
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js">
+
+</script>
+
+<!-- ==========================================
+APPLICATION INITIALIZATION
 ========================================== -->
 
 <script>
 
-if ("serviceWorker" in navigator) {
+document.addEventListener(
 
-window.addEventListener("load", () => {
+"DOMContentLoaded",
 
-navigator.serviceWorker
+()=>{
 
-.register("sw.js")
+console.log(
 
-.then(() => {
+"Assam Finance Hub Initialized"
 
-console.log("Service Worker Registered");
+);
 
-})
+// Initialize app
 
-.catch((err) => {
+if(typeof initializeApp==="function"){
 
-console.log(err);
-
-});
-
-});
+initializeApp();
 
 }
+
+// Register online/offline listeners
+
+window.addEventListener(
+
+"online",
+
+()=>{
+
+document
+
+.getElementById(
+
+"offlineBanner"
+
+)
+
+.hidden=true;
+
+}
+
+);
+
+window.addEventListener(
+
+"offline",
+
+()=>{
+
+document
+
+.getElementById(
+
+"offlineBanner"
+
+)
+
+.hidden=false;
+
+}
+
+);
+
+}
+
+);
 
 </script>
 
 <!-- ==========================================
-INSTALL PWA
+END OF APPLICATION
 ========================================== -->
-
-<script>
-
-let deferredPrompt;
-
-const installApp=document.getElementById("installApp");
-
-const installBtn=document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt",(e)=>{
-
-e.preventDefault();
-
-deferredPrompt=e;
-
-if(installApp){
-
-installApp.style.display="flex";
-
-}
-
-});
-
-if(installBtn){
-
-installBtn.onclick=async()=>{
-
-if(!deferredPrompt)return;
-
-deferredPrompt.prompt();
-
-await deferredPrompt.userChoice;
-
-installApp.style.display="none";
-
-};
-
-}
-
-</script>
-
-<!-- ==========================================
-PERFORMANCE
-========================================== -->
-
-<script>
-
-window.addEventListener("load",()=>{
-
-const loader=document.getElementById("loader");
-
-if(loader){
-
-setTimeout(()=>{
-
-loader.style.opacity="0";
-
-setTimeout(()=>{
-
-loader.remove();
-
-},500);
-
-},700);
-
-}
-
-});
-
-</script>
-
-<!-- ==========================================
-GOOGLE ANALYTICS READY
-========================================== -->
-
-<!-- Paste your GA4 code here -->
-
-<!-- ==========================================
-FACEBOOK PIXEL READY
-========================================== -->
-
-<!-- Paste Facebook Pixel here -->
-
-<!-- ==========================================
-MICRODATA READY
-========================================== -->
-
-<script type="application/ld+json">
-
-{
-
-"@context":"https://schema.org",
-
-"@type":"FinancialService",
-
-"name":"Assam Finance Hub",
-
-"address":"Guwahati, Assam",
-
-"telephone":"+91-9876543210",
-
-"url":"https://yourwebsite.com"
-
-}
-
-</script>
 
 </body>
 
